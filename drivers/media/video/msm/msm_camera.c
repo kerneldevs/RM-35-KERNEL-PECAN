@@ -797,6 +797,12 @@ static struct msm_queue_cmd *__msm_control(struct msm_sync *sync,
 	if (sync->event_q.len <= 100 && sync->frame_q.len <= 100) {
 		/* wake up config thread */
 		msm_enqueue(&sync->event_q, &qcmd->list_config);
+        } else if (sync->event_q.len > 100) {
+		pr_err("%s, Error Event Queue limit exceeded f_q = %d, e_q = %d\n",
+			__func__, sync->frame_q.len, sync->event_q.len);
+		qcmd->error_code = 0xffffffff;
+		qcmd->command = NULL;
+		msm_enqueue(&sync->frame_q, &qcmd->list_frame);
 	} else {
 		pr_err("%s, Error Queue limit exceeded e_q = %d, f_q = %d\n",
 			__func__, sync->event_q.len, sync->frame_q.len);
