@@ -1,5 +1,59 @@
 
-this is .35 kernel for lg optimus me p350 
+
+
+========================================================================================
+
+RM .35 KERNEL FOR LG OPTIMUS ME P350 AKA PECAN/LIFE/SWIFT ME 
+
+CREADIT-
+
+RON GOKHLE  @ xda-developers.com
+
+========================================================================================
+
+
+How to build-
+
+- git clone git://github.com/kerneldevs/RM-35-KERNEL-PECAN.git
+
+now in your pc have rm kernel source code so move to next step
+
+- cd RM-35-KERNEL-PECAN
+
+                                             
+NOW YOU NEED TOOLCHAIN ON YOUR PC. GET IT AND CREATE A FOLDER CALLED 'prebuilt '.
+NOW IN PREBUILT CREATE NEW FODLER CALL 'linux-x86' NOW CREATE ANOTHER ONE IN X86 CALLED 'toolchain' AND PASTE 
+TOOLCHAIN FOLDER HERE 
+NOW START TO COMPILE
+
+- make rm_kernel_defconfig
+
+- make ARCH=arm CROSS_COMPILE=../prebuilt/linux-x86/toolchain/arm-eabi-4.4.3/bin/arm-eabi- -j4
+
+ 
+(NOTICE IF YOU ARE USING OTHER TOOLCHAIN CHANGE THE CHANGE ACCORDING TO IT)
+
+
+ONCE YOUR COMPILE DONE 
+YOU WILL GET ZIMAGE UNDER ARCH/ARM/BOOT
+TUN.KO UNDER DRIVER/NET
+WIFI DRIVER UNDER DRIVER/NET/wireless/BCM/4329
+ 
+NOW YOU HAVE YOUR OWN COMPILED KERNENL MAKE ZIP AND FLASH IT
+ENJOY AND HAVE FUN 
+
+
+                                 
+
+========================================================================================
+
+
+
+
+
+
+
+
 
 
 
