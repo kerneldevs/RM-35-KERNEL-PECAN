@@ -423,7 +423,7 @@ static struct msm_acpu_clock_platform_data msm7x2x_clock_data = {
 	.acpu_switch_time_us = 50,
 	.max_speed_delta_khz = 256000,
 	.vdd_switch_time_us = 62,
-	.max_axi_khz = 160000,
+	.max_axi_khz =  200000, //160000,
 };
 
 void msm_serial_debug_init(unsigned int base, int irq,
