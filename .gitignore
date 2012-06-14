@@ -57,6 +57,10 @@ include/config
 include/linux/version.h
 include/generated
 
+# generated files
+arch/arm/boot/compressed/piggy.gzip
+arch/arm/boot/compressed/vmlinux
+
 # stgit generated dirs
 patches-*
 
