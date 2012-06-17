@@ -236,7 +236,7 @@ static struct msm_clock msm_clocks[] = {
 		.freq = DGT_HZ >> MSM_DGT_SHIFT,
 		.index = MSM_CLOCK_DGT,
 		.shift = MSM_DGT_SHIFT,
-		.write_delay = 2,
+		.write_delay = 9,
 	}
 };
 
@@ -362,18 +362,10 @@ static int msm_timer_set_next_event(unsigned long cycles,
 	clock_state->last_set = now;
 	clock_state->alarm_vtime = alarm + clock_state->sleep_offset;
 	late = now - alarm;
-	if (late >= (int)(-clock->write_delay << clock->shift) && late < DGT_HZ*5) {
-		static int print_limit = 10;
-		if (print_limit > 0) {
-			print_limit--;
-			printk(KERN_NOTICE "msm_timer_set_next_event(%lu) "
-			       "clock %s, alarm already expired, now %x, "
-			       "alarm %x, late %d%s\n",
-			       cycles, clock->clockevent.name, now, alarm, late,
-			       print_limit ? "" : " stop printing");
-		}
-		return -ETIME;
-	}
+	if (late >= (int)(-clock->write_delay << clock->shift) &&
+		late < clock->freq*5)		
+	   return -ETIME;
+
 	return 0;
 }
 
@@ -432,7 +424,6 @@ static void msm_timer_set_mode(enum clock_event_mode mode,
 		}
 		break;
 	}
-	dsb();
 	local_irq_restore(irq_flags);
 }
 
@@ -843,7 +834,6 @@ void msm_timer_exit_idle(int low_power)
 #else
 	gpt_clk_state->in_sync = gpt_clk_state->in_sync && enabled;
 #endif
-	dsb();
 	msm_timer_sync_gpt_to_sclk(1);
 
 	if (clock == gpt_clk)
@@ -858,7 +848,6 @@ void msm_timer_exit_idle(int low_power)
 #else
 	clock_state->in_sync = clock_state->in_sync && enabled;
 #endif
-	dsb();
 	msm_timer_sync_to_gpt(clock, 1);
 
 exit_idle_alarm:
@@ -1040,7 +1029,6 @@ static void __init msm_timer_init(void)
 	}
 #ifdef CONFIG_ARCH_MSM_SCORPIONMP
 	writel(1, msm_clocks[MSM_CLOCK_DGT].regbase + TIMER_ENABLE);
-	dsb();
 	set_delay_fn(read_current_timer_delay_loop);
 #endif
 }
@@ -1049,20 +1037,18 @@ static void __init msm_timer_init(void)
 void local_timer_setup(struct clock_event_device *evt)
 {
 	unsigned long flags;
-	static bool first_boot = true;
 	struct msm_clock *clock = &msm_clocks[MSM_GLOBAL_TIMER];
 
 #ifdef CONFIG_ARCH_MSM8X60
 	writel(DGT_CLK_CTL_DIV_4, MSM_TMR_BASE + DGT_CLK_CTL);
 #endif
 
-	if (first_boot) {
+	if (!local_clock_event) {
 		writel(0, clock->regbase  + TIMER_ENABLE);
 		writel(1, clock->regbase + TIMER_CLEAR);
 		writel(0, clock->regbase + TIMER_COUNT_VAL);
 		writel(~0, clock->regbase + TIMER_MATCH_VAL);
 		__get_cpu_var(msm_clocks_percpu)[clock->index].alarm = ~0;
-		first_boot = false;
 	}
 	evt->irq = clock->irq.irq;
 	evt->name = "local_timer";
@@ -1080,7 +1066,6 @@ void local_timer_setup(struct clock_event_device *evt)
 	local_clock_event = evt;
 
 	local_irq_save(flags);
-	dsb();
 	gic_clear_spi_pending(clock->irq.irq);
 	get_irq_chip(clock->irq.irq)->unmask(clock->irq.irq);
 	local_irq_restore(flags);
