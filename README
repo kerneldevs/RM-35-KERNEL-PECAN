@@ -28,7 +28,7 @@ NOW START TO COMPILE
 
 - make rm_kernel_defconfig
 
-- make ARCH=arm CROSS_COMPILE=../prebuilt/linux-x86/toolchain/arm-eabi-4.4.3/bin/arm-eabi- -j4
+- make ARCH=arm CROSS_COMPILE=../prebuilt/linux-x86/toolchain/arm-eabi-4.4.0/bin/arm-eabi- -j4
 
  
 (NOTICE IF YOU ARE USING OTHER TOOLCHAIN CHANGE THE CHANGE ACCORDING TO IT)
