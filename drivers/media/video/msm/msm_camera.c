@@ -675,14 +675,14 @@ static int __msm_get_frame(struct msm_sync *sync,
 		return -EAGAIN;
 	}
 
-        #ifndef CONFIG_MACH_MSM7X27_PECAN
+#ifndef CONFIG_MACH_MSM7X27_PECAN
 	if ((!qcmd->command) && (qcmd->error_code & MSM_CAMERA_ERR_MASK)) {
 		frame->error_code = qcmd->error_code;
 		pr_info("%s: fake frame with camera error code = %d\n",
 			__func__, frame->error_code);
 		goto err;
 	}
-        #endif
+#endif
 
 	vdata = (struct msm_vfe_resp *)(qcmd->command);
 	pphy = &vdata->phy;
@@ -757,7 +757,7 @@ static int msm_get_frame(struct msm_sync *sync, void __user *arg)
 		}
 	}
 
-        #ifndef CONFIG_MACH_MSM7X27_PECAN
+#ifndef CONFIG_MACH_MSM7X27_PECAN
 	if (sync->fdroiinfo.info) {
 		if (copy_to_user((void *)frame.roi_info.info,
 			sync->fdroiinfo.info,
@@ -767,7 +767,7 @@ static int msm_get_frame(struct msm_sync *sync, void __user *arg)
 			return -EFAULT;
 		}
 	}
-        #endif
+#endif
 
 	if (copy_to_user((void *)arg,
 				&frame, sizeof(struct msm_frame))) {
@@ -2083,7 +2083,7 @@ static int msm_error_config(struct msm_sync *sync, void __user *arg)
 	if (qcmd)
 		atomic_set(&(qcmd->on_heap), 1);
 
-        #ifndef CONFIG_MACH_MSM7X27_PECAN
+#ifndef CONFIG_MACH_MSM7X27_PECAN
 	if (copy_from_user(&(qcmd->error_code), arg, sizeof(uint32_t))) {
 		ERR_COPY_FROM_USER();
 		free_qcmd(qcmd);
@@ -2092,7 +2092,7 @@ static int msm_error_config(struct msm_sync *sync, void __user *arg)
 
 	pr_info("%s: Enqueue Fake Frame with error code = %d\n", __func__,
 		qcmd->error_code);
-        #endif
+#endif
 	msm_enqueue(&sync->frame_q, &qcmd->list_frame);
 	return 0;
 }
