@@ -1299,9 +1299,11 @@ static long dev_ioctl (struct file *fd, unsigned code, unsigned long value)
 	struct usb_gadget	*gadget = dev->gadget;
 	long ret = -ENOTTY;
 
-	if (gadget->ops->ioctl)
+	if (gadget->ops->ioctl) {
+		lock_kernel();
 		ret = gadget->ops->ioctl (gadget, code, value);
-
+		unlock_kernel();
+	}
 	return ret;
 }
 
@@ -1865,9 +1867,13 @@ dev_config (struct file *fd, const char __user *buf, size_t len, loff_t *ptr)
 	buf += 4;
 	length -= 4;
 
-	kbuf = memdup_user(buf, length);
-	if (IS_ERR(kbuf))
-		return PTR_ERR(kbuf);
+	kbuf = kmalloc (length, GFP_KERNEL);
+	if (!kbuf)
+		return -ENOMEM;
+	if (copy_from_user (kbuf, buf, length)) {
+		kfree (kbuf);
+		return -EFAULT;
+	}
 
 	spin_lock_irq (&dev->lock);
 	value = -EINVAL;
