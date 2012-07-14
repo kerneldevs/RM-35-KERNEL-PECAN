@@ -65,9 +65,26 @@ config CGROUP_BFQIO
           filesystem interface.  The name of the subsystem will be
           bfqio.
 
+config IOSCHED_VR
+	tristate "V(R) I/O scheduler"
+	default y
+	---help---
+	  Requests are chosen according to SSTF with a penalty of rev_penalty
+	  for switching head direction.
+
+config IOSCHED_SIO
+	tristate "Simple I/O scheduler"
+	default y
+	---help---
+	  The Simple I/O scheduler is an extremely simple scheduler,
+	  based on noop and deadline, that relies on deadlines to
+	  ensure fairness. The algorithm does not do any sorting but
+	  basic merging, trying to keep a minimum overhead. It is aimed
+	  mainly for aleatory access devices (eg: flash devices).
+
 choice
 	prompt "Default I/O scheduler"
-	default DEFAULT_CFQ
+	default DEFAULT_SIO
 	help
 	  Select the I/O scheduler which will be used by default for all
 	  block devices.
@@ -82,7 +99,13 @@ choice
                 bool "BFQ" if IOSCHED_BFQ=y
 
 	config DEFAULT_NOOP
-		bool "No-op"
+		bool "No-op" if IOSCHED_NOOP=y
+
+	config DEFAULT_VR
+		bool "V/R" if IOSCHED_VR=y
+
+config DEFAULT_SIO
+		bool "SIO" if IOSCHED_SIO=y
 
 endchoice
 
@@ -92,6 +115,8 @@ config DEFAULT_IOSCHED
 	default "cfq" if DEFAULT_CFQ
         default "bfq" if DEFAULT_BFQ
 	default "noop" if DEFAULT_NOOP
+        default "vr" if DEFAULT_VR
+	default "sio" if DEFAULT_SIO
 
 endmenu
 
