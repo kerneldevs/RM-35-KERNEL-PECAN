@@ -198,7 +198,9 @@ struct msm_vfe_evt_msg {
 	unsigned short type;	/* 1 == event (RPC), 0 == message (adsp) */
 	unsigned short msg_id;
 	unsigned int len;	/* size in, number of bytes out */
+#ifndef CONFIG_MACH_MSM7X27_PECAN
 	uint32_t frame_id;
+#endif
 	void *data;
 };
 
@@ -412,8 +414,10 @@ struct msm_frame {
 
 	void *cropinfo;
 	int croplen;
+#ifndef CONFIG_MACH_MSM7X27_PECAN
 	uint32_t error_code;
 	struct fd_roi_info roi_info;
+#endif
 };
 
 #define MSM_CAMERA_ERR_MASK (0xFFFFFFFF & 1)

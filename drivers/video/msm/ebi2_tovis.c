@@ -667,12 +667,12 @@ static int __init tovis_qvga_init(void)
 
 		pinfo->bpp = 16;
 		pinfo->fb_num = 2;
-		pinfo->lcd.vsync_enable = TRUE;
+		pinfo->lcd.vsync_enable = FALSE;
 		pinfo->lcd.refx100 = 6000;
 		pinfo->lcd.v_back_porch = 0x06;
 		pinfo->lcd.v_front_porch = 0x0a;
 		pinfo->lcd.v_pulse_width = 2;
-		pinfo->lcd.hw_vsync_mode = TRUE;
+		pinfo->lcd.hw_vsync_mode = FALSE;
 		pinfo->lcd.vsync_notifier_period = 0;
 
 		ret = platform_device_register(&this_device);

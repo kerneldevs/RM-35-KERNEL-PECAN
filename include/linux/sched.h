@@ -107,6 +107,8 @@ struct perf_event_context;
  */
 #define CLONE_KERNEL	(CLONE_FS | CLONE_FILES | CLONE_SIGHAND)
 
+extern int above_background_load(void);
+	
 /*
  * These are the constant used to fake the fixed-point load-average
  * counting. Some notes:
@@ -1689,6 +1691,7 @@ extern void thread_group_times(struct task_struct *p, cputime_t *ut, cputime_t *
 
 extern int task_free_register(struct notifier_block *n);
 extern int task_free_unregister(struct notifier_block *n);
+
 
 /*
  * Per process flags

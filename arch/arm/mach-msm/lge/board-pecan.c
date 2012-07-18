@@ -447,7 +447,7 @@ static void msm7x27_wlan_init(void)
  * 2010-04-18, cleaneye.kim@lge.com
  */
 unsigned pmem_fb_size = 	0x96000;
-unsigned pmem_adsp_size =	0xAE4000;
+unsigned pmem_adsp_size =	0x9DE000;
 
 static void __init msm7x2x_init(void)
 {
@@ -462,7 +462,7 @@ static void __init msm7x2x_init(void)
 #endif
 
 	if (cpu_is_msm7x27())
-		msm7x2x_clock_data.max_axi_khz = 200000;
+		msm7x2x_clock_data.max_axi_khz = 422400;
 
 	msm_acpu_clock_init(&msm7x2x_clock_data);
 
