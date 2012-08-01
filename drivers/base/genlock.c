@@ -21,8 +21,8 @@
 #include <linux/uaccess.h>
 #include <linux/anon_inodes.h>
 #include <linux/miscdevice.h>
-#include <linux/genlock.h>
 #include <linux/hardirq.h>
+#include <linux/genlock.h>
 
 /* Lock states - can either be unlocked, held as an exclusive write lock or a
  * shared read lock

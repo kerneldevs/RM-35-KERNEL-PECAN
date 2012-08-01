@@ -315,7 +315,7 @@ LC0:		.word	LC0			@ r1
 		.word	_image_size		@ r6
 		.word	_got_start		@ r11
 		.word	_got_end		@ ip
-		.word	user_stack+4096		@ sp
+		.word	user_stack_end		@ sp
 LC1:		.word	reloc_end - reloc_start
 		.size	LC0, . - LC0
 
@@ -396,12 +396,18 @@ __armv3_mpu_cache_on:
 
 		mov	r0, #0
 		mcr	p15, 0, r0, c7, c0, 0	@ invalidate whole cache v3
+		/*
+		 * ?? ARMv3 MMU does not allow reading the control register,
+		 * does this really work on ARMv3 MPU?
+		 */
 		mrc	p15, 0, r0, c1, c0, 0	@ read control reg
 						@ .... .... .... WC.M
 		orr	r0, r0, #0x000d		@ .... .... .... 11.1
+		/* ?? this overwrites the value constructed above? */
 		mov	r0, #0
 		mcr	p15, 0, r0, c1, c0, 0	@ write control reg
 
+		/* ?? invalidate for the second time? */
 		mcr	p15, 0, r0, c7, c0, 0	@ invalidate whole cache v3
 		mov	pc, lr
 
@@ -658,7 +664,7 @@ proc_types:
 		W(b)	__armv3_mpu_cache_on
 		W(b)	__armv3_mpu_cache_off
 		W(b)	__armv3_mpu_cache_flush
-		
+
 		.word	0x41009400		@ ARM94x
 		.word	0xff00ff00
 		W(b)	__armv4_mpu_cache_on
@@ -873,7 +879,7 @@ __armv4_mpu_cache_flush:
 		mcrne	p15, 0, ip, c7, c5, 0	@ invalidate I cache
 		mcr	p15, 0, ip, c7, c10, 4	@ drain WB
 		mov	pc, lr
-		
+
 __fa526_cache_flush:
 		mov	r1, #0
 		mcr	p15, 0, r1, c7, c14, 0	@ clean and invalidate D cache
@@ -991,7 +997,7 @@ no_cache_id:
 __armv3_mmu_cache_flush:
 __armv3_mpu_cache_flush:
 		mov	r1, #0
-		mcr	p15, 0, r0, c7, c0, 0	@ invalidate whole cache v3
+		mcr	p15, 0, r1, c7, c0, 0	@ invalidate whole cache v3
 		mov	pc, lr
 
 /*
@@ -1004,6 +1010,7 @@ __armv3_mpu_cache_flush:
 phexbuf:	.space	12
 		.size	phexbuf, . - phexbuf
 
+@ phex corrupts {r0, r1, r2, r3}
 phex:		adr	r3, phexbuf
 		mov	r2, #0
 		strb	r2, [r3, r1]
@@ -1018,6 +1025,7 @@ phex:		adr	r3, phexbuf
 		strb	r2, [r3, r1]
 		b	1b
 
+@ puts corrupts {r0, r1, r2, r3}
 puts:		loadsp	r3, r1
 1:		ldrb	r2, [r0], #1
 		teq	r2, #0
@@ -1032,12 +1040,14 @@ puts:		loadsp	r3, r1
 		teq	r0, #0
 		bne	1b
 		mov	pc, lr
+@ putc corrupts {r0, r1, r2, r3}
 putc:
 		mov	r2, r0
 		mov	r0, #0
 		loadsp	r3, r1
 		b	2b
 
+@ memdump corrupts {r0, r1, r2, r3, r10, r11, r12, lr}
 memdump:	mov	r12, r0
 		mov	r10, lr
 		mov	r11, #0
@@ -1071,5 +1081,6 @@ memdump:	mov	r12, r0
 reloc_end:
 
 		.align
-		.section ".stack", "w"
+		.section ".stack", "aw", %nobits
 user_stack:	.space	4096
+user_stack_end:

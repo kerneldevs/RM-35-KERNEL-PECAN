@@ -63,16 +63,17 @@ endif
 
 SEDFLAGS	= s/TEXT_START/$(ZTEXTADDR)/;s/BSS_START/$(ZBSSADDR)/
 
-suffix_$(CONFIG_KERNEL_GZIP) = gzip
-suffix_$(CONFIG_KERNEL_LZO)  = lzo
-suffix_$(CONFIG_KERNEL_LZMA) = lzma
+suffix_$(CONFIG_KERNEL_GZIP)    := gzip
+suffix_$(CONFIG_KERNEL_BZIP2)   := bzip2
+suffix_$(CONFIG_KERNEL_LZMA)    := lzma
+suffix_$(CONFIG_KERNEL_XZ)	:= xzkern
 
 targets       := vmlinux vmlinux.lds \
 		 piggy.$(suffix_y) piggy.$(suffix_y).o \
 		 font.o font.c head.o misc.o $(OBJS)
 
 # Make sure files are removed during clean
-extra-y       += piggy.gzip piggy.lzo piggy.lzma lib1funcs.S
+extra-y       += piggy.gzip piggy.lzo piggy.lzma piggy.xzkern lib1funcs.S ashldi3.S
 
 ifeq ($(CONFIG_FUNCTION_TRACER),y)
 ORIG_CFLAGS := $(KBUILD_CFLAGS)
@@ -82,15 +83,12 @@ endif
 EXTRA_CFLAGS  := -fpic -fno-builtin
 EXTRA_AFLAGS  := -Wa,-march=all
 
-# Supply ZRELADDR, INITRD_PHYS and PARAMS_PHYS to the decompressor via
-# linker symbols.  We only define initrd_phys and params_phys if the
-# machine class defined the corresponding makefile variable.
+# Supply ZRELADDR and PARAMS_PHYS to the decompressor via linker symbols.  We
+# only define params_phys if the machine class defined the corresponding
+# makefile variable.
 LDFLAGS_vmlinux := --defsym zreladdr=$(ZRELADDR)
 ifeq ($(CONFIG_CPU_ENDIAN_BE8),y)
 LDFLAGS_vmlinux += --be8
-endif
-ifneq ($(INITRD_PHYS),)
-LDFLAGS_vmlinux += --defsym initrd_phys=$(INITRD_PHYS)
 endif
 ifneq ($(PARAMS_PHYS),)
 LDFLAGS_vmlinux += --defsym params_phys=$(PARAMS_PHYS)
@@ -110,8 +108,14 @@ lib1funcs = $(obj)/lib1funcs.o
 $(obj)/lib1funcs.S: $(srctree)/arch/$(SRCARCH)/lib/lib1funcs.S FORCE
 	$(call cmd,shipped)
 
+# For __aeabi_llsl
+ashldi3 = $(obj)/ashldi3.o
+
+$(obj)/ashldi3.S: $(srctree)/arch/$(SRCARCH)/lib/ashldi3.S FORCE
+	$(call cmd,shipped)
+
 $(obj)/vmlinux: $(obj)/vmlinux.lds $(obj)/$(HEAD) $(obj)/piggy.$(suffix_y).o \
-	 	$(addprefix $(obj)/, $(OBJS)) $(lib1funcs) FORCE
+		$(addprefix $(obj)/, $(OBJS)) $(lib1funcs) $(ashldi3) FORCE
 	$(call if_changed,ld)
 	@:
 

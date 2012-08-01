@@ -876,6 +876,9 @@ check_preempt_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr)
 		struct sched_entity *se = __pick_next_entity(cfs_rq);
 		s64 delta = curr->vruntime - se->vruntime;
 
+		if (delta < 0)
+			return;
+
 		if (delta > ideal_runtime)
 			resched_task(rq_of(cfs_rq)->curr);
 	}
@@ -3253,8 +3256,10 @@ int select_nohz_load_balancer(int stop_tick)
 		cpu_rq(cpu)->in_nohz_recently = 1;
 
 		if (!cpu_active(cpu)) {
-			if (atomic_read(&nohz.load_balancer) != cpu)
+			if (atomic_read(&nohz.load_balancer) != cpu) {
+				cpumask_clear_cpu(cpu, nohz.cpu_mask);
 				return 0;
+			}
 
 			/*
 			 * If we are going offline and still the leader,
@@ -3263,6 +3268,7 @@ int select_nohz_load_balancer(int stop_tick)
 			if (atomic_cmpxchg(&nohz.load_balancer, cpu, -1) != cpu)
 				BUG();
 
+			cpumask_clear_cpu(cpu, nohz.cpu_mask);
 			return 0;
 		}
 
