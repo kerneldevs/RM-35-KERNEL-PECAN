@@ -170,15 +170,9 @@ not_angel:
 
 		.text
 		adr	r0, LC0
-		ldmia	r0, {r1, r2, r3, r5, r6, r11, ip}
-		ldr	sp, [r0, #28]
-#ifdef CONFIG_AUTO_ZRELADDR
-		@ determine final kernel image address
-		and	r4, pc, #0xf8000000
-		add	r4, r4, #TEXT_OFFSET
-#else
-		ldr	r4, =CONFIG_ZRELADDR
-#endif
+ ARM(		ldmia	r0, {r1, r2, r3, r4, r5, r6, r11, ip, sp})
+ THUMB(		ldmia	r0, {r1, r2, r3, r4, r5, r6, r11, ip}	)
+ THUMB(		ldr	sp, [r0, #32]				)
 		subs	r0, r0, r1		@ calculate the delta offset
 
 						@ if delta is zero, we are
@@ -316,6 +310,7 @@ wont_overwrite:	mov	r0, r4
 LC0:		.word	LC0			@ r1
 		.word	__bss_start		@ r2
 		.word	_end			@ r3
+		.word	zreladdr		@ r4
 		.word	_start			@ r5
 		.word	_image_size		@ r6
 		.word	_got_start		@ r11
@@ -326,7 +321,7 @@ LC1:		.word	reloc_end - reloc_start
 
 #ifdef CONFIG_ARCH_RPC
 		.globl	params
-params:		ldr	r0, =0x10000100		@ params_phys for RPC
+params:		ldr	r0, =params_phys
 		mov	pc, lr
 		.ltorg
 		.align
@@ -669,7 +664,7 @@ proc_types:
 		W(b)	__armv3_mpu_cache_on
 		W(b)	__armv3_mpu_cache_off
 		W(b)	__armv3_mpu_cache_flush
-		
+
 		.word	0x41009400		@ ARM94x
 		.word	0xff00ff00
 		W(b)	__armv4_mpu_cache_on
@@ -884,7 +879,7 @@ __armv4_mpu_cache_flush:
 		mcrne	p15, 0, ip, c7, c5, 0	@ invalidate I cache
 		mcr	p15, 0, ip, c7, c10, 4	@ drain WB
 		mov	pc, lr
-		
+
 __fa526_cache_flush:
 		mov	r1, #0
 		mcr	p15, 0, r1, c7, c14, 0	@ clean and invalidate D cache

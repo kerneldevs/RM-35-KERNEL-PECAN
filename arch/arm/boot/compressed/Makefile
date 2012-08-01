@@ -4,7 +4,6 @@
 # create a compressed vmlinuz image from the original vmlinux
 #
 
-AFLAGS_head.o += -DTEXT_OFFSET=$(TEXT_OFFSET)
 HEAD	= head.o
 OBJS	= misc.o decompress.o
 FONTC	= $(srctree)/drivers/video/console/font_acorn_8x8.c
@@ -84,8 +83,15 @@ endif
 EXTRA_CFLAGS  := -fpic -fno-builtin
 EXTRA_AFLAGS  := -Wa,-march=all
 
+# Supply ZRELADDR and PARAMS_PHYS to the decompressor via linker symbols.  We
+# only define params_phys if the machine class defined the corresponding
+# makefile variable.
+LDFLAGS_vmlinux := --defsym zreladdr=$(ZRELADDR)
 ifeq ($(CONFIG_CPU_ENDIAN_BE8),y)
 LDFLAGS_vmlinux += --be8
+endif
+ifneq ($(PARAMS_PHYS),)
+LDFLAGS_vmlinux += --defsym params_phys=$(PARAMS_PHYS)
 endif
 # ?
 LDFLAGS_vmlinux += -p
@@ -123,5 +129,5 @@ CFLAGS_font.o := -Dstatic=
 $(obj)/font.c: $(FONTC)
 	$(call cmd,shipped)
 
-$(obj)/vmlinux.lds: $(obj)/vmlinux.lds.in arch/arm/boot/Makefile $(KCONFIG_CONFIG)
+$(obj)/vmlinux.lds: $(obj)/vmlinux.lds.in arch/arm/boot/Makefile .config
 	@sed "$(SEDFLAGS)" < $< > $@
