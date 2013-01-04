@@ -467,10 +467,6 @@ int __init init_gpio_i2c_pin(struct i2c_gpio_platform_data *i2c_adap_pdata,
 		struct gpio_i2c_pin gpio_i2c_pin,
 		struct i2c_board_info *i2c_board_info_data);
 
-int __init init_gpio_i2c_pin_touch(struct i2c_gpio_platform_data *i2c_adap_pdata,
-		struct gpio_i2c_pin gpio_i2c_pin,
-		struct i2c_board_info *i2c_board_info_data);
-
 void __init msm_msm7x2x_allocate_memory_regions(void);
 void __init msm_add_fb_device(void);
 void __init msm_add_pmem_devices(void);
