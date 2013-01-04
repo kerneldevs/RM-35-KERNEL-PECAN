@@ -384,14 +384,17 @@ static void __init msm7x2x_init_mmc(void)
 	/* GPIO config */
 #ifdef CONFIG_BCM4329_GPIO_WL_REGON
 	gpio_tlmm_config(GPIO_CFG(CONFIG_BCM4329_GPIO_WL_REGON, 0, GPIO_CFG_OUTPUT, GPIO_CFG_PULL_UP, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
+	/*gpio_configure(CONFIG_BCM4329_GPIO_WL_REGON, GPIOF_DRIVE_OUTPUT);*/ // for dkmoon GB kernel
 	gpio_set_value(CONFIG_BCM4329_GPIO_WL_REGON, 0);
 #endif
 	
 	gpio_tlmm_config(GPIO_CFG(CONFIG_BCM4329_GPIO_WL_RESET, 0, GPIO_CFG_OUTPUT, GPIO_CFG_PULL_UP, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
+	/*gpio_configure(CONFIG_BCM4329_GPIO_WL_RESET, GPIOF_DRIVE_OUTPUT);*/ // for dkmoon GB kernel
 	gpio_set_value(CONFIG_BCM4329_GPIO_WL_RESET, 0);
 	
 	// 20110506 dk.moon, block for OOB type.
 	//gpio_tlmm_config(GPIO_CFG(CONFIG_BCM4329_GPIO_WL_HOSTWAKEUP, 0, GPIO_CFG_INPUT, GPIO_CFG_PULL_UP, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
+	/*gpio_configure(CONFIG_BCM4329_GPIO_WL_HOSTWAKEUP, GPIOF_INPUT);*/ // for dkmoon GB kernel
 
 	/* Register platform device */
     msm_add_sdcc(2, &bcm432x_sdcc_wlan_data);
