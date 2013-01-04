@@ -19,48 +19,23 @@
 #include <mach/vreg.h>
 #include <mach/board.h>
 #include <mach/board_lge.h>
+#include <linux/fb.h>
 #include "devices.h"
 #include "board-pecan.h"
 
 #define MSM_FB_LCDC_VREG_OP(name, op, level)			\
 do { \
-	vreg = vreg_get(0, name); \
-	vreg_set_level(vreg, level); \
-	if (vreg_##op(vreg)) \
-		printk(KERN_ERR "%s: %s vreg operation failed \n", \
-			(vreg_##op == vreg_enable) ? "vreg_enable" \
-				: "vreg_disable", name); \
+	vreg = vreg_get(0, name);                \
+	vreg_set_level(vreg, level);              \
+	 if (vreg_##op(vreg))			  \
+		printk(KERN_ERR "%s: %s vreg operation failed \n",  \
+			(vreg_##op == vreg_enable) ? "vreg_enable"  \
+				: "vreg_disable", name);            \
 } while (0)
 
 static char *msm_fb_vreg[] = {
 	"gp1",
 	"gp2",
-};
-
-static int mddi_power_save_on;
-static int msm_fb_mddi_power_save(int on)
-{
-	struct vreg *vreg;
-	int flag_on = !!on;
-
-	if (mddi_power_save_on == flag_on)
-		return 0;
-
-	mddi_power_save_on = flag_on;
-
-	if (on) {
-		MSM_FB_LCDC_VREG_OP(msm_fb_vreg[0], enable, 1800);
-		MSM_FB_LCDC_VREG_OP(msm_fb_vreg[1], enable, 2800);
-	} else{
-		MSM_FB_LCDC_VREG_OP(msm_fb_vreg[0], disable, 0);
-		MSM_FB_LCDC_VREG_OP(msm_fb_vreg[1], disable, 0);
-	}
-
-	return 0;
-}
-
-static struct mddi_platform_data mddi_pdata = {
-	.mddi_power_save = msm_fb_mddi_power_save,
 };
 
 static struct msm_panel_common_pdata mdp_pdata = {
@@ -71,51 +46,40 @@ static void __init msm_fb_add_devices(void)
 {
 	// pecan
 	msm_fb_register_device("mdp", &mdp_pdata);
-	msm_fb_register_device("pmdh", 0);
-//	msm_fb_register_device("lcdc",  0); //	msm_fb_register_device("lcdc", &lcdc_pdata);
-	msm_fb_register_device("ebi2", 0); 
+	msm_fb_register_device("ebi2", 0);
 }
 
-static int mddi_hitachi_pmic_backlight(int level)
+/* Use pmic_backlight function as power save function, munyoung.hwang@lge.com */
+static int mddi_power_save_on;
+static int ebi2_tovis_power_save(int on)
 {
-	/* TODO: Backlight control here */
+	struct vreg *vreg;
+	int flag_on = !!on;
+
+	printk(KERN_INFO"%s: on=%d\n", __func__, flag_on);
+
+	if (mddi_power_save_on == flag_on)
+		return 0;
+
+	mddi_power_save_on = flag_on;
+
+	if (on) {
+		/* MSM_FB_LCDC_VREG_OP(msm_fb_vreg[0], enable, 1800); */
+		MSM_FB_LCDC_VREG_OP(msm_fb_vreg[1], enable, 2800);
+	} else{
+		/* LGE_CHANGE, [hyuncheol0.kim@lge.com] , 2011-02-10, for current consumption */
+		//MSM_FB_LCDC_VREG_OP(msm_fb_vreg[0], disable, 0);
+		MSM_FB_LCDC_VREG_OP(msm_fb_vreg[1], disable, 0);
+	}
 	return 0;
 }
-
-static int ebi2_tovis_pmic_backlight(int level)
-{
-	/* TODO: Backlight control here */
-	return 0;
-}
-
-#if 1//def CONFIG_MACH_MSM7X27_ALOHAG
-		/* LGE_CHANGE
-		  * Define new structure named 'msm_panel_hitachi_pdata' to use LCD initialization Flag (.initialized).
-		  * 2010-04-21, minjong.gong@lge.com
-		  */
-	static struct msm_panel_hitachi_pdata mddi_hitachi_panel_data = {
-		.gpio = 102,				/* lcd reset_n */
-		.pmic_backlight = mddi_hitachi_pmic_backlight,
-		.initialized = 1,
-#else
-	static struct msm_panel_common_pdata mddi_hitachi_panel_data = {
-		.gpio = 102,				/* lcd reset_n */
-		.pmic_backlight = mddi_hitachi_pmic_backlight,
-#endif
-};
 
 // kurze-pecan
-static struct msm_panel_common_pdata ebi2_tovis_panel_data = {
+static struct msm_panel_ilitek_pdata ebi2_tovis_panel_data = {
 		.gpio = 102,				/* lcd reset_n */
-		.pmic_backlight = ebi2_tovis_pmic_backlight,
-};
-
-static struct platform_device mddi_hitachi_panel_device = {
-	.name   = "mddi_hitachi_hvga",
-	.id     = 0,
-	.dev    = {
-		.platform_data = &mddi_hitachi_panel_data,
-	}
+		.lcd_power_save = ebi2_tovis_power_save,
+		.maker_id = PANEL_ID_TOVIS,
+		.initialized = 1,
 };
 
 static struct platform_device ebi2_tovis_panel_device = {
@@ -206,13 +170,32 @@ void __init pecan_init_i2c_backlight(int bus_num)
 	platform_device_register(&bl_i2c_device);
 }
 
+static int pecan_fb_event_notify(struct notifier_block *self,
+            unsigned long action, void *data)
+{
+  struct fb_event *event = data;
+  struct fb_info *info = event->info;
+  struct fb_var_screeninfo *var = &info->var;
+  if(action == FB_EVENT_FB_REGISTERED) {
+    var->width = 43;
+    var->height = 58;
+  }
+  return 0;
+}
+
+static struct notifier_block pecan_fb_event_notifier = {
+  .notifier_call  = pecan_fb_event_notify,
+};
+
 /* common functions */
 void __init lge_add_lcd_devices(void)
-{
-//	platform_device_register(&mddi_hitachi_panel_device);
+{	
+	if(ebi2_tovis_panel_data.initialized)
+	  ebi2_tovis_power_save(1);
+
+	fb_register_client(&pecan_fb_event_notifier);
+
 	platform_device_register(&ebi2_tovis_panel_device);
-
 	msm_fb_add_devices();
-
 	lge_add_gpio_i2c_device(pecan_init_i2c_backlight);
 }

@@ -10,6 +10,9 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  */
+
+
+
 #include <linux/types.h>
 #include <linux/list.h>
 #include <linux/err.h>
@@ -23,7 +26,6 @@
 #include <mach/board.h>
 #include <mach/board_lge.h>
 #include <mach/rpc_server_handset.h>
-
 #include <mach/pmic.h>
 #include "proc_comm.h"
 
@@ -80,13 +82,13 @@ static unsigned int keypad_col_gpios[] = {32, 33};
 #define KEYMAP_INDEX(col, row) ((col)*ARRAY_SIZE(keypad_row_gpios) + (row))
 
 static const unsigned short keypad_keymap_pecan[] = {
-	/* pecan keymap by bongkyu.kim */
-	/* rev_c schematic reversed send, end key */
+/* pecan keymap by bongkyu.kim */
+/* rev_c schematic reversed send, end key */
 	[KEYMAP_INDEX(0, 0)] = KEY_END,
 	[KEYMAP_INDEX(0, 1)] = KEY_VOLUMEUP,
 	[KEYMAP_INDEX(1, 0)] = KEY_SEND,
 	[KEYMAP_INDEX(1, 1)] = KEY_VOLUMEDOWN,
-	
+
 };
 
 int pecan_matrix_info_wrapper(struct gpio_event_input_devs *input_dev, struct gpio_event_info *info, void **data, int func)
@@ -130,7 +132,7 @@ static struct gpio_event_matrix_info pecan_keypad_matrix_info = {
 static void __init pecan_select_keymap(void)
 {
 	pecan_keypad_matrix_info.keymap = keypad_keymap_pecan;
-	
+
 	return;
 }
 
@@ -182,7 +184,7 @@ static struct platform_device *pecan_input_devices[] __initdata = {
 	&atcmd_virtual_device,
 };
 
-/* MCS&000 Touch */
+/* MCS6000 Touch */
 static struct gpio_i2c_pin ts_i2c_pin[] = {
 	[0] = {
 		.sda_pin	= TS_GPIO_I2C_SDA,
@@ -195,7 +197,7 @@ static struct gpio_i2c_pin ts_i2c_pin[] = {
 static struct i2c_gpio_platform_data ts_i2c_pdata = {
 	.sda_is_open_drain	= 0,
 	.scl_is_open_drain	= 0,
-	.udelay				= 2,
+	.udelay			= 1,
 };
 
 static struct platform_device ts_i2c_device = {
@@ -207,8 +209,7 @@ static int ts_set_vreg(unsigned char onoff)
 {
 	struct vreg *vreg_touch;
 	int rc;
-	unsigned on_off, id;
-	
+
 	printk("[Touch] %s() onoff:%d\n",__FUNCTION__, onoff);
 
 	vreg_touch = vreg_get(0, "synt");
@@ -218,23 +219,21 @@ static int ts_set_vreg(unsigned char onoff)
 		return -1;
 	}
 
-	if (onoff) {		
-		on_off = 0;
-		id = PM_VREG_PDOWN_SYNT_ID;
-		msm_proc_comm(PCOM_VREG_PULLDOWN, &on_off, &id);		
-		vreg_disable(vreg_touch);
-		
+	if (onoff) {
+
+    if (lge_bd_rev <= LGE_REV_C)
+      gpio_set_value(28, 1);
+
 		rc = vreg_set_level(vreg_touch, 3050);
 		if (rc != 0) {
 			printk("[Touch] vreg_set_level failed\n");
 			return -1;
 		}
 		vreg_enable(vreg_touch);
-	} else {		
-		vreg_disable(vreg_touch);
-		on_off = 1;
-		id = PM_VREG_PDOWN_SYNT_ID;
-		msm_proc_comm(PCOM_VREG_PULLDOWN, &on_off, &id);		
+	} else {
+	   if (lge_bd_rev <= LGE_REV_C)
+	      gpio_set_value(28, 0);
+		vreg_disable(vreg_touch);	
 	}
 
 	return 0;
@@ -259,11 +258,45 @@ static struct i2c_board_info ts_i2c_bdinfo[] = {
 	},
 };
 
+/* this routine should be checked for nessarry */
+static int init_gpio_i2c_pin_touch(struct i2c_gpio_platform_data *i2c_adap_pdata,
+		struct gpio_i2c_pin gpio_i2c_pin, struct i2c_board_info *i2c_board_info_data)
+{
+	i2c_adap_pdata->sda_pin = gpio_i2c_pin.sda_pin;
+	i2c_adap_pdata->scl_pin = gpio_i2c_pin.scl_pin;
+
+	gpio_tlmm_config(GPIO_CFG(gpio_i2c_pin.sda_pin, 0, GPIO_CFG_OUTPUT,
+				GPIO_CFG_NO_PULL, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
+	gpio_tlmm_config(GPIO_CFG(gpio_i2c_pin.scl_pin, 0, GPIO_CFG_OUTPUT,
+				GPIO_CFG_NO_PULL, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
+	gpio_set_value(gpio_i2c_pin.sda_pin, 1);
+	gpio_set_value(gpio_i2c_pin.scl_pin, 1);
+
+	if (gpio_i2c_pin.reset_pin) {
+		gpio_tlmm_config(GPIO_CFG(gpio_i2c_pin.reset_pin, 0, GPIO_CFG_OUTPUT,
+					GPIO_CFG_NO_PULL, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
+		gpio_set_value(gpio_i2c_pin.reset_pin, 1);
+	}
+
+	if (gpio_i2c_pin.irq_pin) {
+		gpio_tlmm_config(GPIO_CFG(gpio_i2c_pin.irq_pin, 0, GPIO_CFG_INPUT,
+					GPIO_CFG_NO_PULL, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
+		i2c_board_info_data->irq =
+			MSM_GPIO_TO_INT(gpio_i2c_pin.irq_pin);
+	}
+
+  if (lge_bd_rev <= LGE_REV_C)
+    gpio_tlmm_config(GPIO_CFG(28, 0, GPIO_CFG_OUTPUT, GPIO_CFG_PULL_UP, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
+
+	return 0;
+}
+
+
 static void __init pecan_init_i2c_touch(int bus_num)
 {
 	ts_i2c_device.id = bus_num;
 
-	init_gpio_i2c_pin_touch(&ts_i2c_pdata, ts_i2c_pin[0],	&ts_i2c_bdinfo[0]);
+	init_gpio_i2c_pin_touch(&ts_i2c_pdata, ts_i2c_pin[0], &ts_i2c_bdinfo[0]);
 	i2c_register_board_info(bus_num, &ts_i2c_bdinfo[0], 1);
 	platform_device_register(&ts_i2c_device);
 }
@@ -373,14 +406,14 @@ static struct i2c_board_info accel_i2c_bdinfo[] = {
 static void __init pecan_init_i2c_acceleration(int bus_num)
 {
 	accel_i2c_device.id = bus_num;
-	
+
 	init_gpio_i2c_pin(&accel_i2c_pdata, accel_i2c_pin[0], &accel_i2c_bdinfo[0]);
-	
-	//	if(lge_bd_rev >= LGE_REV_11)
-	i2c_register_board_info(bus_num, &accel_i2c_bdinfo[1], 1);	/* KR3DH */
-	//	else
-	//		i2c_register_board_info(bus_num, &accel_i2c_bdinfo[0], 1);	/* KR3DM */
-	
+
+//	if(lge_bd_rev >= LGE_REV_11)
+		i2c_register_board_info(bus_num, &accel_i2c_bdinfo[1], 1);	/* KR3DH */
+//	else
+//		i2c_register_board_info(bus_num, &accel_i2c_bdinfo[0], 1);	/* KR3DM */
+
 	platform_device_register(&accel_i2c_device);
 }
 
@@ -395,7 +428,6 @@ static int ecom_power_set(unsigned char onoff)
 	if (onoff) {
 		vreg_set_level(gp3_vreg, 3000);
 		vreg_enable(gp3_vreg);
-
 	} else {
 		vreg_disable(gp3_vreg);
 	}
@@ -408,7 +440,6 @@ static struct ecom_platform_data ecom_pdata = {
 	.pin_rst		= 0,
 	.power          	= ecom_power_set,
 };
-
 
 static struct i2c_board_info prox_ecom_i2c_bdinfo[] = {
 	[0] = {

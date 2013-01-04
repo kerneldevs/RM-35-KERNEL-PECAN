@@ -46,6 +46,10 @@ static struct platform_device msm_batt_device = {
 
 /* pecan Board Vibrator Functions for Android Vibrator Driver */
 #define VIBE_IC_VOLTAGE			3300
+static uint motor_voltage = 3300;
+static uint prev_motor_voltage = 3300;
+
+
 #define GPIO_LIN_MOTOR_PWM		28
 
 #define GP_MN_CLK_MDIV_REG		0x004C
@@ -176,11 +180,25 @@ int pecan_vibrator_power_set(int enable)
 	if (enable) {
 		if (is_enabled) {
 			//printk(KERN_INFO "vibrator power was enabled, already\n");
+			if (lge_bd_rev <= LGE_REV_C)
+			{
+				if( prev_motor_voltage != motor_voltage )
+				{
+					if (aat28xx_ldo_set_level(dev, 1, motor_voltage) < 0)
+					{
+						printk(KERN_ERR "%s: vibrator LDO set failed\n", __FUNCTION__);
+						return -EIO;
+					}
+
+					prev_motor_voltage = motor_voltage;
+				}
+			}
 			return 0;
 		}
 		
-		/* 3300 mV for Motor IC */				
-		if (aat28xx_ldo_set_level(dev, 1, VIBE_IC_VOLTAGE) < 0) {
+		aat28xx_power(dev, 1);
+
+		if (aat28xx_ldo_set_level(dev, 1, motor_voltage) < 0) {
 			printk(KERN_ERR "%s: vibrator LDO set failed\n", __FUNCTION__);
 			return -EIO;
 		}
@@ -189,6 +207,10 @@ int pecan_vibrator_power_set(int enable)
 			printk(KERN_ERR "%s: vibrator LDO enable failed\n", __FUNCTION__);
 			return -EIO;
 		}
+
+		//pmic_vib_mot_set_volt(motor_voltage);
+		printk("%s: vibrator volage %d\n", __FUNCTION__, motor_voltage);
+
 		is_enabled = 1;
 	} else {
 		if (!is_enabled) {
@@ -196,6 +218,8 @@ int pecan_vibrator_power_set(int enable)
 			return 0;
 		}
 		
+		//pmic_vib_mot_set_volt(0);
+
 		if (aat28xx_ldo_set_level(dev, 1, 0) < 0) {		
 			printk(KERN_ERR "%s: vibrator LDO set failed\n", __FUNCTION__);
 			return -EIO;
@@ -205,31 +229,70 @@ int pecan_vibrator_power_set(int enable)
 			printk(KERN_ERR "%s: vibrator LDO disable failed\n", __FUNCTION__);
 			return -EIO;
 		}
+		aat28xx_power(dev, 0);
+
 		is_enabled = 0;
 	}
 	return 0;
 }
 
+
 int pecan_vibrator_pwm_set(int enable, int amp)
 {
-	int gain = ((PWM_MAX_HALF_DUTY*amp) >> 7)+ GPMN_D_DEFAULT;
 
-	REG_WRITEL((GPMN_M_DEFAULT & GPMN_M_MASK), GP_MN_CLK_MDIV_REG);
-	REG_WRITEL((~( GPMN_N_DEFAULT - GPMN_M_DEFAULT )&GPMN_N_MASK), GP_MN_CLK_NDIV_REG);
 
-	if (enable) {
-		REG_WRITEL((gain & GPMN_D_MASK), GP_MN_CLK_DUTY_REG);
-		gpio_tlmm_config(GPIO_CFG(GPIO_LIN_MOTOR_PWM, 1, GPIO_CFG_OUTPUT, GPIO_CFG_PULL_DOWN, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
-		gpio_direction_output(GPIO_LIN_MOTOR_PWM, 1);
-	} else {
-		REG_WRITEL(GPMN_D_DEFAULT, GP_MN_CLK_DUTY_REG);
-		/* PWM siganl disable by bongkyu.kim */
-		gpio_tlmm_config(GPIO_CFG(GPIO_LIN_MOTOR_PWM, 0, GPIO_CFG_OUTPUT, GPIO_CFG_PULL_DOWN, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
-		gpio_direction_output(GPIO_LIN_MOTOR_PWM, 0);
+	if (lge_bd_rev >= LGE_REV_D){
+
+		int gain = ((PWM_MAX_HALF_DUTY*amp) >> 7)+ GPMN_D_DEFAULT;
+
+		REG_WRITEL((GPMN_M_DEFAULT & GPMN_M_MASK), GP_MN_CLK_MDIV_REG);
+		REG_WRITEL((~( GPMN_N_DEFAULT - GPMN_M_DEFAULT )&GPMN_N_MASK), GP_MN_CLK_NDIV_REG);
+
+		if (enable) {
+			REG_WRITEL((gain & GPMN_D_MASK), GP_MN_CLK_DUTY_REG);
+			gpio_tlmm_config(GPIO_CFG(GPIO_LIN_MOTOR_PWM, 1, GPIO_CFG_OUTPUT, GPIO_CFG_PULL_DOWN, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
+			gpio_direction_output(GPIO_LIN_MOTOR_PWM, 1);
+		} else {
+			REG_WRITEL(GPMN_D_DEFAULT, GP_MN_CLK_DUTY_REG);
+			/* PWM siganl disable by bongkyu.kim */
+			gpio_tlmm_config(GPIO_CFG(GPIO_LIN_MOTOR_PWM, 0, GPIO_CFG_OUTPUT, GPIO_CFG_PULL_DOWN, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
+			gpio_direction_output(GPIO_LIN_MOTOR_PWM, 0);
+		}		
+			
+
+	}else{
+
+	/* for test, jinkyu.choi@lge.com */
+	   if (amp >= 100)
+		   motor_voltage = 3300;
+	   else if (amp >= 90)
+		   motor_voltage = 3200;
+	   else if (amp >= 80)
+		   motor_voltage = 3100;
+	   else if (amp >= 70)
+		   motor_voltage = 3000;
+	   else if (amp >= 60)
+		   motor_voltage = 2900;
+	   else if (amp >= 50)
+		   motor_voltage = 2800;
+	   else if (amp >= 40)
+		   motor_voltage = 2700;
+	   else if (amp >= 30)
+		   motor_voltage = 2600;
+	   else if (amp >= 20)
+		   motor_voltage = 2500;
+	   else if (amp >= 10)
+		   motor_voltage = 2200;
+	   else
+		   motor_voltage = 0;
+
 	}
-	
+
+
+
 	return 0;
 }
+
 
 int pecan_vibrator_ic_enable_set(int enable)
 {
@@ -237,12 +300,20 @@ int pecan_vibrator_ic_enable_set(int enable)
 	return 0;
 }
 
+int pecan_vibrator_gpio_request(void)
+{
+  //gpio_request(GPIO_LIN_MOTOR_PWM, "Vibrator_PWM");
+  return 0;
+}
+
+
 static struct android_vibrator_platform_data pecan_vibrator_data = {
 	.enable_status = 0,	
 	.power_set = pecan_vibrator_power_set,
 	.pwm_set = pecan_vibrator_pwm_set,
 	.ic_enable_set = pecan_vibrator_ic_enable_set,
-	.amp_value = 97,
+	.gpio_request = pecan_vibrator_gpio_request,
+	.amp_value = 92,
 };
 
 static struct platform_device android_vibrator_device = {
@@ -342,6 +413,12 @@ static struct platform_device *pecan_misc_devices[] __initdata = {
 /* main interface */
 void __init lge_add_misc_devices(void)
 {
+
+    motor_voltage = 3300;
+    pecan_vibrator_data.amp_value = 109;
+
+    gpio_request(GPIO_LIN_MOTOR_PWM, "Vibrator_PWM");
+
 	platform_add_devices(pecan_misc_devices, ARRAY_SIZE(pecan_misc_devices));
 	platform_device_register(&msm_device_pmic_leds);
 }

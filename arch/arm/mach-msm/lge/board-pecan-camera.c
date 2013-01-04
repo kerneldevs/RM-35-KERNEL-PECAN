@@ -25,6 +25,7 @@
 
 #include "board-pecan.h"
 
+extern int pclk_rate;
 int mclk_rate = 24000000;
                 
 DEFINE_MUTEX(camera_power_mutex);
@@ -41,14 +42,14 @@ void camera_power_mutex_unlock()
 }
 
 struct i2c_board_info i2c_devices[1] = {
-#if defined (CONFIG_ISX005)
+#if defined(CONFIG_ISX005)
 	{
 		I2C_BOARD_INFO("isx005", 0x3C),
 	},
 #endif
 };
 
-#if defined (CONFIG_MSM_CAMERA)
+#if defined(CONFIG_MSM_CAMERA)
 static uint32_t camera_off_gpio_table[] = {
 	/* parallel CAMERA interfaces */
 	GPIO_CFG(4,  0, GPIO_CFG_INPUT, GPIO_CFG_PULL_DOWN, GPIO_CFG_2MA), /* DAT0 */
@@ -78,7 +79,7 @@ static uint32_t camera_on_gpio_table[] = {
 	GPIO_CFG(12, 1, GPIO_CFG_INPUT, GPIO_CFG_PULL_DOWN, GPIO_CFG_16MA), /* PCLK */
 	GPIO_CFG(13, 1, GPIO_CFG_INPUT, GPIO_CFG_PULL_DOWN, GPIO_CFG_2MA), /* HSYNC_IN */
 	GPIO_CFG(14, 1, GPIO_CFG_INPUT, GPIO_CFG_PULL_DOWN, GPIO_CFG_2MA), /* VSYNC_IN */
-	GPIO_CFG(GPIO_CAM_MCLK, 1, GPIO_CFG_OUTPUT, GPIO_CFG_PULL_DOWN, GPIO_CFG_16MA), /* MCLK */
+	GPIO_CFG(GPIO_CAM_MCLK, 1, GPIO_CFG_OUTPUT, GPIO_CFG_PULL_DOWN, GPIO_CFG_4MA), /* MCLK */
 };
 
 static void config_gpio_table(uint32_t *table, int len)
@@ -107,7 +108,7 @@ void config_camera_off_gpios(void)
 		ARRAY_SIZE(camera_off_gpio_table));
 }
 
-int camera_power_on (void)
+int camera_power_on(void)
 {
 	int rc;
 	struct device *dev = pecan_backlight_dev();
@@ -315,7 +316,6 @@ static struct msm_camera_device_platform_data msm_camera_device_data = {
 	.ioext.appsz  = MSM_CLK_CTL_SIZE,
 	.camera_power_on = camera_power_on,
 	.camera_power_off = camera_power_off,
-	//.camera_standy_high = camera_standy_high,  // 2011-03-21 Samsung camera sensor porting
 };
 
 #if defined (CONFIG_ISX005)
@@ -351,5 +351,10 @@ static struct platform_device *pecan_camera_devices[] __initdata = {
 
 void __init lge_add_camera_devices(void)
 {
+  if (lge_bd_rev >= LGE_REV_F)
+    pclk_rate = 32;
+  else
+    pclk_rate = 27;
+
 	platform_add_devices(pecan_camera_devices, ARRAY_SIZE(pecan_camera_devices));
 }

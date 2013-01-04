@@ -42,10 +42,10 @@
 #include <mach/board.h>
 #include <mach/pmic.h>
 #include <mach/msm_iomap.h>
-#include <mach/msm_rpcrouter.h>
 #include <mach/msm_hsusb.h>
 #include <mach/rpc_hsusb.h>
 #include <mach/rpc_pmapp.h>
+#include <mach/msm_rpcrouter.h>
 #include <mach/msm_serial_hs.h>
 #include <mach/memory.h>
 #include <mach/msm_battery.h>
@@ -57,8 +57,9 @@
 #include <linux/i2c.h>
 #include <linux/android_pmem.h>
 #include <mach/camera.h>
-#include <mach/socinfo.h>
+
 #include "devices.h"
+#include <mach/socinfo.h>
 #include "clock.h"
 #include "msm-keypad-devices.h"
 #include "pm.h"
@@ -108,8 +109,10 @@ struct msm_pm_platform_data msm7x27_pm_data[MSM_PM_SLEEP_MODE_NR] = {
 /* board-specific usb data definitions */
 /* QCT originals are in device_lge.c, not here */
 #ifdef CONFIG_USB_ANDROID
+
 /* LGE_CHANGE
- * Currently, LG Android host driver has 2 USB bind orders as following;
+ * Currently, LG Android host driver has 2 function orders as following;
+ *
  * - Android Platform : MDM + DIAG + GPS + UMS + ADB
  * - Android Net      : DIAG + NDIS + MDM + GPS + UMS
  *
@@ -117,6 +120,7 @@ struct msm_pm_platform_data msm7x27_pm_data[MSM_PM_SLEEP_MODE_NR] = {
  * Please refer to drivers/usb/gadget/f_acm.c.
  * 2011-01-12, hyunhui.park@lge.com
  */
+
 
 /* The binding list for LGE Android USB */
 char *usb_functions_lge_all[] = {
@@ -139,14 +143,9 @@ char *usb_functions_lge_all[] = {
 #ifdef CONFIG_USB_F_SERIAL
 	"nmea",
 #endif
-#ifdef CONFIG_USB_SUPPORT_LGE_ANDROID_AUTORUN
-	"usb_cdrom_storage",
-	"charge_only",
-#endif
 	"usb_mass_storage",
 	"adb",
 };
-
 
 /* LG Android Platform */
 char *usb_functions_lge_android_plat[] = {
@@ -200,55 +199,40 @@ char *usb_functions_lge_mass_storage_only[] = {
 	"usb_mass_storage",
 };
 
-#ifdef CONFIG_USB_SUPPORT_LGE_ANDROID_AUTORUN
-/* CDROM storage only mode(Autorun default mode) */
-char *usb_functions_lge_cdrom_storage_only[] = {
-	"usb_cdrom_storage",
-};
-
-char *usb_functions_lge_cdrom_storage_adb[] = {
-	"usb_cdrom_storage", "adb",
-};
-
-char *usb_functions_lge_charge_only[] = {
-	"charge_only",
-};
-#endif
-
 /* QCT original's composition array is existed in device_lge.c */
 struct android_usb_product usb_products[] = {
 	{
 		.product_id = 0x618E,
-		.num_functions = ARRAY_SIZE(usb_functions_lge_android_plat),
-		.functions = usb_functions_lge_android_plat,
+		.num_functions  = ARRAY_SIZE(usb_functions_lge_android_plat),
+		.functions  = usb_functions_lge_android_plat,
 	},
 	{
 		.product_id = 0x618E,
-		.num_functions = ARRAY_SIZE(usb_functions_lge_android_plat_adb),
-		.functions = usb_functions_lge_android_plat_adb,
+		.num_functions  = ARRAY_SIZE(usb_functions_lge_android_plat_adb),
+		.functions  = usb_functions_lge_android_plat_adb,
 	},
 #ifdef CONFIG_USB_ANDROID_CDC_ECM
 	{
 		.product_id = 0x61A2,
-		.num_functions = ARRAY_SIZE(usb_functions_lge_android_net),
-		.functions = usb_functions_lge_android_net,
+		.num_functions  = ARRAY_SIZE(usb_functions_lge_android_net),
+		.functions  = usb_functions_lge_android_net,
 	},
 	{
 		.product_id = 0x61A1,
-		.num_functions = ARRAY_SIZE(usb_functions_lge_android_net_adb),
-		.functions = usb_functions_lge_android_net_adb,
+		.num_functions  = ARRAY_SIZE(usb_functions_lge_android_net_adb),
+		.functions  = usb_functions_lge_android_net_adb,
 	},
 #endif
 #ifdef CONFIG_USB_ANDROID_RNDIS
 	{
 		.product_id = 0x61DA,
-		.num_functions = ARRAY_SIZE(usb_functions_lge_android_rndis),
-		.functions = usb_functions_lge_android_rndis,
+		.num_functions  = ARRAY_SIZE(usb_functions_lge_android_rndis),
+		.functions  = usb_functions_lge_android_rndis,
 	},
 	{
 		.product_id = 0x61D9,
-		.num_functions = ARRAY_SIZE(usb_functions_lge_android_rndis_adb),
-		.functions = usb_functions_lge_android_rndis_adb,
+		.num_functions  = ARRAY_SIZE(usb_functions_lge_android_rndis_adb),
+		.functions  = usb_functions_lge_android_rndis_adb,
 	},
 #endif
 #ifdef CONFIG_USB_ANDROID_MTP
@@ -268,33 +252,14 @@ struct android_usb_product usb_products[] = {
 #endif
 	{
 		.product_id = 0x6000,
-		.num_functions = ARRAY_SIZE(usb_functions_lge_manufacturing),
-		.functions = usb_functions_lge_manufacturing,
-	},
+		.num_functions  = ARRAY_SIZE(usb_functions_lge_manufacturing),
+		.functions  = usb_functions_lge_manufacturing,
+ 	},
 	{
 		.product_id = 0x61C5,
 		.num_functions = ARRAY_SIZE(usb_functions_lge_mass_storage_only),
 		.functions = usb_functions_lge_mass_storage_only,
 	},
-#ifdef CONFIG_USB_SUPPORT_LGE_ANDROID_AUTORUN
-	{
-		/* FIXME: This pid is just for test */
-		.product_id = 0x91C8,
-		.num_functions = ARRAY_SIZE(usb_functions_lge_cdrom_storage_only),
-		.functions = usb_functions_lge_cdrom_storage_only,
-	},
-	{
-		.product_id = 0x61A6,
-		.num_functions = ARRAY_SIZE(usb_functions_lge_cdrom_storage_adb),
-		.functions = usb_functions_lge_cdrom_storage_adb,
-	},
-	{
-		/* Charge only doesn't have no specific pid */
-		.product_id = 0xFFFF,
-		.num_functions = ARRAY_SIZE(usb_functions_lge_charge_only),
-		.functions = usb_functions_lge_charge_only,
-	},
-#endif
 };
 
 struct usb_mass_storage_platform_data mass_storage_pdata = {
@@ -316,16 +281,15 @@ struct usb_ether_platform_data rndis_pdata = {
 	/* ethaddr is filled by board_serialno_setup */
 	.vendorID   	= 0x1004,
 	.vendorDescr    = "LG Electronics Inc.",
-};
+ };
 
 struct platform_device rndis_device = {
 	.name   = "rndis",
 	.id 	= -1,
 	.dev    = {
 		.platform_data = &rndis_pdata,
-	},
+ 	},
 };
-
 
 #ifdef CONFIG_USB_ANDROID_CDC_ECM
 /* LGE_CHANGE
@@ -353,37 +317,15 @@ struct platform_device ecm_device = {
  * 2011-01-12, hyunhui.park@lge.com
  */
 struct acm_platform_data acm_pdata = {
-	.num_inst	    = 1,
+  .num_inst      = 1,
 };
 
 struct platform_device acm_device = {
-	.name   = "acm",
-	.id 	= -1,
-	.dev    = {
-		.platform_data = &acm_pdata,
-	},
-};
-#endif
-
-#ifdef CONFIG_USB_SUPPORT_LGE_ANDROID_AUTORUN
-/* LGE_CHANGE
- * Add platform data and device for cdrom storage function.
- * It will be used in Autorun feature.
- * 2011-03-02, hyunhui.park@lge.com
- */
-struct usb_cdrom_storage_platform_data cdrom_storage_pdata = {
-	.nluns      = 1,
-	.vendor     = "LGE",
-	.product    = "Android Platform",
-	.release    = 0x0100,
-};
-
-struct platform_device usb_cdrom_storage_device = {
-	.name   = "usb_cdrom_storage",
-	.id = -1,
-	.dev    = {
-		.platform_data = &cdrom_storage_pdata,
-	},
+  .name   = "acm",
+  .id   = -1,
+  .dev    = {
+    .platform_data = &acm_pdata,
+  },
 };
 #endif
 
@@ -395,10 +337,12 @@ struct android_usb_platform_data android_usb_pdata = {
 	.manufacturer_name  = "LG Electronics Inc.",
 	.num_products = ARRAY_SIZE(usb_products),
 	.products = usb_products,
+
 	.num_functions = ARRAY_SIZE(usb_functions_lge_all),
 	.functions = usb_functions_lge_all,
 	.serial_number = "LG_ANDROID_P350_GB_",
 };
+
 
 #endif /* CONFIG_USB_ANDROID */
 
@@ -446,8 +390,14 @@ static void msm7x27_wlan_init(void)
  * qualcomm's original value depends on wvga resolution
  * 2010-04-18, cleaneye.kim@lge.com
  */
-unsigned pmem_fb_size = 	0x96000;
-unsigned pmem_adsp_size =	0x9DE000;
+unsigned pmem_fb_size = 	0x50000;
+unsigned pmem_adsp_size =	0xAE4000; 
+
+/* decrease MDP pmem size in case of gpu and ashmem.
+ * this should be synch. with android display framework.
+ * 2011-03-28, jinkyu.choi@lge.com
+ */
+unsigned pmem_mdp_size = 0x800000;
 
 static void __init msm7x2x_init(void)
 {
@@ -457,12 +407,12 @@ static void __init msm7x2x_init(void)
 	msm_clock_init(msm_clocks_7x27, msm_num_clocks_7x27);
 
 #if defined(CONFIG_MSM_SERIAL_DEBUGGER)
-	msm_serial_debug_init(MSM_UART3_PHYS, INT_UART3,
-			&msm_device_uart3.dev, 1);
+	msm_serial_debug_init(MSM_UART1_PHYS, INT_UART1,
+			&msm_device_uart1.dev, 1);
 #endif
 
 	if (cpu_is_msm7x27())
-		msm7x2x_clock_data.max_axi_khz = 422400;
+		msm7x2x_clock_data.max_axi_khz = 200000;
 
 	msm_acpu_clock_init(&msm7x2x_clock_data);
 
