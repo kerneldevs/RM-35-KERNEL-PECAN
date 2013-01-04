@@ -29,6 +29,7 @@
 #include <mach/board.h>
 #include "board-pecan.h"
 
+#ifdef CONFIG_MMC
 static void sdcc_gpio_init(void)
 {
 #ifdef CONFIG_MMC_MSM_CARD_HW_DETECTION
@@ -391,8 +392,8 @@ static void __init msm7x2x_init_mmc(void)
 	gpio_tlmm_config(GPIO_CFG(CONFIG_BCM4329_GPIO_WL_RESET, 0, GPIO_CFG_OUTPUT, GPIO_CFG_PULL_UP, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
 	/*gpio_configure(CONFIG_BCM4329_GPIO_WL_RESET, GPIOF_DRIVE_OUTPUT);*/ // for dkmoon GB kernel
 	gpio_set_value(CONFIG_BCM4329_GPIO_WL_RESET, 0);
-	
-	// 20110506 dk.moon, block for OOB type.
+
+	// 20110506 dk.moon, block for OOB type. 
 	//gpio_tlmm_config(GPIO_CFG(CONFIG_BCM4329_GPIO_WL_HOSTWAKEUP, 0, GPIO_CFG_INPUT, GPIO_CFG_PULL_UP, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
 	/*gpio_configure(CONFIG_BCM4329_GPIO_WL_HOSTWAKEUP, GPIOF_INPUT);*/ // for dkmoon GB kernel
 
@@ -401,6 +402,9 @@ static void __init msm7x2x_init_mmc(void)
 
 	/* Enable RESET IRQ for wlan card detect */
 	enable_irq(gpio_to_irq(CONFIG_BCM4329_GPIO_WL_RESET));
+#else /* qualcomm or google */
+    msm_add_sdcc(2, &msm7x2x_sdcc_data);
+#endif /* CONFIG_LGE_BCM432X_PATCH */
 
 #endif
 }
