@@ -1,0 +1,142 @@
+diff --git a/arch/arm/configs/cyanogenmod_pecan_defconfig b/arch/arm/configs/cyanogenmod_pecan_defconfig
+index 8d9cc30..b5f8b00 100644
+--- a/arch/arm/configs/cyanogenmod_pecan_defconfig
++++ b/arch/arm/configs/cyanogenmod_pecan_defconfig
+@@ -590,29 +590,35 @@ CONFIG_COMPAT_NET_DEV_OPS=y
+ CONFIG_PACKET=y
+ CONFIG_UNIX=y
+ CONFIG_XFRM=y
+-# CONFIG_XFRM_USER is not set
++CONFIG_XFRM_USER=y
+ # CONFIG_XFRM_SUB_POLICY is not set
+ # CONFIG_XFRM_MIGRATE is not set
+ # CONFIG_XFRM_STATISTICS is not set
+ CONFIG_XFRM_IPCOMP=y
+-# CONFIG_NET_KEY is not set
++CONFIG_NET_KEY=y
++# CONFIG_NET_KEY_MIGRATE is not set
+ CONFIG_INET=y
+ # CONFIG_IP_MULTICAST is not set
+-# CONFIG_IP_ADVANCED_ROUTER is not set
++CONFIG_IP_ADVANCED_ROUTER=y
++CONFIG_ASK_IP_FIB_HASH=y
++# CONFIG_IP_FIB_TRIE is not set
+ CONFIG_IP_FIB_HASH=y
++CONFIG_IP_MULTIPLE_TABLES=y
++# CONFIG_IP_ROUTE_MULTIPATH is not set
++# CONFIG_IP_ROUTE_VERBOSE is not set
+ # CONFIG_IP_PNP is not set
+ # CONFIG_NET_IPIP is not set
+ # CONFIG_NET_IPGRE is not set
+ # CONFIG_ARPD is not set
+ # CONFIG_SYN_COOKIES is not set
+-# CONFIG_INET_AH is not set
+-# CONFIG_INET_ESP is not set
++CONFIG_INET_AH=y
++CONFIG_INET_ESP=y
+ # CONFIG_INET_IPCOMP is not set
+ # CONFIG_INET_XFRM_TUNNEL is not set
+ CONFIG_INET_TUNNEL=y
+-# CONFIG_INET_XFRM_MODE_TRANSPORT is not set
+-# CONFIG_INET_XFRM_MODE_TUNNEL is not set
+-# CONFIG_INET_XFRM_MODE_BEET is not set
++CONFIG_INET_XFRM_MODE_TRANSPORT=y
++CONFIG_INET_XFRM_MODE_TUNNEL=y
++CONFIG_INET_XFRM_MODE_BEET=y
+ # CONFIG_INET_LRO is not set
+ # CONFIG_INET_DIAG is not set
+ # CONFIG_TCP_CONG_ADVANCED is not set
+@@ -647,7 +653,6 @@ CONFIG_NET_ACTIVITY_STATS=y
+ CONFIG_NETFILTER=y
+ # CONFIG_NETFILTER_DEBUG is not set
+ CONFIG_NETFILTER_ADVANCED=y
+-
+ #
+ # Core Netfilter Configuration
+ #
+@@ -717,20 +722,16 @@ CONFIG_NETFILTER_XT_MATCH_LENGTH=y
+ CONFIG_NETFILTER_XT_MATCH_LIMIT=y
+ CONFIG_NETFILTER_XT_MATCH_MAC=y
+ CONFIG_NETFILTER_XT_MATCH_MARK=y
+-# CONFIG_NETFILTER_XT_MATCH_MULTIPORT is not set
++CONFIG_NETFILTER_XT_MATCH_MULTIPORT=y
+ # CONFIG_NETFILTER_XT_MATCH_OSF is not set
+-# CONFIG_NETFILTER_XT_MATCH_OWNER is not set
++CONFIG_NETFILTER_XT_MATCH_OWNER=y
+ CONFIG_NETFILTER_XT_MATCH_POLICY=y
+ CONFIG_NETFILTER_XT_MATCH_PKTTYPE=y
+-CONFIG_NETFILTER_XT_MATCH_QTAGUID=y
+ CONFIG_NETFILTER_XT_MATCH_QUOTA=y
+-CONFIG_NETFILTER_XT_MATCH_QUOTA2=y
+-CONFIG_NETFILTER_XT_MATCH_QUOTA2_LOG=y
+ # CONFIG_NETFILTER_XT_MATCH_RATEEST is not set
+ # CONFIG_NETFILTER_XT_MATCH_REALM is not set
+ # CONFIG_NETFILTER_XT_MATCH_RECENT is not set
+ # CONFIG_NETFILTER_XT_MATCH_SCTP is not set
+-CONFIG_NETFILTER_XT_MATCH_SOCKET=y
+ CONFIG_NETFILTER_XT_MATCH_STATE=y
+ CONFIG_NETFILTER_XT_MATCH_STATISTIC=y
+ CONFIG_NETFILTER_XT_MATCH_STRING=y
+@@ -772,9 +773,7 @@ CONFIG_NF_NAT_AMANDA=y
+ CONFIG_NF_NAT_PPTP=y
+ CONFIG_NF_NAT_H323=y
+ CONFIG_NF_NAT_SIP=y
+-CONFIG_IP_NF_MANGLE=y
+-# CONFIG_IP_NF_TARGET_CLUSTERIP is not set
+-# CONFIG_IP_NF_TARGET_ECN is not set
++# CONFIG_IP_NF_MANGLE is not set
+ # CONFIG_IP_NF_TARGET_TTL is not set
+ # CONFIG_IP_NF_RAW is not set
+ CONFIG_IP_NF_ARPTABLES=y
+@@ -807,7 +806,6 @@ CONFIG_IP_NF_ARP_MANGLE=y
+ # CONFIG_PHONET is not set
+ # CONFIG_IEEE802154 is not set
+ CONFIG_NET_SCHED=y
+-
+ #
+ # Queueing/Scheduling
+ #
+diff --git a/arch/arm/mach-msm/lge/board-pecan-mmc.c b/arch/arm/mach-msm/lge/board-pecan-mmc.c
+index 7784114..70f60e4 100755
+--- a/arch/arm/mach-msm/lge/board-pecan-mmc.c
++++ b/arch/arm/mach-msm/lge/board-pecan-mmc.c
+@@ -384,14 +384,17 @@ static void __init msm7x2x_init_mmc(void)
+ 	/* GPIO config */
+ #ifdef CONFIG_BCM4329_GPIO_WL_REGON
+ 	gpio_tlmm_config(GPIO_CFG(CONFIG_BCM4329_GPIO_WL_REGON, 0, GPIO_CFG_OUTPUT, GPIO_CFG_PULL_UP, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
++	/*gpio_configure(CONFIG_BCM4329_GPIO_WL_REGON, GPIOF_DRIVE_OUTPUT);*/ // for dkmoon GB kernel
+ 	gpio_set_value(CONFIG_BCM4329_GPIO_WL_REGON, 0);
+ #endif
+ 	
+ 	gpio_tlmm_config(GPIO_CFG(CONFIG_BCM4329_GPIO_WL_RESET, 0, GPIO_CFG_OUTPUT, GPIO_CFG_PULL_UP, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
++	/*gpio_configure(CONFIG_BCM4329_GPIO_WL_RESET, GPIOF_DRIVE_OUTPUT);*/ // for dkmoon GB kernel
+ 	gpio_set_value(CONFIG_BCM4329_GPIO_WL_RESET, 0);
+ 	
+ 	// 20110506 dk.moon, block for OOB type.
+ 	//gpio_tlmm_config(GPIO_CFG(CONFIG_BCM4329_GPIO_WL_HOSTWAKEUP, 0, GPIO_CFG_INPUT, GPIO_CFG_PULL_UP, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
++	/*gpio_configure(CONFIG_BCM4329_GPIO_WL_HOSTWAKEUP, GPIOF_INPUT);*/ // for dkmoon GB kernel
+ 
+ 	/* Register platform device */
+     msm_add_sdcc(2, &bcm432x_sdcc_wlan_data);
+diff --git a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_cdc.c b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_cdc.c
+index 86cf6b4..8f97ae3 100644
+--- a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_cdc.c
++++ b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_cdc.c
+@@ -2379,7 +2379,7 @@ static int
+ wl_pattern_atoh(char *src, char *dst)
+ {
+ 	int i;
+-#ifdef CONFIG_MACH_MSM7X27_MUSCAT
++#if defined(CONFIG_MACH_MSM7X27_MUSCAT) || defined(CONFIG_MACH_MSM7X27_PECAN)
+ 	// dk.moon_S Muscat 20110218 temp fix.
+ 	int srclen = 0;
+ 	char tmp[] = {0, };
+@@ -2393,7 +2393,7 @@ wl_pattern_atoh(char *src, char *dst)
+ 		printf("Mask invalid format. Needs to start with 0x\n");
+ 		return -1;
+ 	}
+-#ifndef CONFIG_MACH_MSM7X27_MUSCAT
++#ifndef CONFIG_MACH_MSM7X27_MUSCAT || defined(CONFIG_MACH_MSM7X27_PECAN)
+ 	// dk.moon_S Muscat 20110218 temp fix.
+ 	src = src + 2; /* Skip past 0x */
+ 	//src = &tmp[2];
