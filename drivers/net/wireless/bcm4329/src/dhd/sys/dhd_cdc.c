@@ -2393,7 +2393,7 @@ wl_pattern_atoh(char *src, char *dst)
 		printf("Mask invalid format. Needs to start with 0x\n");
 		return -1;
 	}
-#ifndef CONFIG_MACH_MSM7X27_MUSCAT || defined(CONFIG_MACH_MSM7X27_PECAN)
+#if defined(CONFIG_MACH_MSM7X27_MUSCAT) || defined(CONFIG_MACH_MSM7X27_PECAN)
 	// dk.moon_S Muscat 20110218 temp fix.
 	src = src + 2; /* Skip past 0x */
 	//src = &tmp[2];
