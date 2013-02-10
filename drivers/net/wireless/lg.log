@@ -1,0 +1,33 @@
+
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:#if defined(CONFIG_BRCM_LGE_WL_HOSTWAKEUP)
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:#endif /* CONFIG_BRCM_LGE_WL_HOSTWAKEUP */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:/* LGE_CHANGE_S [yoohoo@lge.com] 2009-11-19, Support Host Wakeup */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:#if defined(CONFIG_BRCM_LGE_WL_HOSTWAKEUP)
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:#endif /* CONFIG_BRCM_LGE_WL_HOSTWAKEUP */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:/* LGE_CHANGE_E [yoohoo@lge.com] 2009-11-19, Support Host Wakeup */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:#if defined(CONFIG_BRCM_LGE_WL_HOSTWAKEUP)
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:#endif /* CONFIG_BRCM_LGE_WL_HOSTWAKEUP */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:#if defined(CONFIG_BRCM_LGE_WL_HOSTWAKEUP)
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:/* LGE_CHANGE_S, [dongp.kim@lge.com], 2010-04-22, WBT Fix */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:/* LGE_CHANGE_S, [dongp.kim@lge.com], 2010-04-22, WBT Fix */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:/* LGE_CHANGE_S, [dongp.kim@lge.com], 2010-04-22, WBT Fix */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:/* LGE_CHANGE_S, [dongp.kim@lge.com], 2010-04-22, WBT Fix */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:#endif /* CONFIG_BRCM_LGE_WL_HOSTWAKEUP */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:#if defined(CONFIG_BRCM_LGE_WL_HOSTWAKEUP)
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:#endif /* CONFIG_BRCM_LGE_WL_HOSTWAKEUP */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:#if defined(CONFIG_BRCM_LGE_WL_HOSTWAKEUP)
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:#endif /* CONFIG_BRCM_LGE_WL_HOSTWAKEUP */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:#if defined(CONFIG_BRCM_LGE_WL_HOSTWAKEUP)
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:	/* LGE_CHANGE_S [yoohoo@lge.com] 2009-01-14, Support Host Wakeup */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:	/* LGE_CHANGE_E [yoohoo@lge.com] 2010-01-14, Support Host Wakeup */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:	/* LGE_CHANGE_S [yoohoo@lge.com] 2009-01-14, Support Host Wakeup */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:	/* LGE_CHANGE_E [yoohoo@lge.com] 2010-01-14, Support Host Wakeup */
+bcm4329old/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c:#endif	/* CONFIG_BRCM_LGE_WL_HOSTWAKEUP */
+
+bcm4329old/Kconfig:config LGE_BCM432X_PATCH
+bcm4329old/Kconfig:	bool "BCM432X Patch by LGE"
+bcm4329old/Kconfig:config BRCM_LGE_WL_HOSTWAKEUP
+bcm4329old/Kconfig:config BRCM_LGE_WL_PKTFILTER
+bcm4329old/Kconfig:	depends on BCM4329 && BRCM_LGE_WL_HOSTWAKEUP
+bcm4329old/Kconfig:config BRCM_LGE_WL_ARPOFFLOAD
+bcm4329old/Kconfig:	depends on BCM4329 && BRCM_LGE_WL_HOSTWAKEUP
