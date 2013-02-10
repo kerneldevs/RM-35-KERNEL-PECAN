@@ -1,0 +1,1241 @@
+diff --git a/arch/arm/boot/compressed/lib1funcs.S b/arch/arm/boot/compressed/lib1funcs.S
+deleted file mode 100644
+index 6dc0648..0000000
+--- a/arch/arm/boot/compressed/lib1funcs.S
++++ /dev/null
+@@ -1,348 +0,0 @@
+-/*
+- * linux/arch/arm/lib/lib1funcs.S: Optimized ARM division routines
+- *
+- * Author: Nicolas Pitre <nico@fluxnic.net>
+- *   - contributed to gcc-3.4 on Sep 30, 2003
+- *   - adapted for the Linux kernel on Oct 2, 2003
+- */
+-
+-/* Copyright 1995, 1996, 1998, 1999, 2000, 2003 Free Software Foundation, Inc.
+-
+-This file is free software; you can redistribute it and/or modify it
+-under the terms of the GNU General Public License as published by the
+-Free Software Foundation; either version 2, or (at your option) any
+-later version.
+-
+-In addition to the permissions in the GNU General Public License, the
+-Free Software Foundation gives you unlimited permission to link the
+-compiled version of this file into combinations with other programs,
+-and to distribute those combinations without any restriction coming
+-from the use of this file.  (The General Public License restrictions
+-do apply in other respects; for example, they cover modification of
+-the file, and distribution when not linked into a combine
+-executable.)
+-
+-This file is distributed in the hope that it will be useful, but
+-WITHOUT ANY WARRANTY; without even the implied warranty of
+-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+-General Public License for more details.
+-
+-You should have received a copy of the GNU General Public License
+-along with this program; see the file COPYING.  If not, write to
+-the Free Software Foundation, 59 Temple Place - Suite 330,
+-Boston, MA 02111-1307, USA.  */
+-
+-
+-#include <linux/linkage.h>
+-#include <asm/assembler.h>
+-
+-
+-.macro ARM_DIV_BODY dividend, divisor, result, curbit
+-
+-#if __LINUX_ARM_ARCH__ >= 5
+-
+-	clz	\curbit, \divisor
+-	clz	\result, \dividend
+-	sub	\result, \curbit, \result
+-	mov	\curbit, #1
+-	mov	\divisor, \divisor, lsl \result
+-	mov	\curbit, \curbit, lsl \result
+-	mov	\result, #0
+-	
+-#else
+-
+-	@ Initially shift the divisor left 3 bits if possible,
+-	@ set curbit accordingly.  This allows for curbit to be located
+-	@ at the left end of each 4 bit nibbles in the division loop
+-	@ to save one loop in most cases.
+-	tst	\divisor, #0xe0000000
+-	moveq	\divisor, \divisor, lsl #3
+-	moveq	\curbit, #8
+-	movne	\curbit, #1
+-
+-	@ Unless the divisor is very big, shift it up in multiples of
+-	@ four bits, since this is the amount of unwinding in the main
+-	@ division loop.  Continue shifting until the divisor is 
+-	@ larger than the dividend.
+-1:	cmp	\divisor, #0x10000000
+-	cmplo	\divisor, \dividend
+-	movlo	\divisor, \divisor, lsl #4
+-	movlo	\curbit, \curbit, lsl #4
+-	blo	1b
+-
+-	@ For very big divisors, we must shift it a bit at a time, or
+-	@ we will be in danger of overflowing.
+-1:	cmp	\divisor, #0x80000000
+-	cmplo	\divisor, \dividend
+-	movlo	\divisor, \divisor, lsl #1
+-	movlo	\curbit, \curbit, lsl #1
+-	blo	1b
+-
+-	mov	\result, #0
+-
+-#endif
+-
+-	@ Division loop
+-1:	cmp	\dividend, \divisor
+-	subhs	\dividend, \dividend, \divisor
+-	orrhs	\result,   \result,   \curbit
+-	cmp	\dividend, \divisor,  lsr #1
+-	subhs	\dividend, \dividend, \divisor, lsr #1
+-	orrhs	\result,   \result,   \curbit,  lsr #1
+-	cmp	\dividend, \divisor,  lsr #2
+-	subhs	\dividend, \dividend, \divisor, lsr #2
+-	orrhs	\result,   \result,   \curbit,  lsr #2
+-	cmp	\dividend, \divisor,  lsr #3
+-	subhs	\dividend, \dividend, \divisor, lsr #3
+-	orrhs	\result,   \result,   \curbit,  lsr #3
+-	cmp	\dividend, #0			@ Early termination?
+-	movnes	\curbit,   \curbit,  lsr #4	@ No, any more bits to do?
+-	movne	\divisor,  \divisor, lsr #4
+-	bne	1b
+-
+-.endm
+-
+-
+-.macro ARM_DIV2_ORDER divisor, order
+-
+-#if __LINUX_ARM_ARCH__ >= 5
+-
+-	clz	\order, \divisor
+-	rsb	\order, \order, #31
+-
+-#else
+-
+-	cmp	\divisor, #(1 << 16)
+-	movhs	\divisor, \divisor, lsr #16
+-	movhs	\order, #16
+-	movlo	\order, #0
+-
+-	cmp	\divisor, #(1 << 8)
+-	movhs	\divisor, \divisor, lsr #8
+-	addhs	\order, \order, #8
+-
+-	cmp	\divisor, #(1 << 4)
+-	movhs	\divisor, \divisor, lsr #4
+-	addhs	\order, \order, #4
+-
+-	cmp	\divisor, #(1 << 2)
+-	addhi	\order, \order, #3
+-	addls	\order, \order, \divisor, lsr #1
+-
+-#endif
+-
+-.endm
+-
+-
+-.macro ARM_MOD_BODY dividend, divisor, order, spare
+-
+-#if __LINUX_ARM_ARCH__ >= 5
+-
+-	clz	\order, \divisor
+-	clz	\spare, \dividend
+-	sub	\order, \order, \spare
+-	mov	\divisor, \divisor, lsl \order
+-
+-#else
+-
+-	mov	\order, #0
+-
+-	@ Unless the divisor is very big, shift it up in multiples of
+-	@ four bits, since this is the amount of unwinding in the main
+-	@ division loop.  Continue shifting until the divisor is 
+-	@ larger than the dividend.
+-1:	cmp	\divisor, #0x10000000
+-	cmplo	\divisor, \dividend
+-	movlo	\divisor, \divisor, lsl #4
+-	addlo	\order, \order, #4
+-	blo	1b
+-
+-	@ For very big divisors, we must shift it a bit at a time, or
+-	@ we will be in danger of overflowing.
+-1:	cmp	\divisor, #0x80000000
+-	cmplo	\divisor, \dividend
+-	movlo	\divisor, \divisor, lsl #1
+-	addlo	\order, \order, #1
+-	blo	1b
+-
+-#endif
+-
+-	@ Perform all needed substractions to keep only the reminder.
+-	@ Do comparisons in batch of 4 first.
+-	subs	\order, \order, #3		@ yes, 3 is intended here
+-	blt	2f
+-
+-1:	cmp	\dividend, \divisor
+-	subhs	\dividend, \dividend, \divisor
+-	cmp	\dividend, \divisor,  lsr #1
+-	subhs	\dividend, \dividend, \divisor, lsr #1
+-	cmp	\dividend, \divisor,  lsr #2
+-	subhs	\dividend, \dividend, \divisor, lsr #2
+-	cmp	\dividend, \divisor,  lsr #3
+-	subhs	\dividend, \dividend, \divisor, lsr #3
+-	cmp	\dividend, #1
+-	mov	\divisor, \divisor, lsr #4
+-	subges	\order, \order, #4
+-	bge	1b
+-
+-	tst	\order, #3
+-	teqne	\dividend, #0
+-	beq	5f
+-
+-	@ Either 1, 2 or 3 comparison/substractions are left.
+-2:	cmn	\order, #2
+-	blt	4f
+-	beq	3f
+-	cmp	\dividend, \divisor
+-	subhs	\dividend, \dividend, \divisor
+-	mov	\divisor,  \divisor,  lsr #1
+-3:	cmp	\dividend, \divisor
+-	subhs	\dividend, \dividend, \divisor
+-	mov	\divisor,  \divisor,  lsr #1
+-4:	cmp	\dividend, \divisor
+-	subhs	\dividend, \dividend, \divisor
+-5:
+-.endm
+-
+-
+-ENTRY(__udivsi3)
+-ENTRY(__aeabi_uidiv)
+-
+-	subs	r2, r1, #1
+-	moveq	pc, lr
+-	bcc	Ldiv0
+-	cmp	r0, r1
+-	bls	11f
+-	tst	r1, r2
+-	beq	12f
+-
+-	ARM_DIV_BODY r0, r1, r2, r3
+-
+-	mov	r0, r2
+-	mov	pc, lr
+-
+-11:	moveq	r0, #1
+-	movne	r0, #0
+-	mov	pc, lr
+-
+-12:	ARM_DIV2_ORDER r1, r2
+-
+-	mov	r0, r0, lsr r2
+-	mov	pc, lr
+-
+-ENDPROC(__udivsi3)
+-ENDPROC(__aeabi_uidiv)
+-
+-ENTRY(__umodsi3)
+-
+-	subs	r2, r1, #1			@ compare divisor with 1
+-	bcc	Ldiv0
+-	cmpne	r0, r1				@ compare dividend with divisor
+-	moveq   r0, #0
+-	tsthi	r1, r2				@ see if divisor is power of 2
+-	andeq	r0, r0, r2
+-	movls	pc, lr
+-
+-	ARM_MOD_BODY r0, r1, r2, r3
+-
+-	mov	pc, lr
+-
+-ENDPROC(__umodsi3)
+-
+-ENTRY(__divsi3)
+-ENTRY(__aeabi_idiv)
+-
+-	cmp	r1, #0
+-	eor	ip, r0, r1			@ save the sign of the result.
+-	beq	Ldiv0
+-	rsbmi	r1, r1, #0			@ loops below use unsigned.
+-	subs	r2, r1, #1			@ division by 1 or -1 ?
+-	beq	10f
+-	movs	r3, r0
+-	rsbmi	r3, r0, #0			@ positive dividend value
+-	cmp	r3, r1
+-	bls	11f
+-	tst	r1, r2				@ divisor is power of 2 ?
+-	beq	12f
+-
+-	ARM_DIV_BODY r3, r1, r0, r2
+-
+-	cmp	ip, #0
+-	rsbmi	r0, r0, #0
+-	mov	pc, lr
+-
+-10:	teq	ip, r0				@ same sign ?
+-	rsbmi	r0, r0, #0
+-	mov	pc, lr
+-
+-11:	movlo	r0, #0
+-	moveq	r0, ip, asr #31
+-	orreq	r0, r0, #1
+-	mov	pc, lr
+-
+-12:	ARM_DIV2_ORDER r1, r2
+-
+-	cmp	ip, #0
+-	mov	r0, r3, lsr r2
+-	rsbmi	r0, r0, #0
+-	mov	pc, lr
+-
+-ENDPROC(__divsi3)
+-ENDPROC(__aeabi_idiv)
+-
+-ENTRY(__modsi3)
+-
+-	cmp	r1, #0
+-	beq	Ldiv0
+-	rsbmi	r1, r1, #0			@ loops below use unsigned.
+-	movs	ip, r0				@ preserve sign of dividend
+-	rsbmi	r0, r0, #0			@ if negative make positive
+-	subs	r2, r1, #1			@ compare divisor with 1
+-	cmpne	r0, r1				@ compare dividend with divisor
+-	moveq	r0, #0
+-	tsthi	r1, r2				@ see if divisor is power of 2
+-	andeq	r0, r0, r2
+-	bls	10f
+-
+-	ARM_MOD_BODY r0, r1, r2, r3
+-
+-10:	cmp	ip, #0
+-	rsbmi	r0, r0, #0
+-	mov	pc, lr
+-
+-ENDPROC(__modsi3)
+-
+-#ifdef CONFIG_AEABI
+-
+-ENTRY(__aeabi_uidivmod)
+-
+-	stmfd	sp!, {r0, r1, ip, lr}
+-	bl	__aeabi_uidiv
+-	ldmfd	sp!, {r1, r2, ip, lr}
+-	mul	r3, r0, r2
+-	sub	r1, r1, r3
+-	mov	pc, lr
+-
+-ENDPROC(__aeabi_uidivmod)
+-
+-ENTRY(__aeabi_idivmod)
+-
+-	stmfd	sp!, {r0, r1, ip, lr}
+-	bl	__aeabi_idiv
+-	ldmfd	sp!, {r1, r2, ip, lr}
+-	mul	r3, r0, r2
+-	sub	r1, r1, r3
+-	mov	pc, lr
+-
+-ENDPROC(__aeabi_idivmod)
+-
+-#endif
+-
+-Ldiv0:
+-
+-	str	lr, [sp, #-8]!
+-	bl	__div0
+-	mov	r0, #0			@ About as wrong as it could be.
+-	ldr	pc, [sp], #8
+-
+-
+diff --git a/drivers/net/wireless/bcm4329/Kconfig b/drivers/net/wireless/bcm4329/Kconfig
+old mode 100644
+new mode 100755
+index 7a1f8a7..9cbf3b1
+--- a/drivers/net/wireless/bcm4329/Kconfig
++++ b/drivers/net/wireless/bcm4329/Kconfig
+@@ -1,7 +1,6 @@
+ config BCM4329
+ 	tristate "BCM4329 wireless support"
+ #	depends on WLAN_80211
+-	select WEXT_PRIV
+ 	select WIRELESS_EXT
+ 	---help---
+ 	  This is a driver for the Broadcom 4329 wireless chip.
+@@ -34,12 +33,12 @@ config BRCM_LGE_WL_HOSTWAKEUP
+ config BRCM_LGE_WL_PKTFILTER
+ 	bool "Setting Multicat/Broadcast packet fillter."
+ 	default n
+-	depends on BCM4329
++	depends on BCM4329 && BRCM_LGE_WL_HOSTWAKEUP
+ 
+ config BRCM_LGE_WL_ARPOFFLOAD
+ 	bool "Use Arp offload function."
+ 	default n
+-	depends on BCM4329
++	depends on BCM4329 && BRCM_LGE_WL_HOSTWAKEUP
+ 
+ config BRCM_GPIO_INTR
+ 	bool "Use Broadcom Host Wakeup GPIO"
+@@ -72,7 +71,7 @@ config BRCM_USE_SOFTAP
+ #	default 21
+ #	depends on BCM4329
+ 
+-config BRCM4329_USE_STATIC_BUF
++config BRCM_USE_STATIC_BUF
+ 	bool "Use static buff of osl_malloc"
+ 	default n
+-	depends on BCM4329
++	depends on BCM4329
+\ No newline at end of file
+diff --git a/drivers/net/wireless/bcm4329/Makefile b/drivers/net/wireless/bcm4329/Makefile
+old mode 100644
+new mode 100755
+index 1ef0983..c5482d2
+--- a/drivers/net/wireless/bcm4329/Makefile
++++ b/drivers/net/wireless/bcm4329/Makefile
+@@ -14,7 +14,7 @@
+ 
+ obj-$(CONFIG_BCM4329) += wireless.o
+ 
+-obj-$(CONFIG_BRCM4329_USE_STATIC_BUF) += brcm_static_buf.o
++obj-$(CONFIG_BRCM_USE_STATIC_BUF) += brcm_static_buf.o
+ 
+ wireless-objs = \
+ 	src/dhd/sys/dhd_linux.o \
+@@ -52,7 +52,8 @@ EXTRA_CFLAGS = \
+ 	-DDHD_GPL -DDHD_SCHED\
+ 	-DBCMLXSDMMC \
+ 	-DBCMPLATFORM_BUS \
+-	-Wall -Wstrict-prototypes \
++	-DSDIO_ISR_THREAD \
++	-Wall -Wstrict-prototypes -Werror \
+ 	-I$(SRCROOT) \
+ 	-I$(SRCROOT)/include \
+ 	-I$(SRCROOT)/shared \
+@@ -65,12 +66,8 @@ EXTRA_CFLAGS = \
+ 	-DSDIO_DEVICE_ID_BROADCOM_4325=0x4c6 \
+ 	-DSDIO_DEVICE_ID_BROADCOM_4329=0x4329 \
+ 	-DANDROID_SPECIFIC \
+-	-DOEM_ANDROID -DEMBEDDED_PLATFORM \
++	-DDONGLEOVERLAYS \
+ 	-DMMC_SDIO_ABORT \
+-	-DOOB_INTR_ONLY \
+-	-DHW_OOB \
+-	-DMMC_SDIO_ABORT \
+-	-DCUSTOMER_HW3 \
+ #-DAP -DAPSTA_PINGTEST \
+ 
+ #	\
+@@ -80,14 +77,11 @@ EXTRA_CFLAGS = \
+ 	-Iinclude/asm/mach-default \
+ 	-DBCMEMBEDIMAGE="<dongle/rte/wl/builds/4325b0/sdio-g-cdc-reclaim-idsup-wme/rtecdc.h>" \
+ 
+-#   -DCUSTOM_OOB_GPIO_NUM=46
+-EXTRA_CFLAGS += -DCUSTOM_OOB_GPIO_NUM=$(CONFIG_BCM4329_GPIO_WL_HOSTWAKEUP)
+-
+ ifeq ($(CONFIG_BCM4329_DEBUG),y)
+ EXTRA_CFLAGS += -DDHD_DEBUG -DSDTEST -DSRCBASE="\"$(SRCROOT)\""
+ endif
+ 
+-ifeq ($(CONFIG_BRCM4329_USE_STATIC_BUF),y)
++ifeq ($(CONFIG_BRCM_USE_STATIC_BUF),y)
+ EXTRA_CFLAGS += -DDHD_USE_STATIC_BUF
+ endif
+ 
+diff --git a/drivers/net/wireless/bcm4329/README b/drivers/net/wireless/bcm4329/README
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/brcm_static_buf.c b/drivers/net/wireless/bcm4329/brcm_static_buf.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/readme.txt b/drivers/net/wireless/bcm4329/readme.txt
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/GNUmakefile.inc b/drivers/net/wireless/bcm4329/src/GNUmakefile.inc
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/Makerules b/drivers/net/wireless/bcm4329/src/Makerules
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/Makerules.env b/drivers/net/wireless/bcm4329/src/Makerules.env
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/bcmsdio/linux/Makefile b/drivers/net/wireless/bcm4329/src/bcmsdio/linux/Makefile
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/bcmsdio/linux/makefile.26 b/drivers/net/wireless/bcm4329/src/bcmsdio/linux/makefile.26
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmpcispi.c b/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmpcispi.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdh.c b/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdh.c
+old mode 100644
+new mode 100755
+index 8155883..b0ac125
+--- a/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdh.c
++++ b/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdh.c
+@@ -103,11 +103,14 @@ bcmsdh_detach(osl_t *osh, void *sdh)
+ {
+ 	bcmsdh_info_t *bcmsdh = (bcmsdh_info_t *)sdh;
+ 
+-	if (bcmsdh != NULL) {
+-		if (bcmsdh->sdioh) {
+-			sdioh_detach(osh, bcmsdh->sdioh);
+-			bcmsdh->sdioh = NULL;
+-		}
++	ASSERT(bcmsdh);
++
++	if (bcmsdh->sdioh) {
++		sdioh_detach(osh, bcmsdh->sdioh);
++		bcmsdh->sdioh = NULL;
++	}
++
++	if (bcmsdh) {
+ 		MFREE(osh, bcmsdh, sizeof(bcmsdh_info_t));
+ 	}
+ 
+diff --git a/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdh_linux.c b/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdh_linux.c
+old mode 100644
+new mode 100755
+index 7f1151a..e467475
+--- a/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdh_linux.c
++++ b/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdh_linux.c
+@@ -581,35 +581,20 @@ bcmsdh_unregister(void)
+ }
+ 
+ #if defined(OOB_INTR_ONLY)
+-void bcmsdh_oob_intr_set(bool enable)
+-{
+-	static bool curstate = 1;
+-	unsigned long flags;
+-
+-	spin_lock_irqsave(&sdhcinfo->irq_lock, flags);
+-	if (curstate != enable) {
+-		if (enable)
+-			enable_irq(sdhcinfo->oob_irq);
+-		else
+-			disable_irq_nosync(sdhcinfo->oob_irq);
+-		curstate = enable;
+-	}
+-	spin_unlock_irqrestore(&sdhcinfo->irq_lock, flags);
+-}
+-
+ static irqreturn_t wlan_oob_irq(int irq, void *dev_id)
+ {
+ 	dhd_pub_t *dhdp;
+ 
+ 	dhdp = (dhd_pub_t *)dev_get_drvdata(sdhcinfo->dev);
+ 
+-	bcmsdh_oob_intr_set(0);
+-
+ 	if (dhdp == NULL) {
+-		SDLX_MSG(("Out of band GPIO interrupt fired way too early\n"));
++		disable_irq(sdhcinfo->oob_irq);
++		printk("Out of band GPIO interrupt fired way too early\n");
+ 		return IRQ_HANDLED;
+ 	}
+ 
++	WAKE_LOCK_TIMEOUT(dhdp, WAKE_LOCK_TMOUT, 25);
++
+ 	dhdsdio_isr((void *)dhdp->bus);
+ 
+ 	return IRQ_HANDLED;
+@@ -632,6 +617,9 @@ int bcmsdh_register_oob_intr(void * dhdp)
+ 	error = request_irq(sdhcinfo->oob_irq, wlan_oob_irq, sdhcinfo->oob_flags,
+ 		"bcmsdh_sdmmc", NULL);
+ 
++	if (error)
++		return -ENODEV;
++
+ 	set_irq_wake(sdhcinfo->oob_irq, 1);
+ 		sdhcinfo->oob_irq_registered = TRUE;
+ 	}
+@@ -643,12 +631,26 @@ void bcmsdh_unregister_oob_intr(void)
+ {
+ 	SDLX_MSG(("%s: Enter\n", __FUNCTION__));
+ 
+-	if (sdhcinfo->oob_irq_registered == TRUE) {
+-		set_irq_wake(sdhcinfo->oob_irq, 0);
+-		disable_irq(sdhcinfo->oob_irq);	/* just in case.. */
+-		free_irq(sdhcinfo->oob_irq, NULL);
+-		sdhcinfo->oob_irq_registered = FALSE;
++	set_irq_wake(sdhcinfo->oob_irq, 0);
++	disable_irq(sdhcinfo->oob_irq);	/* just in case.. */
++	free_irq(sdhcinfo->oob_irq, NULL);
++	sdhcinfo->oob_irq_registered = FALSE;
++}
++
++void bcmsdh_oob_intr_set(bool enable)
++{
++	static bool curstate = 1;
++	unsigned long flags;
++
++	spin_lock_irqsave(&sdhcinfo->irq_lock, flags);
++	if (curstate != enable) {
++		if (enable)
++			enable_irq(sdhcinfo->oob_irq);
++		else
++			disable_irq(sdhcinfo->oob_irq);
++		curstate = enable;
+ 	}
++	spin_unlock_irqrestore(&sdhcinfo->irq_lock, flags);
+ }
+ #endif /* defined(OOB_INTR_ONLY) */
+ /* Module parameters specific to each host-controller driver */
+diff --git a/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdh_sdmmc.c b/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdh_sdmmc.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c b/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdh_sdmmc_linux.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdspi.c b/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdspi.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdspi_linux.c b/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdspi_linux.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdstd.c b/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdstd.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdstd_linux.c b/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmsdstd_linux.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmspibrcm.c b/drivers/net/wireless/bcm4329/src/bcmsdio/sys/bcmspibrcm.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/branding.inc b/drivers/net/wireless/bcm4329/src/branding.inc
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/dhd/linux/Makefile b/drivers/net/wireless/bcm4329/src/dhd/linux/Makefile
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/dhd/linux/makefile.26 b/drivers/net/wireless/bcm4329/src/dhd/linux/makefile.26
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd.h b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_bus.h b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_bus.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_cdc.c b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_cdc.c
+old mode 100644
+new mode 100755
+index 024497a..815667e
+--- a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_cdc.c
++++ b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_cdc.c
+@@ -2379,27 +2379,12 @@ static int
+ wl_pattern_atoh(char *src, char *dst)
+ {
+ 	int i;
+-#if defined(CONFIG_MACH_MSM7X27_MUSCAT) || defined(CONFIG_MACH_MSM7X27_PECAN)
+-	// dk.moon_S Muscat 20110218 temp fix.
+-	int srclen = 0;
+-	char tmp[] = {0, };
+-	srclen = strlen(src);
+-	strncpy(tmp, src, srclen);
+-	tmp[srclen] = '\0';
+-	// dk.moon_E Muscat 20110218 temp fix.
+-#endif
+ 	if (strncmp(src, "0x", 2) != 0 &&
+ 	    strncmp(src, "0X", 2) != 0) {
+ 		printf("Mask invalid format. Needs to start with 0x\n");
+ 		return -1;
+ 	}
+-#if defined(CONFIG_MACH_MSM7X27_MUSCAT) || defined(CONFIG_MACH_MSM7X27_PECAN)
+-	// dk.moon_S Muscat 20110218 temp fix.
+ 	src = src + 2; /* Skip past 0x */
+-	//src = &tmp[2];
+-	//printk("[wl_pattern_atoh-debug] src %s\n", src);
+-	// dk.moon_E Muscat 20110218 temp fix.
+-#endif
+ 	if (strlen(src) % 2 != 0) {
+ 		printf("Mask invalid format. Needs to be of even length\n");
+ 		return -1;
+diff --git a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_common.c b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_common.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_custom_gpio.c b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_custom_gpio.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_dbg.h b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_dbg.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_linux.c b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_linux.c
+old mode 100644
+new mode 100755
+index 3c16d47..a045a8c
+--- a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_linux.c
++++ b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_linux.c
+@@ -199,13 +199,6 @@ volatile bool dhd_mmc_suspend = FALSE;
+ DECLARE_WAIT_QUEUE_HEAD(dhd_dpc_wait);
+ #endif /* (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 27)) && defined(CONFIG_PM_SLEEP) */
+ 
+-/* LGE_CHANGE_S, jisung.yang@lge.com, 2011-4-24, reset wi-fi driver when there a resumed on timeout */
+-#if defined(CONFIG_LGE_BCM432X_PATCH)		//by sjpark 11-01-11 : send hang event
+-int net_os_send_hang_message(struct net_device *dev);
+-extern int wl_iw_send_priv_event( struct net_device *dev, char *evntmsg );
+-#endif
+-/* LGE_CHANGE_E, jisung.yang@lge.com, 2011-4-24, reset wi-fi driver when there a resumed on timeout */
+-
+ #if defined(OOB_INTR_ONLY)
+ extern void dhd_enable_oob_intr(struct dhd_bus *bus, bool enable);
+ #endif /* defined(OOB_INTR_ONLY) */
+@@ -275,11 +268,7 @@ typedef struct dhd_info {
+ 	long dpc_pid;
+ 	struct semaphore dpc_sem;
+ 	struct completion dpc_exited;
+-/* LGE_CHANGE_S, jisung.yang@lge.com, 2011-4-24, reset wi-fi driver when there a resumed on timeout */	
+-#if defined(CONFIG_LGE_BCM432X_PATCH)		//by sjpark 11-01-11 : send hang event
+-	int hang_was_sent; /* flag that message was send at least once */
+-#endif
+-/* LGE_CHANGE_E, jisung.yang@lge.com, 2011-4-24, reset wi-fi driver when there a resumed on timeout */	
++
+ 	/* Thread to issue ioctl for multicast */
+ 	long sysioc_pid;
+ 	struct semaphore sysioc_sem;
+@@ -626,11 +615,7 @@ static void
+ _dhd_set_multicast_list(dhd_info_t *dhd, int ifidx)
+ {
+ 	struct net_device *dev;
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 35)
+-	struct netdev_hw_addr *ha;
+-#else
+ 	struct dev_mc_list *mclist;
+-#endif
+ 	uint32 allmulti, cnt;
+ 
+ 	wl_ioctl_t ioc;
+@@ -640,12 +625,8 @@ _dhd_set_multicast_list(dhd_info_t *dhd, int ifidx)
+ 
+ 	ASSERT(dhd && dhd->iflist[ifidx]);
+ 	dev = dhd->iflist[ifidx]->net;
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 35)
+-	cnt = netdev_mc_count(dev);
+-#else
+ 	mclist = dev->mc_list;
+ 	cnt = dev->mc_count;
+-#endif
+ 
+ 	/* Determine initial value of allmulti flag */
+ 	allmulti = (dev->flags & IFF_ALLMULTI) ? TRUE : FALSE;
+@@ -667,20 +648,10 @@ _dhd_set_multicast_list(dhd_info_t *dhd, int ifidx)
+ 	memcpy(bufp, &cnt, sizeof(cnt));
+ 	bufp += sizeof(cnt);
+ 
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 35)
+-	netdev_for_each_mc_addr(ha, dev) {
+-		if (!cnt)
+-			break;
+-		memcpy(bufp, ha->addr, ETHER_ADDR_LEN);
+-		bufp += ETHER_ADDR_LEN;
+-		cnt--;
+-	}
+-#else
+ 	for (cnt = 0; mclist && (cnt < dev->mc_count); cnt++, mclist = mclist->next) {
+ 		memcpy(bufp, (void *)mclist->dmi_addr, ETHER_ADDR_LEN);
+ 		bufp += ETHER_ADDR_LEN;
+ 	}
+-#endif
+ 
+ 	memset(&ioc, 0, sizeof(ioc));
+ 	ioc.cmd = WLC_SET_VAR;
+@@ -1774,14 +1745,6 @@ dhd_ioctl_entry(struct net_device *net, struct ifreq *ifr, int cmd)
+ 
+ 	bcmerror = dhd_wl_ioctl(&dhd->pub, ifidx, (wl_ioctl_t *)&ioc, buf, buflen);
+ 
+-/* LGE_CHANGE_S, jisung.yang@lge.com, 2011-4-24, reset wi-fi driver when there a resumed on timeout */	
+-#if defined(CONFIG_LGE_BCM432X_PATCH)		//by sjpark 11-01-11 : send hang event
+-	if (bcmerror == -ETIMEDOUT) {			
+-			net_os_send_hang_message(net);
+-	}
+-#endif
+-/* LGE_CHANGE_E, jisung.yang@lge.com, 2011-4-24, reset wi-fi driver when there a resumed on timeout */	
+-
+ 	WAKE_UNLOCK(&dhd->pub, WAKE_LOCK_IOCTL);
+ 	WAKE_LOCK_DESTROY(&dhd->pub, WAKE_LOCK_IOCTL);
+ done:
+@@ -1796,25 +1759,6 @@ done:
+ 	return OSL_ERROR(bcmerror);
+ }
+ 
+-/* LGE_CHANGE_S, jisung.yang@lge.com, 2011-4-24, reset wi-fi driver when there a resumed on timeout */
+-#if defined(CONFIG_LGE_BCM432X_PATCH)		//by sjpark 11-01-11 : send hang event
+-int net_os_send_hang_message(struct net_device *dev)
+-{
+-	dhd_info_t *dhd = *(dhd_info_t **)netdev_priv(dev);
+-	int ret = 0;
+-
+-	if (dhd) {
+-		if (!dhd->hang_was_sent) {
+-			dhd->hang_was_sent = 1;
+-			DHD_ERROR(("%s: Event HANGED send up\n", __FUNCTION__));
+-			ret = wl_iw_send_priv_event(dev, "HANGED");
+-		}
+-	}
+-	return ret;
+-}
+-#endif
+-/* LGE_CHANGE_E, jisung.yang@lge.com, 2011-4-24, reset wi-fi driver when there a resumed on timeout */
+-
+ static int
+ dhd_stop(struct net_device *net)
+ {
+@@ -2529,8 +2473,8 @@ dhd_module_init(void)
+ 		mdelay(150);
+ 	}
+ #endif
+-	gpio_tlmm_config(GPIO_CFG(CONFIG_BCM4329_GPIO_WL_RESET, 0, GPIO_CFG_OUTPUT, GPIO_CFG_NO_PULL, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
+-	//gpio_configure(CONFIG_BCM4329_GPIO_WL_RESET, GPIOF_DRIVE_OUTPUT);
++	gpio_tlmm_config(GPIO_CFG(CONFIG_BCM4329_GPIO_WL_RESET, 0, GPIO_OUTPUT, GPIO_NO_PULL, GPIO_2MA), GPIO_ENABLE);
++	gpio_configure(CONFIG_BCM4329_GPIO_WL_RESET, GPIOF_DRIVE_OUTPUT);
+ /* CONFIG_BCM4329_GPIO_WL_REGON */
+ 	//gpio_tlmm_config(GPIO_CFG(CONFIG_BCM4329_GPIO_WL_RESET, 0, GPIO_OUTPUT, GPIO_NO_PULL, GPIO_2MA), GPIO_ENABLE);
+ 	gpio_set_value(CONFIG_BCM4329_GPIO_WL_RESET, 1);
+@@ -2791,9 +2735,9 @@ dhd_os_sdtxunlock(dhd_pub_t *pub)
+ }
+ 
+ #ifdef DHD_USE_STATIC_BUF
+-#if defined(CONFIG_LGE_BCM432X_PATCH) && defined(CONFIG_BRCM4329_USE_STATIC_BUF)
++#if defined(CONFIG_LGE_BCM432X_PATCH) && defined(CONFIG_BRCM_USE_STATIC_BUF)
+ extern void* mem_prealloc( int section, unsigned long size);
+-#endif /* defined(CONFIG_LGE_BCM432X_PATCH) && defined(CONFIG_BRCM4329_USE_STATIC_BUF) */
++#endif /* defined(CONFIG_LGE_BCM432X_PATCH) && defined(CONFIG_BRCM_USE_STATIC_BUF) */
+ void * dhd_os_prealloc(int section, unsigned long size)
+ {
+ #if defined(CUSTOMER_HW2) && defined(CONFIG_WIFI_CONTROL_FUNC)
+@@ -2812,7 +2756,7 @@ void * dhd_os_prealloc(int section, unsigned long size)
+ 	DHD_ERROR(("can't alloc section %d\n", section));
+ 	return 0;
+ #else
+-#if defined(CONFIG_LGE_BCM432X_PATCH) && defined(CONFIG_BRCM4329_USE_STATIC_BUF)
++#if defined(CONFIG_LGE_BCM432X_PATCH) && defined(CONFIG_BRCM_USE_STATIC_BUF)
+ 	void *alloc_ptr = NULL;
+ 
+ 	alloc_ptr = mem_prealloc(section, size);
+@@ -2826,7 +2770,7 @@ void * dhd_os_prealloc(int section, unsigned long size)
+ 	return 0;
+ #else
+ return MALLOC(0, size);
+-#endif /* defined(CONFIG_LGE_BCM432X_PATCH) && defined(CONFIG_BRCM4329_USE_STATIC_BUF) */
++#endif /* defined(CONFIG_LGE_BCM432X_PATCH) && defined(CONFIG_BRCM_USE_STATIC_BUF) */
+ #endif /* #if defined(CUSTOMER_HW2) && defined(CONFIG_WIFI_CONTROL_FUNC) */
+ }
+ #endif /* DHD_USE_STATIC_BUF */
+@@ -2986,4 +2930,4 @@ dhd_pub_t * get_dhd_pub_from_dev(struct net_device *dev)
+ }
+ /* LGE_CHANGE_S, [yoohoo@lge.com], 2009-11-19, Use deepsleep instead of dhd_dev_reset when driver start or stop */
+ #endif /* CONFIG_LGE_BCM432X_PATCH && CONFIG_BRCM_USE_DEEPSLEEP */
+-/* LGE_CHANGE_E, [yoohoo@lge.com], 2009-11-19, Use deepsleep instead of dhd_dev_reset when driver start or stop */
++/* LGE_CHANGE_E, [yoohoo@lge.com], 2009-11-19, Use deepsleep instead of dhd_dev_reset when driver start or stop */
+\ No newline at end of file
+diff --git a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_linux_sched.c b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_linux_sched.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_proto.h b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_proto.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_sdio.c b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_sdio.c
+old mode 100644
+new mode 100755
+index 720a3a4..b7793c1
+--- a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_sdio.c
++++ b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_sdio.c
+@@ -2426,15 +2426,12 @@ exit:
+ void
+ dhd_bus_stop(struct dhd_bus *bus, bool enforce_mutex)
+ {
+-	osl_t *osh;
++	osl_t *osh = bus->dhd->osh;
+ 	uint32 local_hostintmask;
+ 	uint8 saveclk;
+ 	uint retries;
+ 	int err;
+-	if (!bus->dhd)
+-		return;
+ 
+-	osh = bus->dhd->osh;
+ 	DHD_TRACE(("%s: Enter\n", __FUNCTION__));
+ 
+ 	bcmsdh_waitlockfree(NULL);
+@@ -4034,13 +4031,8 @@ clkwait:
+ 	/* Resched if events or tx frames are pending, else await next interrupt */
+ 	/* On failed register access, all bets are off: no resched or interrupts */
+ 	if ((bus->dhd->busstate == DHD_BUS_DOWN) || bcmsdh_regfail(sdh)) {
+-		DHD_ERROR(("%s: failed backplane access over SDIO, halting operation %d \n",
+-		           __FUNCTION__, bcmsdh_regfail(sdh)));
+-// dk.moon_S 20110316 Muscat, Patch- JTrac52 (Disable SDIO interrupt when BUS is down)
+-#if defined(CONFIG_LGE_BCM432X_PATCH)
+-		bcmsdh_intr_disable(bus->sdh);
+-#endif
+-// dk.moon_E 20110316 Muscat, Patch-JTrac52 (Disable SDIO interrupt when BUS is down)
++		DHD_ERROR(("%s: failed backplane access over SDIO, halting operation\n",
++		           __FUNCTION__));
+ 		bus->dhd->busstate = DHD_BUS_DOWN;
+ 		bus->intstatus = 0;
+ 	} else if (bus->clkstate == CLK_PENDING) {
+diff --git a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_usb_linux.c b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_usb_linux.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_wlfc.h b/drivers/net/wireless/bcm4329/src/dhd/sys/dhd_wlfc.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/dongle/dngl_stats.h b/drivers/net/wireless/bcm4329/src/dongle/dngl_stats.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/Makefile b/drivers/net/wireless/bcm4329/src/include/Makefile
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/aidmp.h b/drivers/net/wireless/bcm4329/src/include/aidmp.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmcdc.h b/drivers/net/wireless/bcm4329/src/include/bcmcdc.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmdefs.h b/drivers/net/wireless/bcm4329/src/include/bcmdefs.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmdevs.h b/drivers/net/wireless/bcm4329/src/include/bcmdevs.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmendian.h b/drivers/net/wireless/bcm4329/src/include/bcmendian.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmpcispi.h b/drivers/net/wireless/bcm4329/src/include/bcmpcispi.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmperf.h b/drivers/net/wireless/bcm4329/src/include/bcmperf.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmsdbus.h b/drivers/net/wireless/bcm4329/src/include/bcmsdbus.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmsdh.h b/drivers/net/wireless/bcm4329/src/include/bcmsdh.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmsdh_sdmmc.h b/drivers/net/wireless/bcm4329/src/include/bcmsdh_sdmmc.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmsdpcm.h b/drivers/net/wireless/bcm4329/src/include/bcmsdpcm.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmsdspi.h b/drivers/net/wireless/bcm4329/src/include/bcmsdspi.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmsdstd.h b/drivers/net/wireless/bcm4329/src/include/bcmsdstd.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmspi.h b/drivers/net/wireless/bcm4329/src/include/bcmspi.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmspibrcm.h b/drivers/net/wireless/bcm4329/src/include/bcmspibrcm.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmutils.h b/drivers/net/wireless/bcm4329/src/include/bcmutils.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/bcmwifi.h b/drivers/net/wireless/bcm4329/src/include/bcmwifi.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/dhdioctl.h b/drivers/net/wireless/bcm4329/src/include/dhdioctl.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/epivers.h b/drivers/net/wireless/bcm4329/src/include/epivers.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/epivers.h.in b/drivers/net/wireless/bcm4329/src/include/epivers.h.in
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/epivers.sh b/drivers/net/wireless/bcm4329/src/include/epivers.sh
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/hndpmu.h b/drivers/net/wireless/bcm4329/src/include/hndpmu.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/hndsoc.h b/drivers/net/wireless/bcm4329/src/include/hndsoc.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/linux_osl.h b/drivers/net/wireless/bcm4329/src/include/linux_osl.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/linuxver.h b/drivers/net/wireless/bcm4329/src/include/linuxver.h
+old mode 100644
+new mode 100755
+index b079480..aadf25e
+--- a/drivers/net/wireless/bcm4329/src/include/linuxver.h
++++ b/drivers/net/wireless/bcm4329/src/include/linuxver.h
+@@ -33,12 +33,8 @@
+ #if (LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 0))
+ #include <linux/config.h>
+ #else
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 33))
+-#include <generated/autoconf.h>
+-#else
+ #include <linux/autoconf.h>
+ #endif
+-#endif /* (LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 0)) */
+ #include <linux/module.h>
+ 
+ #if (LINUX_VERSION_CODE < KERNEL_VERSION(2, 3, 0))
+diff --git a/drivers/net/wireless/bcm4329/src/include/miniopt.h b/drivers/net/wireless/bcm4329/src/include/miniopt.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/msgtrace.h b/drivers/net/wireless/bcm4329/src/include/msgtrace.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/osl.h b/drivers/net/wireless/bcm4329/src/include/osl.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/packed_section_end.h b/drivers/net/wireless/bcm4329/src/include/packed_section_end.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/packed_section_start.h b/drivers/net/wireless/bcm4329/src/include/packed_section_start.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/pcicfg.h b/drivers/net/wireless/bcm4329/src/include/pcicfg.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/proto/802.11.h b/drivers/net/wireless/bcm4329/src/include/proto/802.11.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/proto/802.11e.h b/drivers/net/wireless/bcm4329/src/include/proto/802.11e.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/proto/802.1d.h b/drivers/net/wireless/bcm4329/src/include/proto/802.1d.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/proto/bcmeth.h b/drivers/net/wireless/bcm4329/src/include/proto/bcmeth.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/proto/bcmevent.h b/drivers/net/wireless/bcm4329/src/include/proto/bcmevent.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/proto/bcmip.h b/drivers/net/wireless/bcm4329/src/include/proto/bcmip.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/proto/eapol.h b/drivers/net/wireless/bcm4329/src/include/proto/eapol.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/proto/ethernet.h b/drivers/net/wireless/bcm4329/src/include/proto/ethernet.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/proto/sdspi.h b/drivers/net/wireless/bcm4329/src/include/proto/sdspi.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/proto/vlan.h b/drivers/net/wireless/bcm4329/src/include/proto/vlan.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/proto/wpa.h b/drivers/net/wireless/bcm4329/src/include/proto/wpa.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/sbchipc.h b/drivers/net/wireless/bcm4329/src/include/sbchipc.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/sbconfig.h b/drivers/net/wireless/bcm4329/src/include/sbconfig.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/sbhnddma.h b/drivers/net/wireless/bcm4329/src/include/sbhnddma.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/sbpcmcia.h b/drivers/net/wireless/bcm4329/src/include/sbpcmcia.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/sbsdio.h b/drivers/net/wireless/bcm4329/src/include/sbsdio.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/sbsdpcmdev.h b/drivers/net/wireless/bcm4329/src/include/sbsdpcmdev.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/sbsocram.h b/drivers/net/wireless/bcm4329/src/include/sbsocram.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/sdio.h b/drivers/net/wireless/bcm4329/src/include/sdio.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/sdioh.h b/drivers/net/wireless/bcm4329/src/include/sdioh.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/sdiovar.h b/drivers/net/wireless/bcm4329/src/include/sdiovar.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/siutils.h b/drivers/net/wireless/bcm4329/src/include/siutils.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/spid.h b/drivers/net/wireless/bcm4329/src/include/spid.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/trxhdr.h b/drivers/net/wireless/bcm4329/src/include/trxhdr.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/typedefs.h b/drivers/net/wireless/bcm4329/src/include/typedefs.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/usbrdl.h b/drivers/net/wireless/bcm4329/src/include/usbrdl.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/wlfc_proto.h b/drivers/net/wireless/bcm4329/src/include/wlfc_proto.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/include/wlioctl.h b/drivers/net/wireless/bcm4329/src/include/wlioctl.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/shared/aiutils.c b/drivers/net/wireless/bcm4329/src/shared/aiutils.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/shared/bcmutils.c b/drivers/net/wireless/bcm4329/src/shared/bcmutils.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/shared/bcmwifi.c b/drivers/net/wireless/bcm4329/src/shared/bcmwifi.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/shared/hndpmu.c b/drivers/net/wireless/bcm4329/src/shared/hndpmu.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/shared/linux_osl.c b/drivers/net/wireless/bcm4329/src/shared/linux_osl.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/shared/miniopt.c b/drivers/net/wireless/bcm4329/src/shared/miniopt.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/shared/sbutils.c b/drivers/net/wireless/bcm4329/src/shared/sbutils.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/shared/siutils.c b/drivers/net/wireless/bcm4329/src/shared/siutils.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/shared/siutils_priv.h b/drivers/net/wireless/bcm4329/src/shared/siutils_priv.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/wl/sslpnphy/lpphyregs.h b/drivers/net/wireless/bcm4329/src/wl/sslpnphy/lpphyregs.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/wl/sslpnphy/lpphytbls.c b/drivers/net/wireless/bcm4329/src/wl/sslpnphy/lpphytbls.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/wl/sslpnphy/lpphytbls.h b/drivers/net/wireless/bcm4329/src/wl/sslpnphy/lpphytbls.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/wl/sslpnphy/mimophytbls.c b/drivers/net/wireless/bcm4329/src/wl/sslpnphy/mimophytbls.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/wl/sslpnphy/mimophytbls.h b/drivers/net/wireless/bcm4329/src/wl/sslpnphy/mimophytbls.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/wl/sslpnphy/sslpnphyregs.h b/drivers/net/wireless/bcm4329/src/wl/sslpnphy/sslpnphyregs.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/wl/sslpnphy/sslpnphytbls.c b/drivers/net/wireless/bcm4329/src/wl/sslpnphy/sslpnphytbls.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/wl/sslpnphy/sslpnphytbls.h b/drivers/net/wireless/bcm4329/src/wl/sslpnphy/sslpnphytbls.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/wl/sslpnphy/wlc_phy.c b/drivers/net/wireless/bcm4329/src/wl/sslpnphy/wlc_phy.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/wl/sslpnphy/wlc_phy.h b/drivers/net/wireless/bcm4329/src/wl/sslpnphy/wlc_phy.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/wl/sslpnphy/wlc_phy_cmn.c b/drivers/net/wireless/bcm4329/src/wl/sslpnphy/wlc_phy_cmn.c
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/wl/sslpnphy/wlc_phy_hal.h b/drivers/net/wireless/bcm4329/src/wl/sslpnphy/wlc_phy_hal.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/wl/sslpnphy/wlc_phy_int.h b/drivers/net/wireless/bcm4329/src/wl/sslpnphy/wlc_phy_int.h
+old mode 100644
+new mode 100755
+diff --git a/drivers/net/wireless/bcm4329/src/wl/sys/wl_iw.c b/drivers/net/wireless/bcm4329/src/wl/sys/wl_iw.c
+old mode 100644
+new mode 100755
+index cf9de48..9e982b1
+--- a/drivers/net/wireless/bcm4329/src/wl/sys/wl_iw.c
++++ b/drivers/net/wireless/bcm4329/src/wl/sys/wl_iw.c
+@@ -655,7 +655,7 @@ wl_iw_get_macaddr(
+ 	return error;
+ }
+ 
+-#if defined(CONFIG_BRCM_LGE_WL_ARPOFFLOAD)
++#if defined(CONFIG_BRCM_LGE_WL_HOSTWAKEUP) && defined(CONFIG_BRCM_LGE_WL_ARPOFFLOAD)
+ static int
+ wl_iw_set_hostip(
+ 	struct net_device *dev,
+@@ -680,7 +680,7 @@ wl_iw_set_hostip(
+ 
+ 	ret = strict_strtol((extra+1+ip_offset), 0, &ipaddr_int);
+ 
+-//	printk("%s: Received IP Address: " NIPQUAD_FMT "\n" ,__FUNCTION__, NIPQUAD(ipaddr_int));
++	printk("%s: Received IP Address: " NIPQUAD_FMT "\n" ,__FUNCTION__, NIPQUAD(ipaddr_int));
+ 
+ 	ipaddr[0] = ((unsigned char *)&ipaddr_int)[0];
+ 	ipaddr[1] = ((unsigned char *)&ipaddr_int)[1];
+@@ -708,7 +708,7 @@ wl_iw_set_hostip(
+ 
+     return 0;
+ }
+-#endif	/* defined(CONFIG_BRCM_LGE_WL_ARPOFFLOAD) */
++#endif	/* defined(CONFIG_BRCM_LGE_WL_HOSTWAKEUP) && defined(CONFIG_BRCM_LGE_WL_ARPOFFLOAD) */
+ 
+ static int
+ wl_iw_set_country(
+@@ -980,7 +980,7 @@ wl_iw_get_rssi(
+ 	return error;
+ }
+ 
+-int
++static int
+ wl_iw_send_priv_event(
+ 	struct net_device *dev,
+ 	char *flag
+@@ -2483,11 +2483,7 @@ static void wl_iw_send_scan_complete(iscan_info_t *iscan)
+ 
+ 		memset(&wrqu, 0, sizeof(wrqu));
+ 		memset(extra, 0, sizeof(extra));
+-		// UPDATE_S dk.moon 20110331, remove warning message in wireless EXT. (from BCM4330 src)
+-		/* wext expects to get no data for SIOCGIWSCAN Event  */
+-		wireless_send_event(iscan->dev, SIOCGIWSCAN, &wrqu, NULL);
+-		//wireless_send_event(iscan->dev, SIOCGIWSCAN, &wrqu, extra);
+-		// UPDATE_E dk.moon 20110331, remove warning message in wireless EXT.
++		wireless_send_event(iscan->dev, SIOCGIWSCAN, &wrqu, extra);
+ 		WL_TRACE(("Send Event SCAN complete\n"));
+ #endif
+ }
+@@ -6090,10 +6086,10 @@ wl_iw_set_priv(
+ 			ret = wl_iw_get_macaddr(dev, info, (union iwreq_data *)dwrq, extra);
+ 	    else if (strnicmp(extra, "COUNTRY", strlen("COUNTRY")) == 0)
+ 			ret = wl_iw_set_country(dev, info, (union iwreq_data *)dwrq, extra);
+-#if defined(CONFIG_BRCM_LGE_WL_ARPOFFLOAD)
++#if defined(CONFIG_BRCM_LGE_WL_HOSTWAKEUP) && defined(CONFIG_BRCM_LGE_WL_ARPOFFLOAD)
+ 	    else if (strnicmp(extra, "IPADDR", strlen("IPADDR")) == 0)
+ 			ret = wl_iw_set_hostip(dev, info, (union iwreq_data *)dwrq, extra);
+-#endif	/* defined(CONFIG_BRCM_LGE_WL_ARPOFFLOAD) */
++#endif	/* defined(CONFIG_BRCM_LGE_WL_HOSTWAKEUP) && defined(CONFIG_BRCM_LGE_WL_ARPOFFLOAD) */
+ 	    else if (strnicmp(extra, "STOP", strlen("STOP")) == 0)
+ 			ret = wl_iw_control_wl_off(dev, info);
+ #if !defined(CONFIG_LGE_BCM432X_PATCH)
+@@ -6996,14 +6992,8 @@ wl_iw_event(struct net_device *dev, wl_event_msg_t *e, void* data)
+ 		return;
+ #endif	/* CONFIG_LGE_BCM432X_PATCH */
+ #ifndef SANDGATE2G
+-		// UPDATE_S dk.moon 20110331, remove warning message in wireless EXT. (from BCM4330 src)
+-		if (cmd) {
+-			if (cmd == SIOCGIWSCAN)
+-				wireless_send_event(dev, cmd, &wrqu, NULL);
+-			else
+-				wireless_send_event(dev, cmd, &wrqu, extra);
+-		}
+-		// UPDATE_S dk.moon 20110331, remove warning message in wireless EXT.
++		if (cmd)
++			wireless_send_event(dev, cmd, &wrqu, extra);
+ #endif
+ 
+ #if defined(STA) || defined(BCMDONGLEHOST)
+diff --git a/drivers/net/wireless/bcm4329/src/wl/sys/wl_iw.h b/drivers/net/wireless/bcm4329/src/wl/sys/wl_iw.h
+old mode 100644
+new mode 100755
