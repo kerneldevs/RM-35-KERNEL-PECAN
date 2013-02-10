@@ -39,55 +39,74 @@ struct isx005_register_address_value_pair {
 struct isx005_reg {
 	const struct isx005_register_address_value_pair *init_reg_settings;
 	uint16_t init_reg_settings_size;
-#if !defined(CONFIG_MACH_MSM7X27_THUNDERG) && \
-	!defined(CONFIG_MACH_MSM7X27_THUNDERA)
-	const struct isx005_register_address_value_pair *init_reg32_settings;
-	uint16_t init_reg32_settings_size;
-#endif
+
 	const struct isx005_register_address_value_pair *tuning_reg_settings;
 	uint16_t tuning_reg_settings_size;
+	
+	/* framerate mode start */
+	const struct isx005_register_address_value_pair *auto_framerate_reg_settings;
+	uint16_t auto_framerate_reg_settings_size;
+	
+	const struct isx005_register_address_value_pair *fixed_framerate_reg_settings;
+	uint16_t fixed_framerate_reg_settings_size;	
+	/* framerate mode end */
 
 	const struct isx005_register_address_value_pair *prev_reg_settings;
 	uint16_t prev_reg_settings_size;
 	const struct isx005_register_address_value_pair *snap_reg_settings;
 	uint16_t snap_reg_settings_size;
 
-	const struct isx005_register_address_value_pair *af_normal_reg_settings;
-	uint16_t af_normal_reg_settings_size;
-	const struct isx005_register_address_value_pair *af_macro_reg_settings;
-	uint16_t af_macro_reg_settings_size;
-	const struct isx005_register_address_value_pair *af_manual_reg_settings;
-	uint16_t af_manual_reg_settings_size;
+ /* effect start */
+ const struct isx005_register_address_value_pair *effect_off_reg_settings;
+ uint16_t effect_off_reg_settings_size;
 
-	const struct isx005_register_address_value_pair *af_start_reg_settings;
-	uint16_t af_start_reg_settings_size;
+ const struct isx005_register_address_value_pair *effect_mono_reg_settings;
+ uint16_t effect_mono_reg_settings_size;
 
-	const struct isx005_register_address_value_pair
-		*scene_auto_reg_settings;
-	uint16_t scene_auto_reg_settings_size;
-	const struct isx005_register_address_value_pair
-		*scene_portrait_reg_settings;
-	uint16_t scene_portrait_reg_settings_size;
-	const struct isx005_register_address_value_pair
-		*scene_landscape_reg_settings;
-	uint16_t scene_landscape_reg_settings_size;
-	const struct isx005_register_address_value_pair
-		*scene_sports_reg_settings;
-	uint16_t scene_sports_reg_settings_size;
-	const struct isx005_register_address_value_pair
-		*scene_sunset_reg_settings;
-	uint16_t scene_sunset_reg_settings_size;
-	const struct isx005_register_address_value_pair
-		*scene_night_reg_settings;
-	uint16_t scene_night_reg_settings_size;
-};
+ const struct isx005_register_address_value_pair *effect_negative_reg_settings;
+ uint16_t effect_negative_reg_settings_size;
 
-/* this value is defined in Android native camera */
-enum isx005_focus_mode {
-	FOCUS_NORMAL,
-	FOCUS_MACRO,
-	FOCUS_AUTO,
-	FOCUS_MANUAL,
+ const struct isx005_register_address_value_pair *effect_solarize_reg_settings;
+ uint16_t effect_solarize_reg_settings_size;
+
+ const struct isx005_register_address_value_pair *effect_sepia_reg_settings;
+ uint16_t effect_sepia_reg_settings_size;
+
+ const struct isx005_register_address_value_pair *effect_aqua_reg_settings;
+ uint16_t effect_aqua_reg_settings_size;
+ 
+ /* white balance start */
+ const struct isx005_register_address_value_pair *wb_auto_reg_settings;
+ uint16_t wb_auto_reg_settings_size;
+
+ const struct isx005_register_address_value_pair *wb_incandescent_reg_settings;
+ uint16_t wb_incandescent_reg_settings_size;
+
+ const struct isx005_register_address_value_pair *wb_fluorescent_reg_settings;
+ uint16_t wb_fluorescent_reg_settings_size;
+
+ const struct isx005_register_address_value_pair *wb_daylight_reg_settings;
+ uint16_t wb_daylight_reg_settings_size;
+
+ const struct isx005_register_address_value_pair *wb_cloudy_reg_settings;
+ uint16_t wb_cloudy_reg_settings_size; 
+ 
+ /* iso start */
+ const struct isx005_register_address_value_pair *iso_auto_reg_settings;
+ uint16_t iso_auto_reg_settings_size;
+ 
+ const struct isx005_register_address_value_pair *iso_100_reg_settings;
+ uint16_t iso_100_reg_settings_size;
+ 
+ const struct isx005_register_address_value_pair *iso_200_reg_settings;
+ uint16_t iso_200_reg_settings_size;
+ 
+ const struct isx005_register_address_value_pair *iso_400_reg_settings;
+ uint16_t iso_400_reg_settings_size;   
+
+ /* brightness start */
+	const struct isx005_register_address_value_pair *brightness_reg_settings;
+	uint16_t brightness_reg_settings_size; 
 };
 
 /* this value is defined in Android native camera */
@@ -104,14 +123,6 @@ enum isx005_wb_type {
 	CAMERA_WB_MAX_PLUS_1
 };
 
-enum isx005_antibanding_type {
-	CAMERA_ANTIBANDING_OFF,
-	CAMERA_ANTIBANDING_60HZ,
-	CAMERA_ANTIBANDING_50HZ,
-	CAMERA_ANTIBANDING_AUTO,
-	CAMERA_MAX_ANTIBANDING,
-};
-
 /* Enum Type for different ISO Mode supported */
 enum isx005_iso_value {
 	CAMERA_ISO_AUTO = 0,
@@ -123,18 +134,22 @@ enum isx005_iso_value {
 	CAMERA_ISO_MAX
 };
 
-/* Enum type for scene mode */
-enum {
-	CAMERA_SCENE_AUTO = 1,
-	CAMERA_SCENE_PORTRAIT,
-	CAMERA_SCENE_LANDSCAPE,
-	CAMERA_SCENE_SPORTS,
-	CAMERA_SCENE_NIGHT,
-	CAMERA_SCENE_SUNSET,
+// 2010-11-24 change the framerate mode between capture and video
+enum isx005_fps_mode {
+ FRAME_RATE_AUTO = 0,
+ FRAME_RATE_FIXED
+};
+
+// 2011-03-21 Samsung camera sensor porting
+enum isx005_sensor_type {
+ APTINA_SENSOR = 0,
+ SAMSUNG_SENSOR
 };
 
 #if defined(CONFIG_MACH_MSM7X27_THUNDERG) || \
-	defined(CONFIG_MACH_MSM7X27_THUNDERC)
+	defined(CONFIG_MACH_MSM7X27_THUNDERC) || \
+	defined(CONFIG_MACH_MSM7X27_PECAN) || \
+	defined(CONFIG_MACH_MSM7X27_HAZEL) /* 20100911 pecan porting : temp same as thunderg by bongkyu.kim */
 /* LGE_CHANGE_S. Change code to apply new LUT for display quality.
  * 2010-08-13. minjong.gong@lge.com */
 extern void mdp_load_thunder_lut(int lut_type);

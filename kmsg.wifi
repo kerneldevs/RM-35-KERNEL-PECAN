@@ -1,0 +1,933 @@
+[    0.075283] console [ram-1] enabled
+[    0.075851] ebi2_tovis_power_save: on=1
+[    0.111481] bio: create slab <bio-0> at 0
+[    0.113126] SCSI subsystem initialized
+[    0.113543] usbcore: registered new interface driver usbfs
+[    0.113740] usbcore: registered new interface driver hub
+[    0.113970] usbcore: registered new device driver usb
+[    0.115045] i2c-gpio i2c-gpio.2: using pins 89 (SDA) and 88 (SCL)
+[    0.115478] i2c-gpio i2c-gpio.3: using pins 91 (SDA) and 90 (SCL)
+[    0.115916] i2c-gpio i2c-gpio.4: using pins 108 (SDA) and 107 (SCL)
+[    0.116343] i2c-gpio i2c-gpio.5: using pins 3 (SDA) and 2 (SCL)
+[    0.116541] msm_i2c_probe
+[    0.116658] msm_i2c_probe: clk_ctl 315, 400000 Hz
+[    0.118645] Advanced Linux Sound Architecture Driver Version 1.0.23.
+[    0.119453] Bluetooth: Core ver 2.15
+[    0.119650] NET: Registered protocol family 31
+[    0.119666] Bluetooth: HCI device and connection manager initialized
+[    0.119688] Bluetooth: HCI socket layer initialized
+[    0.120113] Switching to clocksource dg_timer
+[    0.137974] NET: Registered protocol family 2
+[    0.138202] IP route cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.138721] TCP established hash table entries: 8192 (order: 4, 65536 bytes)
+[    0.138969] TCP bind hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.139139] TCP: Hash tables configured (established 8192 bind 8192)
+[    0.139157] TCP reno registered
+[    0.139176] UDP hash table entries: 256 (order: 0, 4096 bytes)
+[    0.139212] UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)
+[    0.139419] NET: Registered protocol family 1
+[    0.139744] RPC: Registered udp transport module.
+[    0.139764] RPC: Registered tcp transport module.
+[    0.139781] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    0.140036] Trying to unpack rootfs image as initramfs...
+[    0.204584] Freeing initrd memory: 444K
+[    0.206347] smd probe
+[    0.206379] smd_core_init()
+[    0.206464] smd_core_init() done
+[    0.206486] smd_alloc_loopback_channel: 'local_loopback' cid=100
+[    0.206716] smd_alloc_channel() 'DS' cid=0
+[    0.206924] Notify: smsm init
+[    0.207579] smd_alloc_channel() 'DIAG' cid=1
+[    0.208411] smd_alloc_channel() 'RPCCALL' cid=2
+[    0.208946] smd_alloc_channel() 'DATA1' cid=7
+[    0.209459] smd_alloc_channel() 'DATA2' cid=8
+[    0.209967] smd_alloc_channel() 'DATA3' cid=9
+[    0.210666] smd_alloc_channel() 'DATA4' cid=10
+[    0.211159] smd_alloc_channel() 'DATA5' cid=11
+[    0.211599] smd_alloc_channel() 'DATA6' cid=12
+[    0.212019] smd_alloc_channel() 'DATA7' cid=13
+[    0.212449] smd_alloc_channel() 'DATA11' cid=17
+[    0.212872] smd_alloc_channel() 'DAL00' cid=38
+[    0.213226] smd_alloc_channel() 'DATA5_CNTL' cid=39
+[    0.213724] smd_alloc_channel() 'DATA6_CNTL' cid=40
+[    0.214217] smd_alloc_channel() 'DATA7_CNTL' cid=41
+[    0.219719] SMD Packet Port Driver Initialized.
+[    0.221210] SMD: ch 2 0 -> 1
+[    0.221329] SMD: ch 2 1 -> 2
+[    0.222697] [adsp.c:adsp_init] rs3000000a -- 0
+[    0.228197] [audpp.c:audpp_probe] Number of decoder supported 5
+[    0.228225] [audpp.c:audpp_probe] Number of concurrency supported 7
+[    0.228245] [audpp.c:audpp_probe] module_name:AUDPLAY0TASK
+[    0.228262] [audpp.c:audpp_probe] queueid:13
+[    0.228279] [audpp.c:audpp_probe] decid:0
+[    0.228294] [audpp.c:audpp_probe] nr_codec_support:11
+[    0.228312] [audpp.c:audpp_probe] module_name:AUDPLAY1TASK
+[    0.228329] [audpp.c:audpp_probe] queueid:14
+[    0.228344] [audpp.c:audpp_probe] decid:1
+[    0.228359] [audpp.c:audpp_probe] nr_codec_support:5
+[    0.228380] [audpp.c:audpp_probe] module_name:AUDPLAY2TASK
+[    0.228397] [audpp.c:audpp_probe] queueid:15
+[    0.228414] [audpp.c:audpp_probe] decid:2
+[    0.228427] [audpp.c:audpp_probe] nr_codec_support:5
+[    0.228444] [audpp.c:audpp_probe] module_name:AUDPLAY3TASK
+[    0.228460] [audpp.c:audpp_probe] queueid:16
+[    0.228475] [audpp.c:audpp_probe] decid:3
+[    0.228490] [audpp.c:audpp_probe] nr_codec_support:4
+[    0.228507] [audpp.c:audpp_probe] module_name:AUDPLAY4TASK
+[    0.228524] [audpp.c:audpp_probe] queueid:17
+[    0.228540] [audpp.c:audpp_probe] decid:4
+[    0.228555] [audpp.c:audpp_probe] nr_codec_support:1
+[    0.248970] RPC_TIME_TOD_SET_APPS_BASES:
+[    0.248978] 	tick = 117728
+[    0.248985] 	stamp = 0
+[    0.249017] drivers/rtc/hctosys.c: unable to open rtc device (rtc0)
+[    0.249433] pecan_gpio_earsense_work_func: ear sense detected : ejected
+[    0.249465] __msm_rpc_connect: server not found 30000061:30001
+[    0.249485] __msm_rpc_connect: server not found 30000061:20001
+[    0.252230] lge_tempdevice_init
+[    0.253270] lge_mtd_direct_access_init: finished
+[    0.255357] LGE Power Sink Driver Init
+[    0.255440] lge_pwrsink_probe: setting driver data
+[    0.267563] ashmem: initialized
+[    0.268856] VFS: Disk quotas dquot_6.5.2
+[    0.268958] Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+[    0.270523] yaffs Feb 10 2013 22:59:17 Installing. 
+[    0.270581] msgmni has been set to 354
+[    0.271506] alg: No test for cipher_null (cipher_null-generic)
+[    0.271908] alg: No test for ecb(cipher_null) (ecb-cipher_null)
+[    0.272305] alg: No test for digest_null (digest_null-generic)
+[    0.272700] alg: No test for compress_null (compress_null-generic)
+[    0.280908] alg: No test for stdrng (krng)
+[    0.280999] io scheduler noop registered
+[    0.281139] io scheduler cfq registered (default)
+[    0.281244] io scheduler bfq registered
+[    0.281259] io scheduler vr registered
+[    0.281274] io scheduler sio registered
+[    0.283014] AAT28XX init start
+[    0.283696] Registered led device: lcd-backlight
+[    0.283718] aat2870bl:aat28xx_probe: Registering led class dev successfully.
+[    0.283768] aat28xx_power_internal: on = 1, refcnt = 0
+[    0.306341] aat2870bl:aat28xx_probe: done
+[    0.306673] pecan_gpio_earsense_work_func: ear sense detected : ejected
+[    0.306973] msm_fb_probe:  phy_Addr = 0x542d000 virt = 0xcd900000
+[    0.308243] MDP HW Base phy_Address = 0xaa200000 virt = 0xcda00000
+[    0.312689] FrameBuffer[0] 240x320 size=327680 bytes is registered successfully!
+[    0.315656] kgsl kgsl-3d0: |kgsl_gpummu_init| MMU type set for device is GPUMMU
+[    0.316608] msm_serial: driver initialized
+[    0.316884] msm_serial_hs.0: ttyHS0 at MMIO 0xa0200000 (irq = 45) is a MSM HS UART
+[    0.317583] msm_serial_hs module loaded
+[    0.323551] brd: module loaded
+[    0.328657] loop: module loaded
+[    0.328832] pmem: Initializing pmem_kernel_ebi1 (in-kernel)
+[    0.328937] pmem: Initializing pmem (user-space) as cached
+[    0.330059] pmem: Initializing pmem_adsp (user-space) as cached
+[    0.331209] pmem: Initializing pmem_audio (user-space) as non-cached
+[    0.331927] LGE: Android Vibrator Driver Init
+[    0.332541] LGE: Android Vibrator Initialization was done
+[    0.333001] atcmd_probe:alohag_atcmd
+[    0.333382] lge_tty_atcmd_init: initialize atcmd-ttys
+[    0.335489] SCSI Media Changer driver v0.25 
+[    0.336867] msm_nand_probe: phys addr 0xa0a00000 
+[    0.336892] msm_nand_probe: dmac 0x7
+[    0.336949] msm_nand_probe: allocated dma buffer at ffc56000, dma_addr fb7a000
+[    0.337432] status: c00020
+[    0.337451] nandid: 5590bc2c maker 2c device bc
+[    0.337476] ONFI probe : Found an ONFI compliant device MT29F4G16ABBDA3W    ,
+[    0.337497] Found a supported NAND device
+[    0.337511] NAND Id  : 0x5590bc2c
+[    0.337524] Buswidth : 16 Bits
+[    0.337536] Density  : 512 MByte
+[    0.337549] Pagesize : 2048 Bytes
+[    0.337562] Erasesize: 131072 Bytes
+[    0.337574] Oobsize  : 64 Bytes
+[    0.337587] CFG0 Init  : 0xa85408c0 
+[    0.337601] CFG1 Init  : 0x0004745e 
+[    0.337614] ECCBUFCFG  : 0x00000203 
+[    0.337639] Creating 10 MTD partitions on "msm_nand":
+[    0.337664] 0x000002600000-0x000002a40000 : "boot"
+[    0.342411] 0x000002a40000-0x00000f240000 : "system"
+[    0.484283] 0x00000f240000-0x00000f740000 : "recovery"
+[    0.489165] 0x00000f740000-0x00000fa00000 : "lgdrm"
+[    0.492655] 0x00000fa00000-0x00000fb00000 : "splash"
+[    0.494873] 0x00000fb00000-0x00000fc00000 : "FOTABIN"
+[    0.497048] 0x00000fc00000-0x000010240000 : "FOTA"
+[    0.502833] 0x000010240000-0x000010280000 : "misc"
+[    0.504423] 0x000010280000-0x000014280000 : "cache"
+[    0.550002] 0x000014280000-0x000020000000 : "userdata"
+[    0.685870] SLIP: version 0.8.4-NET3.019-NEWTTY (dynamic channels, max=256) (6 bit encapsulation enabled).
+[    0.685898] CSLIP: code copyright 1989 Regents of the University of California.
+[    0.686868] rmnet_init
+[    0.694430] msm_hsusb_rpc_connect: rpc connect success vers = 10001
+[    0.694620] msm_otg_probe: clk_get - usb_hs_clk
+[    0.694991] __msm_rpc_connect: server not found 3000001a:40001
+[    0.695015] __msm_rpc_connect: server not found 3000001a:30001
+[    0.695035] __msm_rpc_connect: server not found 3000001a:20001
+[    0.695318] lgeusb[lgeusb_init       :  293] - u_lgeusb init
+[    0.695791] peripheral driver registered w/ tranceiver
+[    0.696346] lgeusb[lgeusb_register_usbinfo:  281] - Registering infomation for lgeusb is success
+[    0.696740] lgeusb[get_factory_cable :  103] - Using PIF ZIG (0)
+[    0.697245] android_usb gadget: android_usb ready
+[    0.697523] f_acm init
+[    0.698068] f_mtp init
+[    0.698325] f_ecm init
+[    0.698638] mtp_bind_config
+[    0.699398] android_usb gadget: using random self ethernet address
+[    0.699435] android_usb gadget: using random host ethernet address
+[    0.700208] usb0: MAC fa:63:9c:01:1d:1a
+[    0.700228] usb0: HOST MAC 26:73:40:d5:5d:b6
+[    0.701253] msm_hsusb_phy_reset
+[    0.702084] ecm_function_bind_config MAC: 00:00:00:00:00:00
+[    0.704261] lgeusb[get_factory_cable :  103] - Using PIF ZIG (0)
+[    0.704286] lgeusb[lgeusb_set_current_mode:  254] - We detect Normal USB cable......
+[    0.704311] lgeusb[do_switch_mode    :  167] - do_switch_mode : pid 618e, need_reset 0
+[    0.706664] msm_nv_imei_get: msm_rpc_call success. ver = 0x60001
+[    0.706688] lgeusb[get_serial_number :   76] - IMEI 80A356525049826379
+[    0.709773] lgeusb[android_register_function:  504] - LGE Android Gadget global configuration:
+[    0.709786] 	product_id -- 618e, serial no. -- 80A356525049826379
+[    0.710066] diagfwd initializing ..
+[    0.710648] SMD: ch 1 0 -> 1
+[    0.710666] diag opened SMD port ; r = 0
+[    0.710751] SMD: ch 1 1 -> 2
+[    0.710931] diagchar initializing ..
+[    0.711458] diagchar initialized
+[    0.711564] [YJ] atcmd_virtual_probe, start!!
+[    0.712024] input: atcmd_virtual_kbd as /devices/platform/atcmd_virtual_kbd/input/input0
+[    0.712993] input: touch_mcs7000 as /devices/virtual/input/input1
+[    0.713346] ------------[ cut here ]------------
+[    0.713404] WARNING: at drivers/gpio/gpiolib.c:103 gpio_ensure_requested+0x48/0x108()
+[    0.713424] autorequest GPIO-92
+[    0.713436] Modules linked in:
+[    0.713508] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c00a0028>] (warn_slowpath_common+0x4c/0x7c)
+[    0.713551] [<c00a0028>] (warn_slowpath_common+0x4c/0x7c) from [<c00a00d8>] (warn_slowpath_fmt+0x2c/0x3c)
+[    0.713594] [<c00a00d8>] (warn_slowpath_fmt+0x2c/0x3c) from [<c01fa624>] (gpio_ensure_requested+0x48/0x108)
+[    0.713638] [<c01fa624>] (gpio_ensure_requested+0x48/0x108) from [<c01faa1c>] (gpio_direction_input+0x84/0x180)
+[    0.713686] [<c01faa1c>] (gpio_direction_input+0x84/0x180) from [<c02cf4b8>] (mcs7000_ts_probe+0x100/0x23c)
+[    0.713731] [<c02cf4b8>] (mcs7000_ts_probe+0x100/0x23c) from [<c02ddd08>] (i2c_device_probe+0x118/0x170)
+[    0.713784] [<c02ddd08>] (i2c_device_probe+0x118/0x170) from [<c025127c>] (driver_probe_device+0x1a4/0x364)
+[    0.713828] [<c025127c>] (driver_probe_device+0x1a4/0x364) from [<c025149c>] (__driver_attach+0x60/0x84)
+[    0.713869] [<c025149c>] (__driver_attach+0x60/0x84) from [<c02500a0>] (bus_for_each_dev+0x4c/0x84)
+[    0.713908] [<c02500a0>] (bus_for_each_dev+0x4c/0x84) from [<c025099c>] (bus_add_driver+0xe8/0x29c)
+[    0.713949] [<c025099c>] (bus_add_driver+0xe8/0x29c) from [<c02519b4>] (driver_register+0xa8/0x134)
+[    0.713993] [<c02519b4>] (driver_register+0xa8/0x134) from [<c02dfe00>] (i2c_register_driver+0x40/0x108)
+[    0.714038] [<c02dfe00>] (i2c_register_driver+0x40/0x108) from [<c048645c>] (mcs7000_ts_init+0x160/0x23c)
+[    0.714091] [<c048645c>] (mcs7000_ts_init+0x160/0x23c) from [<c002e3bc>] (do_one_initcall+0x54/0x1a0)
+[    0.714133] [<c002e3bc>] (do_one_initcall+0x54/0x1a0) from [<c0008b84>] (kernel_init+0xac/0x160)
+[    0.714174] [<c0008b84>] (kernel_init+0xac/0x160) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[    0.714221] ---[ end trace eaa58ef60776b0b2 ]---
+[    0.714454] [Touch] ts_set_vreg() onoff:0
+[    0.740108] [Touch] ts_set_vreg() onoff:1
+[    0.830261] msm_hsusb msm_hsusb: msm72k_udc: OFFLINE -> ONLINE
+[    0.835406] msm_hsusb_phy_reset
+[    0.960239] msm_hsusb msm_hsusb: usb: notify offline - usb reset
+[    0.990146] MCS7000 F/W Version [0xf]
+[    1.010148] MCS7000 H/W Revision [0x11]
+[    1.011149] GPIO Matrix Keypad Driver: Start keypad matrix for pecan_keypad in interrupt mode
+[    1.011658] input: pecan_keypad as /devices/virtual/input/input2
+[    1.012829] KR3DM accelerometer driver
+[    1.013034] KR3DH accelerometer driver
+[    1.013094] [Accelerometer] accel_power_on() : Power On
+[    1.020273] input: accelerometer as /devices/virtual/input/input3
+[    1.021226] input: lge_gesture as /devices/virtual/input/input4
+[    1.021528] KR3DH 5-0019: KR3DH kr3dh: Accelerometer chip found
+[    1.021754] [Ecompass] ecom_power_set() : Power On
+[    1.024696] ami304_sensor 4-000f: force operating mode
+[    1.024711] Register input device!
+[    1.025133] input: Acompass as /devices/virtual/input/input5
+[    1.027392] RTC Registering with rs30000048
+[    1.028606] msm_rpc_client_req: RPC call was not successful (3)
+[    1.028631] msmrtc_setup_cb: RPC client registration for PROC:12 failed
+[    1.028651] rs30000048 rs30000048.65536: msmrtc_probe: Could not initialize RPC callback
+[    1.029537] using rtc device, msm_rtc, for alarms
+[    1.029562] msm_rtc: dev (254:0)
+[    1.029612] rs30000048 rs30000048.65536: rtc core: registered msm_rtc as rtc0
+[    1.030002] msm_rtc_secure: dev (254:1)
+[    1.030022] rs30000048 rs30000048.65536: rtc core: registered msm_rtc_secure as rtc1
+[    1.030409] i2c /dev entries driver
+[    1.032667] IR NEC protocol handler initialized
+[    1.032687] IR RC5(x) protocol handler initialized
+[    1.032702] IR RC6 protocol handler initialized
+[    1.032716] IR JVC protocol handler initialized
+[    1.032731] IR Sony protocol handler initialized
+[    1.032744] Linux video capture interface: v2.00
+[    1.033087] msm_batt_init: enter
+[    1.033112] __msm_rpc_connect: server not found 3000001a:40001
+[    1.033132] __msm_rpc_connect: server not found 3000001a:30001
+[    1.033771] msm_batt_get_charger_api_version: num_of_chg_api_versions = 3. The chg api version = 0x00010003
+[    1.033819] __msm_rpc_connect: server not found 30000089:40001
+[    1.036419] msm_batt_enable_filter: enable vbatt filter: OK
+[    1.037117] msm-battery msm-battery: msm_batt_probe : Using PIF ZIG (0)
+[    1.037501] msm_batt_init: Charger/Battery = 0x00010003/0x00010001 (RPC version)
+[    1.037811] device-mapper: uevent: version 1.0.3
+[    1.038547] device-mapper: ioctl: 4.17.0-ioctl (2010-03-05) initialised: dm-devel@redhat.com
+[    1.038636] Bluetooth: HCI UART driver ver 2.2
+[    1.038652] Bluetooth: HCI H4 protocol initialized
+[    1.038667] Bluetooth: HCI BCSP protocol initialized
+[    1.038684] Bluetooth: MSM Sleep Mode Driver Ver 1.1
+[    1.041504] mmc0: Qualcomm MSM SDCC at 0x00000000a0400000 irq 24,113 dma 8
+[    1.041531] mmc0: 8 bit data mode disabled
+[    1.041544] mmc0: 4 bit data mode enabled
+[    1.041559] mmc0: polling status mode disabled
+[    1.041579] mmc0: MMC clock 144000 -> 49152000 Hz, PCLK 100000000 Hz
+[    1.041596] mmc0: Slot eject status = 0
+[    1.041611] mmc0: Power save feature enable = 1
+[    1.041629] mmc0: DM non-cached buffer at ffc5a000, dma_addr 0x0f005000
+[    1.041651] mmc0: DM cmd busaddr 0x0f005000, cmdptr busaddr 0x0f005300
+[    1.041986] bcm432x_sdcc_wlan_slot_status: 93 0
+[    1.042682] bcm432x_sdcc_wlan_slot_status: 93 0
+[    1.042927] mmc1: Qualcomm MSM SDCC at 0x00000000a0500000 irq 26,157 dma 8
+[    1.042947] mmc1: 8 bit data mode disabled
+[    1.042962] mmc1: 4 bit data mode enabled
+[    1.042976] mmc1: polling status mode disabled
+[    1.042994] mmc1: MMC clock 144000 -> 49152000 Hz, PCLK 100000000 Hz
+[    1.043011] mmc1: Slot eject status = 1
+[    1.043026] mmc1: Power save feature enable = 1
+[    1.043044] mmc1: DM non-cached buffer at ffc5b000, dma_addr 0x0f006000
+[    1.043064] mmc1: DM cmd busaddr 0x0f006000, cmdptr busaddr 0x0f006300
+[    1.043956] Registered led device: button-backlight
+[    1.046004] usbcore: registered new interface driver usbhid
+[    1.046024] usbhid: USB HID core driver
+[    1.046899] logger: created 64K log 'log_main'
+[    1.047215] logger: created 32K log 'log_events'
+[    1.047529] logger: created 32K log 'log_radio'
+[    1.047832] logger: created 64K log 'log_system'
+[    1.048172] zram: num_devices not specified. Using default: 1
+[    1.048192] zram: Creating 1 devices ...
+[    1.049892] No device for DAI CODEC_DAI
+[    1.049914] No device for DAI CPU_DAI
+[    1.050665] msm_soc: create pcms
+[    1.050982] asoc: CODEC_DAI <-> CPU_DAI mapping ok
+[    1.051000] msm_soc: ALSA MSM Mixer Setting
+[    1.052409] ALSA device list:
+[    1.052427]   #0: msm-audio (MSM-CARD)
+[    1.052554] u32 classifier
+[    1.052569] Netfilter messages via NETLINK v0.30.
+[    1.052677] nf_conntrack version 0.5.0 (2835 buckets, 11340 max)
+[    1.053165] ctnetlink v0.93: registering with nfnetlink.
+[    1.053364] xt_time: kernel timezone is -0000
+[    1.053664] ip_tables: (C) 2000-2006 Netfilter Core Team
+[    1.053802] arp_tables: (C) 2002 David S. Miller
+[    1.053877] TCP cubic registered
+[    1.053890] Initializing XFRM netlink socket
+[    1.054272] NET: Registered protocol family 10
+[    1.055007] lo: Disabled Privacy Extensions
+[    1.057074] Mobile IPv6
+[    1.057094] IPv6 over IPv4 tunneling driver
+[    1.058070] sit0: Disabled Privacy Extensions
+[    1.058980] ip6tnl0: Disabled Privacy Extensions
+[    1.059177] NET: Registered protocol family 17
+[    1.059237] NET: Registered protocol family 15
+[    1.059410] Bluetooth: L2CAP ver 2.14
+[    1.059425] Bluetooth: L2CAP socket layer initialized
+[    1.059450] Bluetooth: SCO (Voice Link) ver 0.6
+[    1.059464] Bluetooth: SCO socket layer initialized
+[    1.059575] Bluetooth: RFCOMM TTY layer initialized
+[    1.059600] Bluetooth: RFCOMM socket layer initialized
+[    1.059615] Bluetooth: RFCOMM ver 1.11
+[    1.059632] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[    1.059647] Bluetooth: BNEP filters: protocol multicast
+[    1.059665] Bluetooth: HIDP (Human Interface Emulation) ver 1.2
+[    1.063775] input: 7k_handset as /devices/virtual/input/input6
+[    1.064259] __msm_rpc_connect: server not found 30000091:30001
+[    1.065714] msm_rpc_client_req: RPC call was not successful (4)
+[    1.065735] hs_rpc_cb_init: RPC client request failed for pwr key delay cmd, using normal mode
+[    1.066487] VFP support v0.3: implementor 41 architecture 1 part 20 variant b rev 5
+[    1.069015] msmrtc_tod_proc_result: 02/10/2013 23:08:07 (06)
+[    1.069074] rs30000048 rs30000048.65536: setting system clock to 2013-02-10 23:08:07 UTC (1360537687)
+[    1.069100] msm_v4l2: msm_v4l2_init
+[    1.070919] msm_sync_init: initialized isx005
+[    1.072390] Warning: unable to open an initial console.
+[    1.072459] Freeing init memory: 152K
+[    1.249980] mmc0: host does not support reading read-only switch. assuming write-enable.
+[    1.250027] mmc0: new high speed SDHC card at address 1234
+[    1.250042] [LGE] mmc device add
+[    1.251803] mmcblk0: mmc0:1234 SA08G 7.28 GiB 
+[    1.252980]  mmcblk0: p1
+[    1.256761] bcm432x_sdcc_wlan_slot_status: 93 0
+[    1.334611] android_usb gadget: high speed config #1: android
+[    1.334731] diag: USB connected
+[    1.336881] init: cannot open '/initlogo.rle'
+[    1.340016] yaffs: dev is 32505857 name is "mtdblock1" rw
+[    1.340039] yaffs: passed flags ""
+[    1.340056] yaffs: Attempting MTD mount on 31.1, "mtdblock1"
+[    1.515802] yaffs: restored from checkpoint
+[    1.516242] yaffs_read_super: isCheckpointed 1
+[    1.520567] yaffs: dev is 32505865 name is "mtdblock9" rw
+[    1.520594] yaffs: passed flags ""
+[    1.520615] yaffs: Attempting MTD mount on 31.9, "mtdblock9"
+[    1.960274] lgeusb[get_factory_cable :  103] - Using PIF ZIG (0)
+[    1.961065] 
+[    1.961075] Charger Type: STD DOWNSTREAM PORT
+[   13.829056] yaffs_read_super: isCheckpointed 0
+[   13.829626] yaffs: dev is 32505864 name is "mtdblock8" rw
+[   13.829646] yaffs: passed flags ""
+[   13.829663] yaffs: Attempting MTD mount on 31.8, "mtdblock8"
+[   13.832415] yaffs: restored from checkpoint
+[   13.832470] yaffs_read_super: isCheckpointed 1
+[   14.364715] pecan_bluetooth_power
+[   14.364743] pecan_bluetooth_power 0
+[   14.373203] init: service 'console' requires console
+[   14.375983] adb_enable_open: Enabling adb
+[   14.465839] SMD: ch 39 0 -> 1
+[   14.465942] SMD: ch 39 1 -> 2
+[   14.469194] SMD: ch 40 0 -> 1
+[   14.469269] SMD: ch 40 1 -> 2
+[   14.469599] SMD: ch 41 0 -> 1
+[   14.469724] SMD: ch 41 1 -> 2
+[   14.532897] msm_hsusb msm_hsusb: usb: notify offline - reset interrupt
+[   14.533640] diag: USB disconnected
+[   14.664992] warning: `rild' uses 32-bit capabilities (legacy support in use)
+[   14.778182] android_usb gadget: high speed config #1: android
+[   14.778317] diag: USB connected
+[   14.802246] select 951 (ueventd), adj 0, size 38, to kill
+[   14.802286] send sigkill to 951 (ueventd), adj 0, size 38
+[   15.390155] lgeusb[get_factory_cable :  103] - Using PIF ZIG (0)
+[   16.169173] [snd.c:snd_ioctl] snd_avc_ctl 1
+[   16.170184] [snd.c:snd_ioctl] snd_agc_ctl 1
+[   16.176478] [snd.c:snd_ioctl] snd_set_volume 6 0 7
+[   16.177178] [snd.c:snd_ioctl] snd_set_volume 0 0 7
+[   16.177743] [snd.c:snd_ioctl] snd_set_volume 7 0 7
+[   16.178394] [snd.c:snd_ioctl] snd_set_volume 13 0 7
+[   16.179281] [snd.c:snd_ioctl] snd_set_volume 2 0 7
+[   16.179844] [snd.c:snd_ioctl] snd_set_volume 3 0 7
+[   16.231799] [snd.c:snd_ioctl] snd_set_device 0 1 1
+[   16.242220] [snd.c:snd_ioctl] snd_set_volume 30 0 7
+[   16.244642] snd_set_fm_radio_volume 20
+[   16.926239] Adding 47216k swap on /dev/block/zram0.  Priority:-1 extents:1 across:47216k SS
+[   18.187733] save exit: isCheckpointed 1
+[   18.195425] save exit: isCheckpointed 1
+[   23.800039] ilitek_qvga_disp_on: display on...
+[   23.800079] ebi2_tovis_power_save: on=1
+[   30.233652] save exit: isCheckpointed 1
+[   33.979893] register_mmc_card_pm: [WiFi] Callbacks registered successfully. 
+[   33.980065] [dhd_hostwakeup_isr] HostWakeup Get GPIO 94: 1
+[   33.980180] [dhd_register_early_suspend] HostWakeup Get GPIO 94: 1
+[   33.980195] 
+[   33.980200] Dongle Host Driver, version 4.220.14.0
+[   33.980287] bcm432x_sdcc_wlan_slot_status: 93 1
+[   33.980303] mmc1: Slot status change detected (0 -> 1)
+[   33.980320] [host->plat->status_irq:157:MSM_GPIO_TO_INIT:157:msmsdcc_check_status:1450]
+[   33.980337] [msmsdcc_check_status] !host->eject: mmc_detect_change after 150ms
+[   34.130013] bcm432x_sdcc_wlan_slot_status: 93 1
+[   34.141306] [snd.c:snd_ioctl] snd_set_volume 30 0 5
+[   34.157864] snd_set_fm_radio_volume 14
+[   34.161139] snd_set_fm_radio_volume 14
+[   34.230611] mmc1: queuing unknown CIS tuple 0x91 (3 bytes)
+[   34.230675] mmc1: new SDIO card at address 0001
+[   34.230688] [LGE] mmc device add
+[   34.464787] [cdc]dhd_preinit_proc:2518 - do control PM (2)
+[   34.466104] Bad Address: cur_etheraddr=01:02:03:04:05:06
+[   34.619370] wlan0: Broadcom Dongle Host Driver mac=00:90:0c:ba:cd:88
+[   34.881986] aat28xx_power_internal: on = 1, refcnt = 1
+[   34.882583] pecan_vibrator_power_set: vibrator volage 3300
+[   34.884181] aat28xx_power_internal: on = 0, refcnt = 2
+[   34.907059] aat28xx_power_internal: on = 1, refcnt = 1
+[   34.907703] pecan_vibrator_power_set: vibrator volage 3300
+[   34.908318] request_suspend_state: wakeup (3->0) at 34908378322 (2013-02-10 23:08:41.330829989 UTC)
+[   34.939336] aat28xx_power_internal: on = 0, refcnt = 2
+[   36.279072] save exit: isCheckpointed 1
+[   37.814644] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000102
+[   37.814661] Modules linked in: wireless
+[   37.814734] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   37.814783] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   37.814819] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   37.814863] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   37.814906] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4)
+[   37.814941] [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4) from [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190)
+[   37.814974] [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190) from [<c032950c>] (sdio_memcpy_toio+0x1c/0x20)
+[   37.815259] [<c032950c>] (sdio_memcpy_toio+0x1c/0x20) from [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless])
+[   37.815554] [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless]) from [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless])
+[   37.815836] [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless]) from [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless])
+[   37.816109] [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless]) from [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless])
+[   37.816393] [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   37.816649] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   37.816868] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   37.817043] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless])
+[   37.817159] [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   37.818404] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000102
+[   37.818428] Modules linked in: wireless
+[   37.818494] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   37.818536] [<c048c810>] (schedule+0x70/0x308) from [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8)
+[   37.818698] [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8) from [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless])
+[   37.818939] [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless]) from [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless])
+[   37.819209] [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless]) from [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless])
+[   37.819469] [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   37.819694] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   37.819874] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless])
+[   37.820043] [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   37.830378] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000102
+[   37.830401] Modules linked in: wireless
+[   37.830474] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   37.830516] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   37.830579] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   37.830628] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   37.830669] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c03225e8>] (mmc_wait_for_cmd+0x68/0x7c)
+[   37.830714] [<c03225e8>] (mmc_wait_for_cmd+0x68/0x7c) from [<c0328228>] (mmc_io_rw_direct_host+0xb4/0x118)
+[   37.830759] [<c0328228>] (mmc_io_rw_direct_host+0xb4/0x118) from [<c03291ac>] (sdio_writeb+0x38/0x44)
+[   37.831033] [<c03291ac>] (sdio_writeb+0x38/0x44) from [<bf0177cc>] (sdioh_request_byte+0x120/0x1a4 [wireless])
+[   37.831336] [<bf0177cc>] (sdioh_request_byte+0x120/0x1a4 [wireless]) from [<bf017870>] (sdioh_cfg_write+0x20/0x24 [wireless])
+[   37.831621] [<bf017870>] (sdioh_cfg_write+0x20/0x24 [wireless]) from [<bf0185f4>] (bcmsdh_cfg_write+0x24/0x40 [wireless])
+[   37.831891] [<bf0185f4>] (bcmsdh_cfg_write+0x24/0x40 [wireless]) from [<bf011e44>] (dhdsdio_htclk+0x60/0x310 [wireless])
+[   37.832153] [<bf011e44>] (dhdsdio_htclk+0x60/0x310 [wireless]) from [<bf012324>] (dhdsdio_clkctl+0x58/0xf0 [wireless])
+[   37.832416] [<bf012324>] (dhdsdio_clkctl+0x58/0xf0 [wireless]) from [<bf013a64>] (dhd_bus_txctl+0x118/0x2fc [wireless])
+[   37.832678] [<bf013a64>] (dhd_bus_txctl+0x118/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   37.832936] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   37.833161] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   37.833343] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless])
+[   37.833464] [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   37.833868] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000102
+[   37.833901] Modules linked in: wireless
+[   37.833954] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   37.833996] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   37.834044] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   37.834088] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   37.834128] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c03225e8>] (mmc_wait_for_cmd+0x68/0x7c)
+[   37.834169] [<c03225e8>] (mmc_wait_for_cmd+0x68/0x7c) from [<c0328228>] (mmc_io_rw_direct_host+0xb4/0x118)
+[   37.834211] [<c0328228>] (mmc_io_rw_direct_host+0xb4/0x118) from [<c0329268>] (sdio_readb+0x44/0x64)
+[   37.834424] [<c0329268>] (sdio_readb+0x44/0x64) from [<bf017824>] (sdioh_request_byte+0x178/0x1a4 [wireless])
+[   37.834714] [<bf017824>] (sdioh_request_byte+0x178/0x1a4 [wireless]) from [<bf017894>] (sdioh_cfg_read+0x20/0x24 [wireless])
+[   37.834998] [<bf017894>] (sdioh_cfg_read+0x20/0x24 [wireless]) from [<bf0185b0>] (bcmsdh_cfg_read+0x28/0x48 [wireless])
+[   37.835269] [<bf0185b0>] (bcmsdh_cfg_read+0x28/0x48 [wireless]) from [<bf011efc>] (dhdsdio_htclk+0x118/0x310 [wireless])
+[   37.835529] [<bf011efc>] (dhdsdio_htclk+0x118/0x310 [wireless]) from [<bf012324>] (dhdsdio_clkctl+0x58/0xf0 [wireless])
+[   37.835793] [<bf012324>] (dhdsdio_clkctl+0x58/0xf0 [wireless]) from [<bf013a64>] (dhd_bus_txctl+0x118/0x2fc [wireless])
+[   37.836054] [<bf013a64>] (dhd_bus_txctl+0x118/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   37.836313] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   37.836536] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   37.836714] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless])
+[   37.836851] [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   37.837088] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000102
+[   37.837138] Modules linked in: wireless
+[   37.837188] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   37.837228] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   37.837268] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   37.837321] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   37.837364] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4)
+[   37.837404] [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4) from [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190)
+[   37.837441] [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190) from [<c032950c>] (sdio_memcpy_toio+0x1c/0x20)
+[   37.837629] [<c032950c>] (sdio_memcpy_toio+0x1c/0x20) from [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless])
+[   37.837922] [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless]) from [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless])
+[   37.838209] [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless]) from [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless])
+[   37.838487] [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless]) from [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless])
+[   37.838749] [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   37.839007] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   37.839232] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   37.839411] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless])
+[   37.839522] [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   37.840019] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000102
+[   37.840039] Modules linked in: wireless
+[   37.840104] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   37.840144] [<c048c810>] (schedule+0x70/0x308) from [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8)
+[   37.840302] [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8) from [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless])
+[   37.840539] [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless]) from [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless])
+[   37.840807] [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless]) from [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless])
+[   37.841066] [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   37.841291] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   37.841469] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless])
+[   37.841584] [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   37.842007] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000102
+[   37.842051] Modules linked in: wireless
+[   37.842107] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   37.842149] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   37.842189] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   37.842241] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   37.842286] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4)
+[   37.842326] [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4) from [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190)
+[   37.842362] [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190) from [<c032950c>] (sdio_memcpy_toio+0x1c/0x20)
+[   37.842546] [<c032950c>] (sdio_memcpy_toio+0x1c/0x20) from [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless])
+[   37.842837] [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless]) from [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless])
+[   37.843124] [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless]) from [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless])
+[   37.843404] [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless]) from [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless])
+[   37.843666] [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   37.843924] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   37.844149] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   37.844326] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless])
+[   37.844439] [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   37.854402] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000102
+[   37.854427] Modules linked in: wireless
+[   37.854524] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   37.854571] [<c048c810>] (schedule+0x70/0x308) from [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8)
+[   37.854796] [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8) from [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless])
+[   37.855039] [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless]) from [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless])
+[   37.855307] [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless]) from [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless])
+[   37.855567] [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   37.855792] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   37.855972] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless])
+[   37.856096] [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   37.875924] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[   37.875949] Modules linked in: wireless
+[   37.876046] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   37.876091] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   37.876132] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   37.876179] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   37.876219] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c03225e8>] (mmc_wait_for_cmd+0x68/0x7c)
+[   37.876276] [<c03225e8>] (mmc_wait_for_cmd+0x68/0x7c) from [<c0328228>] (mmc_io_rw_direct_host+0xb4/0x118)
+[   37.876321] [<c0328228>] (mmc_io_rw_direct_host+0xb4/0x118) from [<c03291ac>] (sdio_writeb+0x38/0x44)
+[   37.876612] [<c03291ac>] (sdio_writeb+0x38/0x44) from [<bf0177cc>] (sdioh_request_byte+0x120/0x1a4 [wireless])
+[   37.876906] [<bf0177cc>] (sdioh_request_byte+0x120/0x1a4 [wireless]) from [<bf017870>] (sdioh_cfg_write+0x20/0x24 [wireless])
+[   37.877189] [<bf017870>] (sdioh_cfg_write+0x20/0x24 [wireless]) from [<bf0185f4>] (bcmsdh_cfg_write+0x24/0x40 [wireless])
+[   37.877461] [<bf0185f4>] (bcmsdh_cfg_write+0x24/0x40 [wireless]) from [<bf011e44>] (dhdsdio_htclk+0x60/0x310 [wireless])
+[   37.877721] [<bf011e44>] (dhdsdio_htclk+0x60/0x310 [wireless]) from [<bf012324>] (dhdsdio_clkctl+0x58/0xf0 [wireless])
+[   37.877984] [<bf012324>] (dhdsdio_clkctl+0x58/0xf0 [wireless]) from [<bf013a64>] (dhd_bus_txctl+0x118/0x2fc [wireless])
+[   37.878246] [<bf013a64>] (dhd_bus_txctl+0x118/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   37.878504] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   37.878729] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   37.878909] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless])
+[   37.879032] [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   37.924260] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[   37.924289] Modules linked in: wireless
+[   37.924367] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   37.924412] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   37.924454] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   37.924500] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   37.924540] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c03225e8>] (mmc_wait_for_cmd+0x68/0x7c)
+[   37.924587] [<c03225e8>] (mmc_wait_for_cmd+0x68/0x7c) from [<c0328228>] (mmc_io_rw_direct_host+0xb4/0x118)
+[   37.924630] [<c0328228>] (mmc_io_rw_direct_host+0xb4/0x118) from [<c0329268>] (sdio_readb+0x44/0x64)
+[   37.924924] [<c0329268>] (sdio_readb+0x44/0x64) from [<bf017824>] (sdioh_request_byte+0x178/0x1a4 [wireless])
+[   37.925212] [<bf017824>] (sdioh_request_byte+0x178/0x1a4 [wireless]) from [<bf017894>] (sdioh_cfg_read+0x20/0x24 [wireless])
+[   37.925495] [<bf017894>] (sdioh_cfg_read+0x20/0x24 [wireless]) from [<bf0185b0>] (bcmsdh_cfg_read+0x28/0x48 [wireless])
+[   37.925767] [<bf0185b0>] (bcmsdh_cfg_read+0x28/0x48 [wireless]) from [<bf011efc>] (dhdsdio_htclk+0x118/0x310 [wireless])
+[   37.926027] [<bf011efc>] (dhdsdio_htclk+0x118/0x310 [wireless]) from [<bf012324>] (dhdsdio_clkctl+0x58/0xf0 [wireless])
+[   37.926292] [<bf012324>] (dhdsdio_clkctl+0x58/0xf0 [wireless]) from [<bf013a64>] (dhd_bus_txctl+0x118/0x2fc [wireless])
+[   37.926554] [<bf013a64>] (dhd_bus_txctl+0x118/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   37.926812] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   37.927037] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   37.927217] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless])
+[   37.927342] [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   37.927425] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[   37.927472] Modules linked in: wireless
+[   37.927535] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   37.927577] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   37.927615] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   37.927657] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   37.927699] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4)
+[   37.927739] [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4) from [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190)
+[   37.927775] [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190) from [<c032950c>] (sdio_memcpy_toio+0x1c/0x20)
+[   37.927954] [<c032950c>] (sdio_memcpy_toio+0x1c/0x20) from [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless])
+[   37.928242] [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless]) from [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless])
+[   37.928530] [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless]) from [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless])
+[   37.928809] [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless]) from [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless])
+[   37.929070] [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   37.929329] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   37.929554] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   37.929732] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless])
+[   37.929844] [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   37.944427] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[   37.944452] Modules linked in: wireless
+[   37.944530] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   37.944575] [<c048c810>] (schedule+0x70/0x308) from [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8)
+[   37.944810] [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8) from [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless])
+[   37.945054] [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless]) from [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless])
+[   37.945324] [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless]) from [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless])
+[   37.945584] [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   37.945809] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   37.945989] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless])
+[   37.946112] [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   37.947900] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[   37.947922] Modules linked in: wireless
+[   37.947985] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   37.948052] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   37.948094] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   37.948140] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   37.948189] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4)
+[   37.948229] [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4) from [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190)
+[   37.948267] [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190) from [<c032950c>] (sdio_memcpy_toio+0x1c/0x20)
+[   37.948505] [<c032950c>] (sdio_memcpy_toio+0x1c/0x20) from [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless])
+[   37.948800] [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless]) from [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless])
+[   37.949089] [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless]) from [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless])
+[   37.949370] [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless]) from [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless])
+[   37.949632] [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   37.949890] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   37.950172] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   37.950352] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless])
+[   37.950470] [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   37.970025] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[   37.970052] Modules linked in: wireless
+[   37.970132] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   37.970177] [<c048c810>] (schedule+0x70/0x308) from [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8)
+[   37.970408] [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8) from [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless])
+[   37.970653] [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless]) from [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless])
+[   37.970923] [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless]) from [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless])
+[   37.971185] [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   37.971410] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   37.971590] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless])
+[   37.971713] [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   37.975043] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[   37.975075] Modules linked in: wireless
+[   37.975142] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   37.975197] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   37.975238] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   37.975285] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   37.975335] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4)
+[   37.975375] [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4) from [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190)
+[   37.975412] [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190) from [<c032950c>] (sdio_memcpy_toio+0x1c/0x20)
+[   37.975648] [<c032950c>] (sdio_memcpy_toio+0x1c/0x20) from [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless])
+[   37.975942] [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless]) from [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless])
+[   37.976227] [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless]) from [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless])
+[   37.976507] [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless]) from [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless])
+[   37.976768] [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   37.977027] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   37.977252] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   37.977432] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless])
+[   37.977547] [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   38.007035] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[   38.007060] Modules linked in: wireless
+[   38.007140] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   38.007185] [<c048c810>] (schedule+0x70/0x308) from [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8)
+[   38.007423] [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8) from [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless])
+[   38.007665] [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless]) from [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless])
+[   38.007933] [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless]) from [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless])
+[   38.008193] [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   38.008416] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   38.008596] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless])
+[   38.008720] [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   38.009511] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[   38.009531] Modules linked in: wireless
+[   38.009591] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   38.009633] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   38.009675] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048dfd8>] (__down_interruptible+0x88/0xec)
+[   38.009746] [<c048dfd8>] (__down_interruptible+0x88/0xec) from [<c00ba148>] (down_interruptible+0x40/0x78)
+[   38.009896] [<c00ba148>] (down_interruptible+0x40/0x78) from [<bf001db8>] (_dhd_sysioc_thread+0x4f8/0x548 [wireless])
+[   38.010066] [<bf001db8>] (_dhd_sysioc_thread+0x4f8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   39.139551] list->version 0 != WL_BSS_INFO_VERSION
+[   39.705555] SMD: ch 7 0 -> 1
+[   39.705665] SMD: ch 7 1 -> 2
+[   39.706785] handle_ats_rpc_call:ONCRPC_LGE_GET_FLEX_ 9
+[   39.706812] ONCRPC_LGE_GET_FLEX_OPERATOR_CODE_PROC
+[   39.706863] read data flex.xml fd: -2 iFlexSize : 500 res;-9
+[   39.706882] ONCRPC_LGE_GET_FLEX_OPERATOR_CODE_PROC return string : 0 , 
+[   39.706900] lge_ats_handle_flex result : 7 
+[   39.706917] DSAT RPC accept_status = 7
+[   39.709160] handle_ats_rpc_call:ONCRPC_LGE_GET_FLEX_ 10
+[   39.709187] ONCRPC_LGE_GET_FLEX_COUNTRY_PROC
+[   39.709385] read data flex.xml fd: -2 iFlexSize : 500 res;-9
+[   39.709407] ONCRPC_LGE_GET_FLEX_COUNTRY_PROC return string : 0 , 
+[   39.709423] lge_ats_handle_flex result : 7 
+[   39.709438] DSAT RPC accept_status = 7
+[   40.705882] smd_close(DATA1)
+[   41.449566] STA connect received 1
+[   41.747094] handle_ats_rpc_call:ONCRPC_LGE_GET_FLEX_ 7
+[   41.747140] ONCRPC_LGE_GET_FLEX_MCC_PROC
+[   41.747242] read data flex.xml fd: -2 iFlexSize : 500 res;-9
+[   41.747264] ONCRPC_LGE_GET_FLEX_MCC_PROC return string : 0 , 
+[   41.747282] lge_ats_handle_flex result : 7 
+[   41.747299] DSAT RPC accept_status = 7
+[   41.749009] handle_ats_rpc_call:ONCRPC_LGE_GET_FLEX_ 9
+[   41.749029] ONCRPC_LGE_GET_FLEX_OPERATOR_CODE_PROC
+[   41.749077] read data flex.xml fd: -2 iFlexSize : 500 res;-9
+[   41.749092] ONCRPC_LGE_GET_FLEX_OPERATOR_CODE_PROC return string : 0 , 
+[   41.749105] lge_ats_handle_flex result : 7 
+[   41.749117] DSAT RPC accept_status = 7
+[   42.483899] save exit: isCheckpointed 1
+[   42.863100] SMD: ch 7 0 -> 1
+[   42.863222] SMD: ch 7 1 -> 2
+[   43.863397] smd_close(DATA1)
+[   48.297141] save exit: isCheckpointed 1
+[   48.519942] wlan0: no IPv6 routers present
+[   54.241698] save exit: isCheckpointed 1
+[   55.429341] select 1708 (viders.calendar), adj 15, size 4754, to kill
+[   55.429383] send sigkill to 1708 (viders.calendar), adj 15, size 4754
+[   55.669272] select 1735 (ndroid.settings), adj 12, size 5777, to kill
+[   55.669306] select 1791 (d.process.acore), adj 14, size 6753, to kill
+[   55.669336] send sigkill to 1791 (d.process.acore), adj 14, size 6753
+[   59.722407] select 1735 (ndroid.settings), adj 12, size 5660, to kill
+[   59.722446] send sigkill to 1735 (ndroid.settings), adj 12, size 5660
+[   60.205111] save exit: isCheckpointed 1
+[   66.219423] save exit: isCheckpointed 1
+[   70.695270] aat28xx_power_internal: on = 1, refcnt = 1
+[   70.695867] pecan_vibrator_power_set: vibrator volage 3300
+[   70.706485] aat28xx_power_internal: on = 0, refcnt = 2
+[   70.727630] aat28xx_power_internal: on = 1, refcnt = 1
+[   70.728227] pecan_vibrator_power_set: vibrator volage 3300
+[   70.758857] aat28xx_power_internal: on = 0, refcnt = 2
+[   70.817806] aat28xx_power_internal: on = 1, refcnt = 1
+[   70.818395] pecan_vibrator_power_set: vibrator volage 3300
+[   70.829015] aat28xx_power_internal: on = 0, refcnt = 2
+[   70.848863] aat28xx_power_internal: on = 1, refcnt = 1
+[   70.849460] pecan_vibrator_power_set: vibrator volage 3300
+[   70.880104] aat28xx_power_internal: on = 0, refcnt = 2
+[   71.379393] select 1780 (ogenmod.cmparts), adj 7, size 3778, to kill
+[   71.379428] select 1800 (d.apps.uploader), adj 14, size 3415, to kill
+[   71.379479] send sigkill to 1800 (d.apps.uploader), adj 14, size 3415
+[   71.890754] select 1780 (ogenmod.cmparts), adj 7, size 3777, to kill
+[   71.890789] select 1834 (d.process.media), adj 12, size 4066, to kill
+[   71.890809] select 1857 (anogenmod.stats), adj 13, size 3407, to kill
+[   71.890833] select 1920 (oid.voicedialer), adj 14, size 3276, to kill
+[   71.890864] send sigkill to 1920 (oid.voicedialer), adj 14, size 3276
+[   72.244407] save exit: isCheckpointed 1
+[   72.402388] select 1780 (ogenmod.cmparts), adj 7, size 3757, to kill
+[   72.402421] select 1834 (d.process.media), adj 13, size 4008, to kill
+[   72.402443] select 1857 (anogenmod.stats), adj 14, size 3385, to kill
+[   72.402493] send sigkill to 1857 (anogenmod.stats), adj 14, size 3385
+[   72.921987] select 1780 (ogenmod.cmparts), adj 7, size 3731, to kill
+[   72.922022] select 1834 (d.process.media), adj 13, size 3950, to kill
+[   72.922070] send sigkill to 1834 (d.process.media), adj 13, size 3950
+[   73.506697] select 1780 (ogenmod.cmparts), adj 7, size 3730, to kill
+[   73.506732] select 1885 (ogle.android.gm), adj 8, size 4010, to kill
+[   73.506753] select 1928 (droid.deskclock), adj 13, size 3641, to kill
+[   73.506783] send sigkill to 1928 (droid.deskclock), adj 13, size 3641
+[   77.461341] aat28xx_power_internal: on = 1, refcnt = 1
+[   77.461939] pecan_vibrator_power_set: vibrator volage 3300
+[   77.472549] aat28xx_power_internal: on = 0, refcnt = 2
+[   77.492539] aat28xx_power_internal: on = 1, refcnt = 1
+[   77.493138] pecan_vibrator_power_set: vibrator volage 3300
+[   77.523761] aat28xx_power_internal: on = 0, refcnt = 2
+[   78.234691] save exit: isCheckpointed 1
+[   78.860961] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000304
+[   78.860987] Modules linked in: wireless
+[   78.861077] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   78.861124] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   78.861166] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   78.861212] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   78.861261] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4)
+[   78.861301] [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4) from [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190)
+[   78.861337] [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190) from [<c032950c>] (sdio_memcpy_toio+0x1c/0x20)
+[   78.861627] [<c032950c>] (sdio_memcpy_toio+0x1c/0x20) from [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless])
+[   78.861924] [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless]) from [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless])
+[   78.862212] [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless]) from [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless])
+[   78.862492] [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless]) from [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless])
+[   78.862754] [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   78.863012] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   78.863239] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   78.863417] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless])
+[   78.863541] [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   78.865831] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000304
+[   78.865854] Modules linked in: wireless
+[   78.865922] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   78.865966] [<c048c810>] (schedule+0x70/0x308) from [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8)
+[   78.866171] [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8) from [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless])
+[   78.866414] [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless]) from [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless])
+[   78.866682] [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless]) from [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless])
+[   78.866942] [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   78.867167] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   78.867346] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless])
+[   78.867467] [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   78.869514] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000304
+[   78.869539] Modules linked in: wireless
+[   78.869602] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   78.869669] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   78.869710] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   78.869755] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   78.869850] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4)
+[   78.869892] [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4) from [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190)
+[   78.869929] [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190) from [<c032950c>] (sdio_memcpy_toio+0x1c/0x20)
+[   78.870169] [<c032950c>] (sdio_memcpy_toio+0x1c/0x20) from [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless])
+[   78.870464] [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless]) from [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless])
+[   78.870750] [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless]) from [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless])
+[   78.871030] [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless]) from [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless])
+[   78.871292] [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   78.871552] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   78.871775] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   78.871955] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless])
+[   78.872072] [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   78.888895] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000304
+[   78.888924] Modules linked in: wireless
+[   78.889005] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   78.889049] [<c048c810>] (schedule+0x70/0x308) from [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8)
+[   78.889299] [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8) from [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless])
+[   78.889540] [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless]) from [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless])
+[   78.889862] [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless]) from [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless])
+[   78.890129] [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   78.890355] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   78.890535] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless])
+[   78.890662] [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   78.900557] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000304
+[   78.900587] Modules linked in: wireless
+[   78.900665] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   78.900709] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   78.900765] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   78.900815] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   78.900854] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c03225e8>] (mmc_wait_for_cmd+0x68/0x7c)
+[   78.900900] [<c03225e8>] (mmc_wait_for_cmd+0x68/0x7c) from [<c0328228>] (mmc_io_rw_direct_host+0xb4/0x118)
+[   78.900945] [<c0328228>] (mmc_io_rw_direct_host+0xb4/0x118) from [<c03291ac>] (sdio_writeb+0x38/0x44)
+[   78.901225] [<c03291ac>] (sdio_writeb+0x38/0x44) from [<bf0177cc>] (sdioh_request_byte+0x120/0x1a4 [wireless])
+[   78.901519] [<bf0177cc>] (sdioh_request_byte+0x120/0x1a4 [wireless]) from [<bf017870>] (sdioh_cfg_write+0x20/0x24 [wireless])
+[   78.901804] [<bf017870>] (sdioh_cfg_write+0x20/0x24 [wireless]) from [<bf0185f4>] (bcmsdh_cfg_write+0x24/0x40 [wireless])
+[   78.902075] [<bf0185f4>] (bcmsdh_cfg_write+0x24/0x40 [wireless]) from [<bf011e44>] (dhdsdio_htclk+0x60/0x310 [wireless])
+[   78.902335] [<bf011e44>] (dhdsdio_htclk+0x60/0x310 [wireless]) from [<bf012324>] (dhdsdio_clkctl+0x58/0xf0 [wireless])
+[   78.902600] [<bf012324>] (dhdsdio_clkctl+0x58/0xf0 [wireless]) from [<bf013a64>] (dhd_bus_txctl+0x118/0x2fc [wireless])
+[   78.902862] [<bf013a64>] (dhd_bus_txctl+0x118/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   78.903122] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   78.903345] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   78.903525] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless])
+[   78.903647] [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   78.903740] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000304
+[   78.903770] Modules linked in: wireless
+[   78.903817] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   78.903857] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   78.903895] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   78.903937] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   78.903989] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c03225e8>] (mmc_wait_for_cmd+0x68/0x7c)
+[   78.904030] [<c03225e8>] (mmc_wait_for_cmd+0x68/0x7c) from [<c0328228>] (mmc_io_rw_direct_host+0xb4/0x118)
+[   78.904072] [<c0328228>] (mmc_io_rw_direct_host+0xb4/0x118) from [<c0329268>] (sdio_readb+0x44/0x64)
+[   78.904250] [<c0329268>] (sdio_readb+0x44/0x64) from [<bf017824>] (sdioh_request_byte+0x178/0x1a4 [wireless])
+[   78.904537] [<bf017824>] (sdioh_request_byte+0x178/0x1a4 [wireless]) from [<bf017894>] (sdioh_cfg_read+0x20/0x24 [wireless])
+[   78.904820] [<bf017894>] (sdioh_cfg_read+0x20/0x24 [wireless]) from [<bf0185b0>] (bcmsdh_cfg_read+0x28/0x48 [wireless])
+[   78.905090] [<bf0185b0>] (bcmsdh_cfg_read+0x28/0x48 [wireless]) from [<bf011efc>] (dhdsdio_htclk+0x118/0x310 [wireless])
+[   78.905362] [<bf011efc>] (dhdsdio_htclk+0x118/0x310 [wireless]) from [<bf012324>] (dhdsdio_clkctl+0x58/0xf0 [wireless])
+[   78.905629] [<bf012324>] (dhdsdio_clkctl+0x58/0xf0 [wireless]) from [<bf013a64>] (dhd_bus_txctl+0x118/0x2fc [wireless])
+[   78.905892] [<bf013a64>] (dhd_bus_txctl+0x118/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   78.906149] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   78.906374] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   78.906552] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless])
+[   78.906664] [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   78.907587] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000304
+[   78.907620] Modules linked in: wireless
+[   78.907680] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   78.907722] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   78.907772] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   78.907815] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   78.907855] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c03225e8>] (mmc_wait_for_cmd+0x68/0x7c)
+[   78.907895] [<c03225e8>] (mmc_wait_for_cmd+0x68/0x7c) from [<c0328228>] (mmc_io_rw_direct_host+0xb4/0x118)
+[   78.907939] [<c0328228>] (mmc_io_rw_direct_host+0xb4/0x118) from [<c0329268>] (sdio_readb+0x44/0x64)
+[   78.908172] [<c0329268>] (sdio_readb+0x44/0x64) from [<bf017824>] (sdioh_request_byte+0x178/0x1a4 [wireless])
+[   78.908464] [<bf017824>] (sdioh_request_byte+0x178/0x1a4 [wireless]) from [<bf017894>] (sdioh_cfg_read+0x20/0x24 [wireless])
+[   78.908745] [<bf017894>] (sdioh_cfg_read+0x20/0x24 [wireless]) from [<bf0185b0>] (bcmsdh_cfg_read+0x28/0x48 [wireless])
+[   78.909015] [<bf0185b0>] (bcmsdh_cfg_read+0x28/0x48 [wireless]) from [<bf012000>] (dhdsdio_htclk+0x21c/0x310 [wireless])
+[   78.909277] [<bf012000>] (dhdsdio_htclk+0x21c/0x310 [wireless]) from [<bf012324>] (dhdsdio_clkctl+0x58/0xf0 [wireless])
+[   78.909540] [<bf012324>] (dhdsdio_clkctl+0x58/0xf0 [wireless]) from [<bf013a64>] (dhd_bus_txctl+0x118/0x2fc [wireless])
+[   78.909842] [<bf013a64>] (dhd_bus_txctl+0x118/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   78.910105] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   78.910332] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   78.910510] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless])
+[   78.910627] [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   78.910827] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000304
+[   78.910880] Modules linked in: wireless
+[   78.910930] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   78.910970] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   78.911024] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   78.911065] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   78.911107] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4)
+[   78.911147] [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4) from [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190)
+[   78.911184] [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190) from [<c032950c>] (sdio_memcpy_toio+0x1c/0x20)
+[   78.911372] [<c032950c>] (sdio_memcpy_toio+0x1c/0x20) from [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless])
+[   78.911665] [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless]) from [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless])
+[   78.911952] [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless]) from [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless])
+[   78.912232] [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless]) from [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless])
+[   78.912495] [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   78.912752] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   78.912977] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   78.913155] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless])
+[   78.913267] [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   78.913757] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000304
+[   78.913779] Modules linked in: wireless
+[   78.913829] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   78.913870] [<c048c810>] (schedule+0x70/0x308) from [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8)
+[   78.914017] [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8) from [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless])
+[   78.914254] [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless]) from [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless])
+[   78.914519] [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless]) from [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless])
+[   78.914779] [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   78.915004] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   78.915182] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless])
+[   78.915295] [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   78.915589] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000304
+[   78.915607] Modules linked in: wireless
+[   78.915652] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   78.915690] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   78.915734] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048dfd8>] (__down_interruptible+0x88/0xec)
+[   78.915785] [<c048dfd8>] (__down_interruptible+0x88/0xec) from [<c00ba148>] (down_interruptible+0x40/0x78)
+[   78.915924] [<c00ba148>] (down_interruptible+0x40/0x78) from [<bf001db8>] (_dhd_sysioc_thread+0x4f8/0x548 [wireless])
+[   78.916040] [<bf001db8>] (_dhd_sysioc_thread+0x4f8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   79.943543] unregister_mmc_card_pm: [WIFI] Unregistering suspend/resume callbacks.  
+[   79.970381] Kernel panic - not syncing: Aiee, killing interrupt handler!
+[   79.970420] Rebooting in 1 seconds..
+[   80.951219] Restarting Linux version 2.6.35.10-PecanCM-Ics (anthony@anthony-PecanCM) (gcc version 4.6.x-google 20120106 (prerelease) (GCC) ) #1 PREEMPT Sun Feb 10 23:00:01 GMT 2013
+[   80.951243] 

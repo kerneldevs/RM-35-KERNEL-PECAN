@@ -316,6 +316,7 @@ static struct msm_camera_device_platform_data msm_camera_device_data = {
 	.ioext.appsz  = MSM_CLK_CTL_SIZE,
 	.camera_power_on = camera_power_on,
 	.camera_power_off = camera_power_off,
+	.camera_standy_high = camera_standy_high,  // 2011-03-21 Samsung camera sensor porting
 };
 
 #if defined (CONFIG_ISX005)

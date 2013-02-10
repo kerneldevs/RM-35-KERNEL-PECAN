@@ -1,0 +1,1693 @@
+[    0.073031] console [ram-1] enabled
+[    0.073599] ebi2_tovis_power_save: on=1
+[    0.108893] bio: create slab <bio-0> at 0
+[    0.111016] SCSI subsystem initialized
+[    0.111435] usbcore: registered new interface driver usbfs
+[    0.111631] usbcore: registered new interface driver hub
+[    0.111870] usbcore: registered new device driver usb
+[    0.112941] i2c-gpio i2c-gpio.2: using pins 89 (SDA) and 88 (SCL)
+[    0.113376] i2c-gpio i2c-gpio.3: using pins 91 (SDA) and 90 (SCL)
+[    0.113806] i2c-gpio i2c-gpio.4: using pins 108 (SDA) and 107 (SCL)
+[    0.114230] i2c-gpio i2c-gpio.5: using pins 3 (SDA) and 2 (SCL)
+[    0.114425] msm_i2c_probe
+[    0.114536] msm_i2c_probe: clk_ctl 315, 400000 Hz
+[    0.116536] Advanced Linux Sound Architecture Driver Version 1.0.23.
+[    0.117355] Bluetooth: Core ver 2.15
+[    0.117551] NET: Registered protocol family 31
+[    0.117568] Bluetooth: HCI device and connection manager initialized
+[    0.117588] Bluetooth: HCI socket layer initialized
+[    0.118001] Switching to clocksource dg_timer
+[    0.135738] NET: Registered protocol family 2
+[    0.135968] IP route cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.136474] TCP established hash table entries: 8192 (order: 4, 65536 bytes)
+[    0.136723] TCP bind hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.136894] TCP: Hash tables configured (established 8192 bind 8192)
+[    0.136913] TCP reno registered
+[    0.136931] UDP hash table entries: 256 (order: 0, 4096 bytes)
+[    0.136969] UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)
+[    0.137178] NET: Registered protocol family 1
+[    0.137522] RPC: Registered udp transport module.
+[    0.137541] RPC: Registered tcp transport module.
+[    0.137557] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    0.137821] Trying to unpack rootfs image as initramfs...
+[    0.202237] Freeing initrd memory: 444K
+[    0.203997] smd probe
+[    0.204027] smd_core_init()
+[    0.204114] smd_core_init() done
+[    0.204136] smd_alloc_loopback_channel: 'local_loopback' cid=100
+[    0.204364] smd_alloc_channel() 'DS' cid=0
+[    0.204569] Notify: smsm init
+[    0.205219] smd_alloc_channel() 'DIAG' cid=1
+[    0.206041] smd_alloc_channel() 'RPCCALL' cid=2
+[    0.206561] smd_alloc_channel() 'DATA1' cid=7
+[    0.207067] smd_alloc_channel() 'DATA2' cid=8
+[    0.207572] smd_alloc_channel() 'DATA3' cid=9
+[    0.208239] smd_alloc_channel() 'DATA4' cid=10
+[    0.208746] smd_alloc_channel() 'DATA5' cid=11
+[    0.209181] smd_alloc_channel() 'DATA6' cid=12
+[    0.209591] smd_alloc_channel() 'DATA7' cid=13
+[    0.210014] smd_alloc_channel() 'DATA11' cid=17
+[    0.210434] smd_alloc_channel() 'DAL00' cid=38
+[    0.210779] smd_alloc_channel() 'DATA5_CNTL' cid=39
+[    0.211261] smd_alloc_channel() 'DATA6_CNTL' cid=40
+[    0.211732] smd_alloc_channel() 'DATA7_CNTL' cid=41
+[    0.217167] SMD Packet Port Driver Initialized.
+[    0.218670] SMD: ch 2 0 -> 1
+[    0.218789] SMD: ch 2 1 -> 2
+[    0.220185] [adsp.c:adsp_init] rs3000000a -- 0
+[    0.225727] [audpp.c:audpp_probe] Number of decoder supported 5
+[    0.225755] [audpp.c:audpp_probe] Number of concurrency supported 7
+[    0.225774] [audpp.c:audpp_probe] module_name:AUDPLAY0TASK
+[    0.225792] [audpp.c:audpp_probe] queueid:13
+[    0.225809] [audpp.c:audpp_probe] decid:0
+[    0.225824] [audpp.c:audpp_probe] nr_codec_support:11
+[    0.225840] [audpp.c:audpp_probe] module_name:AUDPLAY1TASK
+[    0.225865] [audpp.c:audpp_probe] queueid:14
+[    0.225880] [audpp.c:audpp_probe] decid:1
+[    0.225895] [audpp.c:audpp_probe] nr_codec_support:5
+[    0.225912] [audpp.c:audpp_probe] module_name:AUDPLAY2TASK
+[    0.225929] [audpp.c:audpp_probe] queueid:15
+[    0.225945] [audpp.c:audpp_probe] decid:2
+[    0.225960] [audpp.c:audpp_probe] nr_codec_support:5
+[    0.225975] [audpp.c:audpp_probe] module_name:AUDPLAY3TASK
+[    0.225992] [audpp.c:audpp_probe] queueid:16
+[    0.226009] [audpp.c:audpp_probe] decid:3
+[    0.226024] [audpp.c:audpp_probe] nr_codec_support:4
+[    0.226040] [audpp.c:audpp_probe] module_name:AUDPLAY4TASK
+[    0.226057] [audpp.c:audpp_probe] queueid:17
+[    0.226072] [audpp.c:audpp_probe] decid:4
+[    0.226092] [audpp.c:audpp_probe] nr_codec_support:1
+[    0.246763] RPC_TIME_TOD_SET_APPS_BASES:
+[    0.246772] 	tick = 117694
+[    0.246778] 	stamp = 0
+[    0.246810] drivers/rtc/hctosys.c: unable to open rtc device (rtc0)
+[    0.247218] pecan_gpio_earsense_work_func: ear sense detected : ejected
+[    0.247250] __msm_rpc_connect: server not found 30000061:30001
+[    0.247270] __msm_rpc_connect: server not found 30000061:20001
+[    0.249992] lge_tempdevice_init
+[    0.251037] lge_mtd_direct_access_init: finished
+[    0.253183] LGE Power Sink Driver Init
+[    0.253263] lge_pwrsink_probe: setting driver data
+[    0.265505] ashmem: initialized
+[    0.266808] VFS: Disk quotas dquot_6.5.2
+[    0.266908] Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+[    0.268546] yaffs Feb 10 2013 22:59:17 Installing. 
+[    0.268600] msgmni has been set to 354
+[    0.269431] alg: No test for cipher_null (cipher_null-generic)
+[    0.269835] alg: No test for ecb(cipher_null) (ecb-cipher_null)
+[    0.270235] alg: No test for digest_null (digest_null-generic)
+[    0.270623] alg: No test for compress_null (compress_null-generic)
+[    0.278848] alg: No test for stdrng (krng)
+[    0.278941] io scheduler noop registered
+[    0.279083] io scheduler cfq registered (default)
+[    0.279186] io scheduler bfq registered
+[    0.279201] io scheduler vr registered
+[    0.279216] io scheduler sio registered
+[    0.280953] AAT28XX init start
+[    0.281633] Registered led device: lcd-backlight
+[    0.281655] aat2870bl:aat28xx_probe: Registering led class dev successfully.
+[    0.281703] aat28xx_power_internal: on = 1, refcnt = 0
+[    0.304283] aat2870bl:aat28xx_probe: done
+[    0.304613] pecan_gpio_earsense_work_func: ear sense detected : ejected
+[    0.304906] msm_fb_probe:  phy_Addr = 0x542d000 virt = 0xcd900000
+[    0.306174] MDP HW Base phy_Address = 0xaa200000 virt = 0xcda00000
+[    0.310616] FrameBuffer[0] 240x320 size=327680 bytes is registered successfully!
+[    0.313571] kgsl kgsl-3d0: |kgsl_gpummu_init| MMU type set for device is GPUMMU
+[    0.314526] msm_serial: driver initialized
+[    0.314803] msm_serial_hs.0: ttyHS0 at MMIO 0xa0200000 (irq = 45) is a MSM HS UART
+[    0.315494] msm_serial_hs module loaded
+[    0.321459] brd: module loaded
+[    0.326616] loop: module loaded
+[    0.326791] pmem: Initializing pmem_kernel_ebi1 (in-kernel)
+[    0.326896] pmem: Initializing pmem (user-space) as cached
+[    0.328009] pmem: Initializing pmem_adsp (user-space) as cached
+[    0.329152] pmem: Initializing pmem_audio (user-space) as non-cached
+[    0.329867] LGE: Android Vibrator Driver Init
+[    0.330489] LGE: Android Vibrator Initialization was done
+[    0.330954] atcmd_probe:alohag_atcmd
+[    0.331341] lge_tty_atcmd_init: initialize atcmd-ttys
+[    0.333459] SCSI Media Changer driver v0.25 
+[    0.334846] msm_nand_probe: phys addr 0xa0a00000 
+[    0.334871] msm_nand_probe: dmac 0x7
+[    0.334926] msm_nand_probe: allocated dma buffer at ffc56000, dma_addr fba2000
+[    0.335417] status: c00020
+[    0.335437] nandid: 5590bc2c maker 2c device bc
+[    0.335462] ONFI probe : Found an ONFI compliant device MT29F4G16ABBDA3W    ,
+[    0.335484] Found a supported NAND device
+[    0.335497] NAND Id  : 0x5590bc2c
+[    0.335511] Buswidth : 16 Bits
+[    0.335522] Density  : 512 MByte
+[    0.335536] Pagesize : 2048 Bytes
+[    0.335547] Erasesize: 131072 Bytes
+[    0.335561] Oobsize  : 64 Bytes
+[    0.335574] CFG0 Init  : 0xa85408c0 
+[    0.335587] CFG1 Init  : 0x0004745e 
+[    0.335601] ECCBUFCFG  : 0x00000203 
+[    0.335624] Creating 10 MTD partitions on "msm_nand":
+[    0.335649] 0x000002600000-0x000002a40000 : "boot"
+[    0.340394] 0x000002a40000-0x00000f240000 : "system"
+[    0.482273] 0x00000f240000-0x00000f740000 : "recovery"
+[    0.487148] 0x00000f740000-0x00000fa00000 : "lgdrm"
+[    0.490628] 0x00000fa00000-0x00000fb00000 : "splash"
+[    0.492853] 0x00000fb00000-0x00000fc00000 : "FOTABIN"
+[    0.494998] 0x00000fc00000-0x000010240000 : "FOTA"
+[    0.500706] 0x000010240000-0x000010280000 : "misc"
+[    0.502308] 0x000010280000-0x000014280000 : "cache"
+[    0.547902] 0x000014280000-0x000020000000 : "userdata"
+[    0.683806] SLIP: version 0.8.4-NET3.019-NEWTTY (dynamic channels, max=256) (6 bit encapsulation enabled).
+[    0.683836] CSLIP: code copyright 1989 Regents of the University of California.
+[    0.684820] rmnet_init
+[    0.692391] msm_hsusb_rpc_connect: rpc connect success vers = 10001
+[    0.692583] msm_otg_probe: clk_get - usb_hs_clk
+[    0.692933] __msm_rpc_connect: server not found 3000001a:40001
+[    0.692958] __msm_rpc_connect: server not found 3000001a:30001
+[    0.692978] __msm_rpc_connect: server not found 3000001a:20001
+[    0.693263] lgeusb[lgeusb_init       :  293] - u_lgeusb init
+[    0.693751] peripheral driver registered w/ tranceiver
+[    0.694320] lgeusb[lgeusb_register_usbinfo:  281] - Registering infomation for lgeusb is success
+[    0.694718] lgeusb[get_factory_cable :  103] - Using PIF ZIG (0)
+[    0.695215] android_usb gadget: android_usb ready
+[    0.695503] f_acm init
+[    0.696051] f_mtp init
+[    0.696310] f_ecm init
+[    0.696628] mtp_bind_config
+[    0.697396] android_usb gadget: using random self ethernet address
+[    0.697433] android_usb gadget: using random host ethernet address
+[    0.698191] usb0: MAC fa:b9:02:be:96:41
+[    0.698213] usb0: HOST MAC 42:1a:56:a9:4f:b2
+[    0.699248] msm_hsusb_phy_reset
+[    0.700091] ecm_function_bind_config MAC: 00:00:00:00:00:00
+[    0.702283] lgeusb[get_factory_cable :  103] - Using PIF ZIG (0)
+[    0.702308] lgeusb[lgeusb_set_current_mode:  254] - We detect Normal USB cable......
+[    0.702331] lgeusb[do_switch_mode    :  167] - do_switch_mode : pid 618e, need_reset 0
+[    0.704741] msm_nv_imei_get: msm_rpc_call success. ver = 0x60001
+[    0.704764] lgeusb[get_serial_number :   76] - IMEI 80A356525049826379
+[    0.707813] lgeusb[android_register_function:  504] - LGE Android Gadget global configuration:
+[    0.707826] 	product_id -- 618e, serial no. -- 80A356525049826379
+[    0.708288] diagfwd initializing ..
+[    0.708694] SMD: ch 1 0 -> 1
+[    0.708713] diag opened SMD port ; r = 0
+[    0.708798] SMD: ch 1 1 -> 2
+[    0.708973] diagchar initializing ..
+[    0.709484] diagchar initialized
+[    0.709593] [YJ] atcmd_virtual_probe, start!!
+[    0.710051] input: atcmd_virtual_kbd as /devices/platform/atcmd_virtual_kbd/input/input0
+[    0.711023] input: touch_mcs7000 as /devices/virtual/input/input1
+[    0.711371] ------------[ cut here ]------------
+[    0.711426] WARNING: at drivers/gpio/gpiolib.c:103 gpio_ensure_requested+0x48/0x108()
+[    0.711444] autorequest GPIO-92
+[    0.711456] Modules linked in:
+[    0.711529] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c00a0028>] (warn_slowpath_common+0x4c/0x7c)
+[    0.711573] [<c00a0028>] (warn_slowpath_common+0x4c/0x7c) from [<c00a00d8>] (warn_slowpath_fmt+0x2c/0x3c)
+[    0.711614] [<c00a00d8>] (warn_slowpath_fmt+0x2c/0x3c) from [<c01fa624>] (gpio_ensure_requested+0x48/0x108)
+[    0.711659] [<c01fa624>] (gpio_ensure_requested+0x48/0x108) from [<c01faa1c>] (gpio_direction_input+0x84/0x180)
+[    0.711706] [<c01faa1c>] (gpio_direction_input+0x84/0x180) from [<c02cf4b8>] (mcs7000_ts_probe+0x100/0x23c)
+[    0.711753] [<c02cf4b8>] (mcs7000_ts_probe+0x100/0x23c) from [<c02ddd08>] (i2c_device_probe+0x118/0x170)
+[    0.711804] [<c02ddd08>] (i2c_device_probe+0x118/0x170) from [<c025127c>] (driver_probe_device+0x1a4/0x364)
+[    0.711848] [<c025127c>] (driver_probe_device+0x1a4/0x364) from [<c025149c>] (__driver_attach+0x60/0x84)
+[    0.711889] [<c025149c>] (__driver_attach+0x60/0x84) from [<c02500a0>] (bus_for_each_dev+0x4c/0x84)
+[    0.711928] [<c02500a0>] (bus_for_each_dev+0x4c/0x84) from [<c025099c>] (bus_add_driver+0xe8/0x29c)
+[    0.711968] [<c025099c>] (bus_add_driver+0xe8/0x29c) from [<c02519b4>] (driver_register+0xa8/0x134)
+[    0.712013] [<c02519b4>] (driver_register+0xa8/0x134) from [<c02dfe00>] (i2c_register_driver+0x40/0x108)
+[    0.712058] [<c02dfe00>] (i2c_register_driver+0x40/0x108) from [<c048645c>] (mcs7000_ts_init+0x160/0x23c)
+[    0.712111] [<c048645c>] (mcs7000_ts_init+0x160/0x23c) from [<c002e3bc>] (do_one_initcall+0x54/0x1a0)
+[    0.712151] [<c002e3bc>] (do_one_initcall+0x54/0x1a0) from [<c0008b84>] (kernel_init+0xac/0x160)
+[    0.712193] [<c0008b84>] (kernel_init+0xac/0x160) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[    0.712241] ---[ end trace a0b805fb4ed34033 ]---
+[    0.712471] [Touch] ts_set_vreg() onoff:0
+[    0.737999] [Touch] ts_set_vreg() onoff:1
+[    0.828149] msm_hsusb msm_hsusb: msm72k_udc: OFFLINE -> ONLINE
+[    0.833209] msm_hsusb_phy_reset
+[    0.958126] msm_hsusb msm_hsusb: usb: notify offline - usb reset
+[    0.988034] MCS7000 F/W Version [0xf]
+[    1.008036] MCS7000 H/W Revision [0x11]
+[    1.009041] GPIO Matrix Keypad Driver: Start keypad matrix for pecan_keypad in interrupt mode
+[    1.009543] input: pecan_keypad as /devices/virtual/input/input2
+[    1.010726] KR3DM accelerometer driver
+[    1.010931] KR3DH accelerometer driver
+[    1.010991] [Accelerometer] accel_power_on() : Power On
+[    1.018168] input: accelerometer as /devices/virtual/input/input3
+[    1.019099] input: lge_gesture as /devices/virtual/input/input4
+[    1.019393] KR3DH 5-0019: KR3DH kr3dh: Accelerometer chip found
+[    1.019611] [Ecompass] ecom_power_set() : Power On
+[    1.022558] ami304_sensor 4-000f: force operating mode
+[    1.022573] Register input device!
+[    1.022986] input: Acompass as /devices/virtual/input/input5
+[    1.025218] RTC Registering with rs30000048
+[    1.026421] msm_rpc_client_req: RPC call was not successful (3)
+[    1.026446] msmrtc_setup_cb: RPC client registration for PROC:12 failed
+[    1.026466] rs30000048 rs30000048.65536: msmrtc_probe: Could not initialize RPC callback
+[    1.027342] using rtc device, msm_rtc, for alarms
+[    1.027367] msm_rtc: dev (254:0)
+[    1.027417] rs30000048 rs30000048.65536: rtc core: registered msm_rtc as rtc0
+[    1.027806] msm_rtc_secure: dev (254:1)
+[    1.027824] rs30000048 rs30000048.65536: rtc core: registered msm_rtc_secure as rtc1
+[    1.028216] i2c /dev entries driver
+[    1.030491] IR NEC protocol handler initialized
+[    1.030511] IR RC5(x) protocol handler initialized
+[    1.030524] IR RC6 protocol handler initialized
+[    1.030539] IR JVC protocol handler initialized
+[    1.030552] IR Sony protocol handler initialized
+[    1.030567] Linux video capture interface: v2.00
+[    1.030917] msm_batt_init: enter
+[    1.030942] __msm_rpc_connect: server not found 3000001a:40001
+[    1.030962] __msm_rpc_connect: server not found 3000001a:30001
+[    1.031621] msm_batt_get_charger_api_version: num_of_chg_api_versions = 3. The chg api version = 0x00010003
+[    1.031667] __msm_rpc_connect: server not found 30000089:40001
+[    1.034252] msm_batt_enable_filter: enable vbatt filter: OK
+[    1.034944] msm-battery msm-battery: msm_batt_probe : Using PIF ZIG (0)
+[    1.035324] msm_batt_init: Charger/Battery = 0x00010003/0x00010001 (RPC version)
+[    1.035636] device-mapper: uevent: version 1.0.3
+[    1.036354] device-mapper: ioctl: 4.17.0-ioctl (2010-03-05) initialised: dm-devel@redhat.com
+[    1.036444] Bluetooth: HCI UART driver ver 2.2
+[    1.036462] Bluetooth: HCI H4 protocol initialized
+[    1.036477] Bluetooth: HCI BCSP protocol initialized
+[    1.036492] Bluetooth: MSM Sleep Mode Driver Ver 1.1
+[    1.039292] mmc0: Qualcomm MSM SDCC at 0x00000000a0400000 irq 24,113 dma 8
+[    1.039317] mmc0: 8 bit data mode disabled
+[    1.039332] mmc0: 4 bit data mode enabled
+[    1.039347] mmc0: polling status mode disabled
+[    1.039366] mmc0: MMC clock 144000 -> 49152000 Hz, PCLK 100000000 Hz
+[    1.039384] mmc0: Slot eject status = 0
+[    1.039397] mmc0: Power save feature enable = 1
+[    1.039417] mmc0: DM non-cached buffer at ffc5a000, dma_addr 0x0f056000
+[    1.039439] mmc0: DM cmd busaddr 0x0f056000, cmdptr busaddr 0x0f056300
+[    1.039767] bcm432x_sdcc_wlan_slot_status: 93 0
+[    1.040501] bcm432x_sdcc_wlan_slot_status: 93 0
+[    1.040739] mmc1: Qualcomm MSM SDCC at 0x00000000a0500000 irq 26,157 dma 8
+[    1.040759] mmc1: 8 bit data mode disabled
+[    1.040772] mmc1: 4 bit data mode enabled
+[    1.040787] mmc1: polling status mode disabled
+[    1.040806] mmc1: MMC clock 144000 -> 49152000 Hz, PCLK 100000000 Hz
+[    1.040822] mmc1: Slot eject status = 1
+[    1.040837] mmc1: Power save feature enable = 1
+[    1.040856] mmc1: DM non-cached buffer at ffc5b000, dma_addr 0x0f057000
+[    1.040876] mmc1: DM cmd busaddr 0x0f057000, cmdptr busaddr 0x0f057300
+[    1.041767] Registered led device: button-backlight
+[    1.043821] usbcore: registered new interface driver usbhid
+[    1.043842] usbhid: USB HID core driver
+[    1.044735] logger: created 64K log 'log_main'
+[    1.045047] logger: created 32K log 'log_events'
+[    1.045360] logger: created 32K log 'log_radio'
+[    1.045655] logger: created 64K log 'log_system'
+[    1.045994] zram: num_devices not specified. Using default: 1
+[    1.046014] zram: Creating 1 devices ...
+[    1.047710] No device for DAI CODEC_DAI
+[    1.047732] No device for DAI CPU_DAI
+[    1.048494] msm_soc: create pcms
+[    1.048812] asoc: CODEC_DAI <-> CPU_DAI mapping ok
+[    1.048830] msm_soc: ALSA MSM Mixer Setting
+[    1.050244] ALSA device list:
+[    1.050262]   #0: msm-audio (MSM-CARD)
+[    1.050387] u32 classifier
+[    1.050400] Netfilter messages via NETLINK v0.30.
+[    1.050505] nf_conntrack version 0.5.0 (2835 buckets, 11340 max)
+[    1.050999] ctnetlink v0.93: registering with nfnetlink.
+[    1.051197] xt_time: kernel timezone is -0000
+[    1.051492] ip_tables: (C) 2000-2006 Netfilter Core Team
+[    1.051634] arp_tables: (C) 2002 David S. Miller
+[    1.051707] TCP cubic registered
+[    1.051720] Initializing XFRM netlink socket
+[    1.052100] NET: Registered protocol family 10
+[    1.052819] lo: Disabled Privacy Extensions
+[    1.054885] Mobile IPv6
+[    1.054904] IPv6 over IPv4 tunneling driver
+[    1.055892] sit0: Disabled Privacy Extensions
+[    1.056802] ip6tnl0: Disabled Privacy Extensions
+[    1.057000] NET: Registered protocol family 17
+[    1.057060] NET: Registered protocol family 15
+[    1.057247] Bluetooth: L2CAP ver 2.14
+[    1.057262] Bluetooth: L2CAP socket layer initialized
+[    1.057287] Bluetooth: SCO (Voice Link) ver 0.6
+[    1.057302] Bluetooth: SCO socket layer initialized
+[    1.057414] Bluetooth: RFCOMM TTY layer initialized
+[    1.057439] Bluetooth: RFCOMM socket layer initialized
+[    1.057455] Bluetooth: RFCOMM ver 1.11
+[    1.057472] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[    1.057487] Bluetooth: BNEP filters: protocol multicast
+[    1.057505] Bluetooth: HIDP (Human Interface Emulation) ver 1.2
+[    1.061537] input: 7k_handset as /devices/virtual/input/input6
+[    1.062012] __msm_rpc_connect: server not found 30000091:30001
+[    1.063445] msm_rpc_client_req: RPC call was not successful (4)
+[    1.063467] hs_rpc_cb_init: RPC client request failed for pwr key delay cmd, using normal mode
+[    1.064215] VFP support v0.3: implementor 41 architecture 1 part 20 variant b rev 5
+[    1.066707] msmrtc_tod_proc_result: 02/10/2013 23:02:03 (06)
+[    1.066764] rs30000048 rs30000048.65536: setting system clock to 2013-02-10 23:02:03 UTC (1360537323)
+[    1.066790] msm_v4l2: msm_v4l2_init
+[    1.068295] msm_sync_init: initialized isx005
+[    1.070015] Warning: unable to open an initial console.
+[    1.070085] Freeing init memory: 152K
+[    1.288781] mmc0: host does not support reading read-only switch. assuming write-enable.
+[    1.288831] mmc0: new high speed SDHC card at address 1234
+[    1.288846] [LGE] mmc device add
+[    1.290156] mmcblk0: mmc0:1234 SA08G 7.28 GiB 
+[    1.291379]  mmcblk0: p1
+[    1.294981] bcm432x_sdcc_wlan_slot_status: 93 0
+[    1.323094] init: cannot open '/initlogo.rle'
+[    1.326086] yaffs: dev is 32505857 name is "mtdblock1" rw
+[    1.326111] yaffs: passed flags ""
+[    1.326129] yaffs: Attempting MTD mount on 31.1, "mtdblock1"
+[    1.333319] android_usb gadget: high speed config #1: android
+[    1.333436] diag: USB connected
+[    1.500829] yaffs: restored from checkpoint
+[    1.501227] yaffs_read_super: isCheckpointed 1
+[    1.508417] yaffs: dev is 32505865 name is "mtdblock9" rw
+[    1.508439] yaffs: passed flags ""
+[    1.508457] yaffs: Attempting MTD mount on 31.9, "mtdblock9"
+[    1.633197] yaffs: restored from checkpoint
+[    1.639238] yaffs_read_super: isCheckpointed 0
+[    1.639478] yaffs: dev is 32505864 name is "mtdblock8" rw
+[    1.639498] yaffs: passed flags ""
+[    1.639517] yaffs: Attempting MTD mount on 31.8, "mtdblock8"
+[    1.642447] yaffs: restored from checkpoint
+[    1.642508] yaffs_read_super: isCheckpointed 1
+[    1.958224] lgeusb[get_factory_cable :  103] - Using PIF ZIG (0)
+[    1.959019] 
+[    1.959030] Charger Type: STD DOWNSTREAM PORT
+[    2.177280] pecan_bluetooth_power
+[    2.177308] pecan_bluetooth_power 0
+[    2.184558] init: service 'console' requires console
+[    2.187223] adb_enable_open: Enabling adb
+[    2.282303] SMD: ch 39 0 -> 1
+[    2.282401] SMD: ch 39 1 -> 2
+[    2.285554] SMD: ch 40 0 -> 1
+[    2.285629] SMD: ch 40 1 -> 2
+[    2.285983] SMD: ch 41 0 -> 1
+[    2.286094] SMD: ch 41 1 -> 2
+[    2.355584] msm_hsusb msm_hsusb: usb: notify offline - reset interrupt
+[    2.356330] diag: USB disconnected
+[    2.475054] warning: `rild' uses 32-bit capabilities (legacy support in use)
+[    2.600577] android_usb gadget: high speed config #1: android
+[    2.600707] diag: USB connected
+[    2.619327] select 951 (ueventd), adj 0, size 38, to kill
+[    2.619367] send sigkill to 951 (ueventd), adj 0, size 38
+[    3.198205] lgeusb[get_factory_cable :  103] - Using PIF ZIG (0)
+[    3.989990] [snd.c:snd_ioctl] snd_avc_ctl 1
+[    3.990850] [snd.c:snd_ioctl] snd_agc_ctl 1
+[    3.995926] [snd.c:snd_ioctl] snd_set_volume 6 0 7
+[    3.996633] [snd.c:snd_ioctl] snd_set_volume 0 0 7
+[    3.997263] [snd.c:snd_ioctl] snd_set_volume 7 0 7
+[    3.998214] [snd.c:snd_ioctl] snd_set_volume 13 0 7
+[    3.999084] [snd.c:snd_ioctl] snd_set_volume 2 0 7
+[    3.999681] [snd.c:snd_ioctl] snd_set_volume 3 0 7
+[    4.052257] [snd.c:snd_ioctl] snd_set_device 0 1 1
+[    4.064247] [snd.c:snd_ioctl] snd_set_volume 30 0 7
+[    4.066817] snd_set_fm_radio_volume 20
+[    4.740155] Adding 47216k swap on /dev/block/zram0.  Priority:-1 extents:1 across:47216k SS
+[    6.193355] save exit: isCheckpointed 1
+[    6.196571] save exit: isCheckpointed 1
+[   11.658067] ilitek_qvga_disp_on: display on...
+[   11.658107] ebi2_tovis_power_save: on=1
+[   18.240295] save exit: isCheckpointed 1
+[   21.909445] register_mmc_card_pm: [WiFi] Callbacks registered successfully. 
+[   21.909522] [dhd_hostwakeup_isr] HostWakeup Get GPIO 94: 1
+[   21.909633] [dhd_register_early_suspend] HostWakeup Get GPIO 94: 1
+[   21.909653] 
+[   21.909658] Dongle Host Driver, version 4.220.14.0
+[   21.909753] bcm432x_sdcc_wlan_slot_status: 93 1
+[   21.909772] mmc1: Slot status change detected (0 -> 1)
+[   21.909792] [host->plat->status_irq:157:MSM_GPIO_TO_INIT:157:msmsdcc_check_status:1450]
+[   21.909812] [msmsdcc_check_status] !host->eject: mmc_detect_change after 150ms
+[   22.058046] bcm432x_sdcc_wlan_slot_status: 93 1
+[   22.076003] [snd.c:snd_ioctl] snd_set_volume 30 0 5
+[   22.089261] snd_set_fm_radio_volume 14
+[   22.092566] snd_set_fm_radio_volume 14
+[   22.162435] mmc1: queuing unknown CIS tuple 0x91 (3 bytes)
+[   22.162496] mmc1: new SDIO card at address 0001
+[   22.162510] [LGE] mmc device add
+[   22.400209] [cdc]dhd_preinit_proc:2518 - do control PM (2)
+[   22.401549] Bad Address: cur_etheraddr=01:02:03:04:05:06
+[   22.551583] wlan0: Broadcom Dongle Host Driver mac=00:90:0c:ba:cd:88
+[   22.732178] aat28xx_power_internal: on = 1, refcnt = 1
+[   22.732776] pecan_vibrator_power_set: vibrator volage 3300
+[   22.734378] aat28xx_power_internal: on = 0, refcnt = 2
+[   22.827799] aat28xx_power_internal: on = 1, refcnt = 1
+[   22.828444] pecan_vibrator_power_set: vibrator volage 3300
+[   22.829303] request_suspend_state: wakeup (3->0) at 22831333327 (2013-02-10 23:02:25.255718326 UTC)
+[   22.860071] aat28xx_power_internal: on = 0, refcnt = 2
+[   24.449841] save exit: isCheckpointed 1
+[   26.420392] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000102
+[   26.420419] Modules linked in: wireless
+[   26.420507] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   26.420554] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   26.420594] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   26.420642] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   26.420689] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4)
+[   26.420729] [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4) from [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190)
+[   26.420767] [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190) from [<c032950c>] (sdio_memcpy_toio+0x1c/0x20)
+[   26.421054] [<c032950c>] (sdio_memcpy_toio+0x1c/0x20) from [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless])
+[   26.421350] [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless]) from [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless])
+[   26.421639] [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless]) from [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless])
+[   26.421917] [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless]) from [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless])
+[   26.422180] [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   26.422439] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   26.422664] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   26.422842] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless])
+[   26.422965] [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   26.428074] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000102
+[   26.428097] Modules linked in: wireless
+[   26.428162] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   26.428204] [<c048c810>] (schedule+0x70/0x308) from [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8)
+[   26.428384] [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8) from [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless])
+[   26.428624] [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless]) from [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless])
+[   26.428892] [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless]) from [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless])
+[   26.429152] [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   26.429375] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   26.429555] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless])
+[   26.429675] [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   26.434357] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000102
+[   26.434380] Modules linked in: wireless
+[   26.434445] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   26.434512] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   26.434554] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   26.434600] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   26.434647] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4)
+[   26.434687] [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4) from [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190)
+[   26.434725] [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190) from [<c032950c>] (sdio_memcpy_toio+0x1c/0x20)
+[   26.434984] [<c032950c>] (sdio_memcpy_toio+0x1c/0x20) from [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless])
+[   26.435282] [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless]) from [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless])
+[   26.435572] [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless]) from [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless])
+[   26.435852] [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless]) from [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless])
+[   26.436114] [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   26.436372] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   26.436597] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   26.436774] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless])
+[   26.436894] [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   26.443804] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000102
+[   26.443829] Modules linked in: wireless
+[   26.443907] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   26.443952] [<c048c810>] (schedule+0x70/0x308) from [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8)
+[   26.444192] [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8) from [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless])
+[   26.444435] [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless]) from [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless])
+[   26.444705] [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless]) from [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless])
+[   26.444964] [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   26.445189] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   26.445367] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless])
+[   26.445494] [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   26.446170] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000102
+[   26.446224] Modules linked in: wireless
+[   26.446292] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   26.446334] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   26.446387] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[   26.446435] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[   26.446484] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4)
+[   26.446525] [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4) from [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190)
+[   26.446562] [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190) from [<c032950c>] (sdio_memcpy_toio+0x1c/0x20)
+[   26.446764] [<c032950c>] (sdio_memcpy_toio+0x1c/0x20) from [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless])
+[   26.447055] [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless]) from [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless])
+[   26.447344] [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless]) from [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless])
+[   26.447622] [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless]) from [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless])
+[   26.447885] [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[   26.448207] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   26.448434] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   26.448614] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless])
+[   26.448739] [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   26.449579] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000102
+[   26.449600] Modules linked in: wireless
+[   26.449660] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   26.449700] [<c048c810>] (schedule+0x70/0x308) from [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8)
+[   26.449869] [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8) from [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless])
+[   26.450105] [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless]) from [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless])
+[   26.450372] [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless]) from [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless])
+[   26.450632] [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[   26.450857] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[   26.451035] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless])
+[   26.451150] [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   26.452414] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000102
+[   26.452434] Modules linked in: wireless
+[   26.452490] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[   26.452532] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[   26.452574] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048dfd8>] (__down_interruptible+0x88/0xec)
+[   26.452649] [<c048dfd8>] (__down_interruptible+0x88/0xec) from [<c00ba148>] (down_interruptible+0x40/0x78)
+[   26.452805] [<c00ba148>] (down_interruptible+0x40/0x78) from [<bf001db8>] (_dhd_sysioc_thread+0x4f8/0x548 [wireless])
+[   26.452930] [<bf001db8>] (_dhd_sysioc_thread+0x4f8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[   27.524769] SMD: ch 7 0 -> 1
+[   27.524867] SMD: ch 7 1 -> 2
+[   27.525961] handle_ats_rpc_call:ONCRPC_LGE_GET_FLEX_ 9
+[   27.525979] ONCRPC_LGE_GET_FLEX_OPERATOR_CODE_PROC
+[   27.526029] read data flex.xml fd: -2 iFlexSize : 500 res;-9
+<6>[   27.526044] ONCRPC_LGE_GET_FLEX_OPERATOR_CODE_PROC return string : 0 , 
+[   27.526057] lge_ats_handle_flex result : 7 
+<6>[   27.526071] DSAT RPC accept_status = 7
+[   27.527419] handle_ats_rpc_call:ONCRPC_LGE_GET_FLEX_ 10
+[   27.527442] ONCRPC_LGE_GET_FLEX_COUNTRY_PROC
+[   27.527482] read data flex.xml fd: -2 iFlexSize : 500 res;-9
+[   27.527502] ONCRPC_LGE_GET_FLEX_COUNTRY_PROC return string : 0 , 
+[   27.527519] lge_ats_handle_flex result : 7 
+[   27.527534] DSAT RPC accept_status = 7
+[   27.868967] list->version 0 != WL_BSS_INFO_VERSION
+[   28.525081] smd_close(DATA1)
+[   29.390055] handle_ats_rpc_call:ONCRPC_LGE_GET_FLEX_ 7
+[   29.390089] ONCRPC_LGE_GET_FLEX_MCC_PROC
+[   29.390150] read data flex.xml fd: -2 iFlexSize : 500 res;-9
+[   29.390170] ONCRPC_LGE_GET_FLEX_MCC_PROC return string : 0 , 
+[   29.390187] lge_ats_handle_flex result : 7 
+[   29.390204] DSAT RPC accept_status = 7
+[   29.391107] handle_ats_rpc_call:ONCRPC_LGE_GET_FLEX_ 9
+[   29.391130] ONCRPC_LGE_GET_FLEX_OPERATOR_CODE_PROC
+[   29.391170] read data flex.xml fd: -2 iFlexSize : 500 res;-9
+[   29.391205] ONCRPC_LGE_GET_FLEX_OPERATOR_CODE_PROC return string : 0 , 
+[   29.391224] lge_ats_handle_flex result : 7 
+[   29.391239] DSAT RPC accept_status = 7
+[   29.963956] SMD: ch 7 0 -> 1
+[   29.964068] SMD: ch 7 1 -> 2
+[   30.281901] STA connect received 1
+[   30.563723] save exit: isCheckpointed 1
+[   30.964268] smd_close(DATA1)
+[   36.337985] save exit: isCheckpointed 1
+[   36.523781] rs30000048 rs30000048.65536: msmrtc_timeremote_set_time: 01/10/2013 23:02:38 (00)
+[   36.525139] RPC_TIME_TOD_SET_APPS_BASES:
+[   36.525149] 	tick = 1368968
+[   36.525154] 	stamp = 54765682042077185
+[   36.531307] msmrtc_tod_proc_result: 02/10/2013 23:02:38 (06)
+[   36.531372] rs30000048 rs30000048.65536: setting system clock to 2013-02-10 23:02:38 UTC (1360537358)
+[   36.987971] wlan0: no IPv6 routers present
+[   38.199754] aat28xx_power_internal: on = 1, refcnt = 1
+[   38.200344] pecan_vibrator_power_set: vibrator volage 3300
+[   38.210967] aat28xx_power_internal: on = 0, refcnt = 2
+[   38.230807] aat28xx_power_internal: on = 1, refcnt = 1
+[   38.231398] pecan_vibrator_power_set: vibrator volage 3300
+[   38.262030] aat28xx_power_internal: on = 0, refcnt = 2
+[   38.386368] aat28xx_power_internal: on = 1, refcnt = 1
+[   38.386963] pecan_vibrator_power_set: vibrator volage 3300
+[   38.397588] aat28xx_power_internal: on = 0, refcnt = 2
+[   38.417440] aat28xx_power_internal: on = 1, refcnt = 1
+[   38.418036] pecan_vibrator_power_set: vibrator volage 3300
+[   38.448666] aat28xx_power_internal: on = 0, refcnt = 2
+[   42.186886] save exit: isCheckpointed 1
+[   42.191067] save exit: isCheckpointed 1
+[   43.738040] select 1817 (d.apps.uploader), adj 15, size 4572, to kill
+[   43.738075] send sigkill to 1817 (d.apps.uploader), adj 15, size 4572
+[   44.122834] select 1736 (ndroid.settings), adj 11, size 5800, to kill
+[   44.122866] select 1753 (viders.calendar), adj 14, size 4822, to kill
+[   44.122894] send sigkill to 1753 (viders.calendar), adj 14, size 4822
+[   45.756786] select 1736 (ndroid.settings), adj 13, size 5727, to kill
+[   45.756824] select 1877 (ogle.android.gm), adj 15, size 4926, to kill
+[   45.756866] send sigkill to 1877 (ogle.android.gm), adj 15, size 4926
+[   45.988411] select 1736 (ndroid.settings), adj 13, size 5723, to kill
+[   45.988444] select 1910 (m.android.music), adj 14, size 4448, to kill
+[   45.988467] send sigkill to 1910 (m.android.music), adj 14, size 4448
+[   46.202892] select 1736 (ndroid.settings), adj 13, size 5723, to kill
+[   46.202935] send sigkill to 1736 (ndroid.settings), adj 13, size 5723
+[   47.679666] aat28xx_power_internal: on = 1, refcnt = 1
+[   47.680263] pecan_vibrator_power_set: vibrator volage 3300
+[   47.681871] aat28xx_power_internal: on = 0, refcnt = 2
+[   47.702716] aat28xx_power_internal: on = 1, refcnt = 1
+[   47.703313] pecan_vibrator_power_set: vibrator volage 3300
+[   47.733953] aat28xx_power_internal: on = 0, refcnt = 2
+[   48.512066] save exit: isCheckpointed 1
+[   51.612038] msm_enqueue: queue event new max is 1
+[   51.786587] [dual] 0x3B80 = 9
+[   51.786608] pll
+[   51.788003] pll delay 10
+[   51.798901] pll polling 0x4028
+[   51.799396] pll polling 0x4028
+[   51.799645] pll polling 0x4028
+[   51.799990] pll polling 0x4028
+[   51.800178] pll polling 0x4028
+[   51.800508] pll polling 0x4028
+[   51.800711] pll polling 0x4028
+[   51.801086] pll polling 0x4028
+[   51.801278] pll polling 0x4028
+[   51.801471] pll polling 0x4028
+[   51.801678] pll polling 0x4028
+[   51.801878] pll polling 0x4028
+[   51.802065] pll polling 0x4028
+[   51.803961] pll polling 0x4028
+[   51.804545] pll polling 0x4028
+[   51.806203] pll polling 0x4028
+[   51.806750] pll polling 0x4028
+[   51.807703] pll polling 0x4028
+[   51.808148] pll polling 0x28
+[   51.808165] Aptina init_code
+[   52.221614] [adsp.c:handle_adsp_rtos_mtoa_app] INIT_INFO Event
+[   52.222436] [adsp.c:msm_adsp_get] opening module QCAMTASK
+[   52.223264] [adsp.c:msm_adsp_get] opening module VFETASK
+[   52.266371] Config sensor info type 0
+[   52.266397] Config Sensor Mode
+[   52.266409] preview mode
+[   52.299247] preview extra polling 5
+[   52.301920] preview extra polling 5
+[   52.302265] preview extra polling 5
+[   52.308065] preview extra polling 5
+[   52.308590] preview extra polling 5
+[   52.309084] preview extra polling 5
+[   52.309988] preview extra polling 5
+[   52.310453] preview extra polling 5
+[   52.310912] preview extra polling 5
+[   52.311617] preview extra polling 5
+[   52.312077] preview extra polling 5
+[   52.312533] preview extra polling 5
+[   52.312993] preview extra polling 5
+[   52.313450] preview extra polling 5
+[   52.313907] preview extra polling 5
+[   52.314367] preview extra polling 5
+[   52.314828] preview extra polling 5
+[   52.315287] preview extra polling 5
+[   52.315743] preview extra polling 5
+[   52.316200] preview extra polling 5
+[   52.316658] preview extra polling 5
+[   52.317115] preview extra polling 5
+[   52.317572] preview extra polling 5
+[   52.318058] preview extra polling 5
+[   52.318517] preview extra polling 5
+[   52.318975] preview extra polling 5
+[   52.319432] preview extra polling 5
+[   52.319887] preview extra polling 5
+[   52.320343] preview extra polling 5
+[   52.320802] preview extra polling 5
+[   52.321258] preview extra polling 5
+[   52.321720] preview extra polling 5
+[   52.322182] preview extra polling 5
+[   52.322640] preview extra polling 5
+[   52.323097] preview extra polling 5
+[   52.323553] preview extra polling 5
+[   52.324012] preview extra polling 5
+[   52.324470] preview extra polling 5
+[   52.324927] preview extra polling 5
+[   52.325383] preview extra polling 5
+[   52.325842] preview extra polling 5
+[   52.326298] preview extra polling 5
+[   52.326755] preview extra polling 5
+[   52.327212] preview extra polling 5
+[   52.327668] preview extra polling 5
+[   52.328152] preview extra polling 5
+[   52.328610] preview extra polling 5
+[   52.329067] preview extra polling 5
+[   52.329523] preview extra polling 5
+[   52.329980] preview extra polling 5
+[   52.330437] preview extra polling 5
+[   52.330893] preview extra polling 5
+[   52.331398] preview extra polling 5
+[   52.331875] preview extra polling 5
+[   52.332328] preview extra polling 5
+[   52.332788] preview extra polling 5
+[   52.333135] preview extra polling 5
+[   52.335290] preview extra polling 5
+[   52.336773] preview extra polling 5
+[   52.337366] preview extra polling 5
+[   52.337898] preview extra polling 5
+[   52.338365] preview extra polling 5
+[   52.338825] preview extra polling 5
+[   52.339280] preview extra polling 5
+[   52.339738] preview extra polling 5
+[   52.340196] preview extra polling 5
+[   52.340655] preview extra polling 5
+[   52.341111] preview extra polling 5
+[   52.341568] preview extra polling 5
+[   52.342025] preview extra polling 5
+[   52.342645] preview extra polling 5
+[   52.343105] preview extra polling 5
+[   52.343561] preview extra polling 5
+[   52.344018] preview extra polling 5
+[   52.344476] preview extra polling 5
+[   52.344935] preview extra polling 5
+[   52.345391] preview extra polling 5
+[   52.345848] preview extra polling 5
+[   52.346306] preview extra polling 5
+[   52.346761] preview extra polling 5
+[   52.347220] preview extra polling 5
+[   52.347676] preview extra polling 5
+[   52.348163] preview extra polling 5
+[   52.348621] preview extra polling 5
+[   52.349076] preview extra polling 5
+[   52.349533] preview extra polling 5
+[   52.349990] preview extra polling 5
+[   52.350446] preview extra polling 5
+[   52.350901] preview extra polling 5
+[   52.351395] preview extra polling 5
+[   52.351866] preview extra polling 5
+[   52.352325] preview extra polling 5
+[   52.352781] preview extra polling 5
+[   52.353236] preview extra polling 5
+[   52.353693] preview extra polling 5
+[   52.354150] preview extra polling 5
+[   52.358015] preview extra polling 5
+[   52.358525] preview extra polling 5
+[   52.359901] preview extra polling 5
+[   52.360363] preview extra polling 5
+[   52.360710] preview extra polling 5
+[   52.361048] preview extra polling 5
+[   52.361390] preview extra polling 5
+[   52.361726] preview extra polling 5
+[   52.362068] preview extra polling 5
+[   52.362410] preview extra polling 5
+[   52.362756] preview extra polling 5
+[   52.363105] preview extra polling 5
+[   52.363450] preview extra polling 5
+[   52.363790] preview extra polling 5
+[   52.364133] preview extra polling 5
+[   52.364573] preview extra polling 5
+[   52.365039] preview extra polling 5
+[   52.365504] preview extra polling 5
+[   52.365968] preview extra polling 5
+[   52.366431] preview extra polling 5
+[   52.366891] preview extra polling 5
+[   52.367351] preview extra polling 5
+[   52.367813] preview extra polling 5
+[   52.368224] preview extra polling 5
+[   52.368686] preview extra polling 5
+[   52.369146] preview extra polling 5
+[   52.369608] preview extra polling 5
+[   52.370069] preview extra polling 5
+[   52.370529] preview extra polling 5
+[   52.370991] preview extra polling 5
+[   52.371453] preview extra polling 5
+[   52.371966] preview extra polling 5
+[   52.372429] preview extra polling 5
+[   52.372889] preview extra polling 5
+[   52.373353] preview extra polling 5
+[   52.373796] preview extra polling 5
+[   52.374269] preview extra polling 5
+[   52.374641] preview extra polling 5
+[   52.374999] preview extra polling 5
+[   52.375343] preview extra polling 5
+[   52.378136] preview extra polling 5
+[   52.378488] preview extra polling 5
+[   52.378829] preview extra polling 5
+[   52.379168] preview extra polling 5
+[   52.379508] preview extra polling 5
+[   52.379853] preview extra polling 5
+[   52.380198] preview extra polling 5
+[   52.380543] preview extra polling 5
+[   52.380889] preview extra polling 5
+[   52.381251] preview extra polling 5
+[   52.381611] preview extra polling 5
+[   52.382003] preview extra polling 5
+[   52.382348] preview extra polling 5
+[   52.382751] preview extra polling 5
+[   52.383099] preview extra polling 5
+[   52.383449] preview extra polling 5
+[   52.383799] preview extra polling 5
+[   52.384141] preview extra polling 5
+[   52.384489] preview extra polling 5
+[   52.385121] preview extra polling 5
+[   52.386812] preview extra polling 5
+[   52.387177] preview extra polling 5
+[   52.387532] preview extra polling 5
+[   52.387916] preview extra polling 5
+[   52.388271] preview extra polling 5
+[   52.388622] preview extra polling 5
+[   52.389871] preview extra polling 5
+[   52.395349] preview extra polling 5
+[   52.395712] preview extra polling 5
+[   52.396062] preview extra polling 5
+[   52.396417] preview extra polling 5
+[   52.396781] preview extra polling 5
+[   52.397132] preview extra polling 5
+[   52.399517] preview extra polling 5
+[   52.400697] preview extra polling 5
+[   52.401156] preview extra polling 5
+[   52.401494] preview extra polling 5
+[   52.401839] preview extra polling 5
+[   52.402186] preview extra polling 5
+[   52.403066] preview extra polling 5
+[   52.403666] preview extra polling 5
+[   52.412634] preview extra polling 5
+[   52.413007] preview extra polling 5
+[   52.413349] preview extra polling 5
+[   52.414172] preview extra polling 5
+[   52.414522] preview extra polling 5
+[   52.414872] preview extra polling 5
+[   52.415224] preview extra polling 5
+[   52.415601] preview extra polling 5
+[   52.415974] preview extra polling 5
+[   52.416341] preview extra polling 5
+[   52.416716] preview extra polling 5
+[   52.417086] preview extra polling 5
+[   52.417472] preview extra polling 5
+[   52.417839] preview extra polling 5
+[   52.418292] preview extra polling 5
+[   52.418657] preview extra polling 5
+[   52.419021] preview extra polling 5
+[   52.419567] preview extra polling 5
+[   52.419915] preview extra polling 5
+[   52.420262] preview extra polling 5
+[   52.420607] preview extra polling 5
+[   52.420954] preview extra polling 5
+[   52.421300] preview extra polling 5
+[   52.421644] preview extra polling 5
+[   52.422007] preview extra polling 5
+[   52.422385] preview extra polling 5
+[   52.422745] preview extra polling 5
+[   52.423107] preview extra polling 5
+[   52.423449] preview extra polling 5
+[   52.423792] preview extra polling 5
+[   52.424135] preview extra polling 5
+[   52.424477] preview extra polling 5
+[   52.424822] preview extra polling 5
+[   52.425167] preview extra polling 5
+[   52.425512] preview extra polling 5
+[   52.425859] preview extra polling 5
+[   52.426200] preview extra polling 5
+[   52.426550] preview extra polling 5
+[   52.426894] preview extra polling 5
+[   52.427242] preview extra polling 5
+[   52.427587] preview extra polling 5
+[   52.428007] preview extra polling 5
+[   52.428352] preview extra polling 5
+[   52.428699] preview extra polling 5
+[   52.429044] preview extra polling 5
+[   52.429389] preview extra polling 5
+[   52.429730] preview extra polling 5
+[   52.430072] preview extra polling 5
+[   52.430439] preview extra polling 5
+[   52.430784] preview extra polling 5
+[   52.431129] preview extra polling 5
+[   52.431470] preview extra polling 5
+[   52.431812] preview extra polling 5
+[   52.432154] preview extra polling 5
+[   52.432494] preview extra polling 5
+[   52.432834] preview extra polling 5
+[   52.433179] preview extra polling 5
+[   52.433519] preview extra polling 5
+[   52.433860] preview extra polling 5
+[   52.434200] preview extra polling 5
+[   52.434545] preview extra polling 5
+[   52.434890] preview extra polling 5
+[   52.435230] preview extra polling 5
+[   52.435574] preview extra polling 5
+[   52.435914] preview extra polling 5
+[   52.436255] preview extra polling 5
+[   52.436598] preview extra polling 5
+[   52.436938] preview extra polling 5
+[   52.437282] preview extra polling 5
+[   52.437625] preview extra polling 5
+[   52.438007] preview extra polling 5
+[   52.438355] preview extra polling 5
+[   52.438697] preview extra polling 5
+[   52.439038] preview extra polling 5
+[   52.439385] preview extra polling 5
+[   52.439732] preview extra polling 5
+[   52.440073] preview extra polling 5
+[   52.443972] preview extra polling 5
+[   52.451102] preview extra polling 5
+[   52.451745] preview extra polling 5
+[   52.452103] preview extra polling 5
+[   52.452455] preview extra polling 5
+[   52.457952] preview extra polling 5
+[   52.458308] preview extra polling 5
+[   52.458647] preview extra polling 5
+[   52.459002] preview extra polling 5
+[   52.459340] preview extra polling 5
+[   52.459677] preview extra polling 5
+[   52.460012] preview extra polling 5
+[   52.460367] preview extra polling 5
+[   52.460705] preview extra polling 5
+[   52.461042] preview extra polling 5
+[   52.461382] preview extra polling 5
+[   52.461727] preview extra polling 5
+[   52.462065] preview extra polling 5
+[   52.462400] preview extra polling 5
+[   52.462743] preview extra polling 5
+[   52.463085] preview extra polling 5
+[   52.463440] preview extra polling 5
+[   52.463807] preview extra polling 5
+[   52.464292] preview extra polling 5
+[   52.464637] preview extra polling 5
+[   52.464982] preview extra polling 5
+[   52.465363] preview extra polling 5
+[   52.468933] preview extra polling 5
+[   52.469315] preview extra polling 5
+[   52.469667] preview extra polling 5
+[   52.470277] preview extra polling 5
+[   52.470640] preview extra polling 5
+[   52.471025] preview extra polling 5
+[   52.471390] preview extra polling 5
+[   52.471743] preview extra polling 5
+[   52.472230] preview extra polling 5
+[   52.472901] preview extra polling 5
+[   52.473296] preview extra polling 5
+[   52.473670] preview extra polling 5
+[   52.474038] preview extra polling 5
+[   52.474403] preview extra polling 5
+[   52.474768] preview extra polling 5
+[   52.475126] preview extra polling 5
+[   52.475475] preview extra polling 5
+[   52.475821] preview extra polling 5
+[   52.476166] preview extra polling 5
+[   52.476516] preview extra polling 5
+[   52.476891] preview extra polling 5
+[   52.477255] preview extra polling 5
+[   52.488163] preview extra polling 5
+[   52.488510] preview extra polling 5
+[   52.488848] preview extra polling 5
+[   52.489205] preview extra polling 5
+[   52.489566] preview extra polling 5
+[   52.489936] preview extra polling 5
+[   52.490303] preview extra polling 5
+[   52.490660] preview extra polling 5
+[   52.491023] preview extra polling 5
+[   52.491401] preview extra polling 5
+[   52.491758] preview extra polling 5
+[   52.492126] preview extra polling 5
+[   52.492478] preview extra polling 5
+[   52.492840] preview extra polling 5
+[   52.493205] preview extra polling 5
+[   52.493563] preview extra polling 5
+[   52.493958] preview extra polling 5
+[   52.494360] preview extra polling 5
+[   52.494718] preview extra polling 5
+[   52.497966] preview extra polling 5
+[   52.498376] preview extra polling 5
+[   52.498925] preview extra polling 5
+[   52.499285] preview extra polling 5
+[   52.499638] preview extra polling 5
+[   52.499978] preview extra polling 5
+[   52.500330] preview extra polling 5
+[   52.500695] preview extra polling 5
+[   52.501040] preview extra polling 5
+[   52.501411] preview extra polling 5
+[   52.501764] preview extra polling 5
+[   52.502168] preview extra polling 5
+[   52.502569] preview extra polling 5
+[   52.502934] preview extra polling 5
+[   52.503299] preview extra polling 5
+[   52.503641] preview extra polling 5
+[   52.503981] preview extra polling 5
+[   52.504349] preview extra polling 5
+[   52.504706] preview extra polling 5
+[   52.505071] preview extra polling 5
+[   52.505428] preview extra polling 5
+[   52.505789] preview extra polling 5
+[   52.506144] preview extra polling 5
+[   52.506486] preview extra polling 5
+[   52.506843] preview extra polling 5
+[   52.507189] preview extra polling 5
+[   52.507533] preview extra polling 5
+[   52.507931] preview extra polling 5
+[   52.508291] preview extra polling 5
+[   52.508661] preview extra polling 5
+[   52.509021] preview extra polling 5
+[   52.509366] preview extra polling 5
+[   52.509726] preview extra polling 5
+[   52.510069] preview extra polling 5
+[   52.510411] preview extra polling 5
+[   52.510751] preview extra polling 5
+[   52.511096] preview extra polling 5
+[   52.511438] preview extra polling 5
+[   52.511778] preview extra polling 5
+[   52.512124] preview extra polling 5
+[   52.512466] preview extra polling 5
+[   52.512808] preview extra polling 5
+[   52.513148] preview extra polling 5
+[   52.513493] preview extra polling 5
+[   52.513836] preview extra polling 5
+[   52.514179] preview extra polling 5
+[   52.514521] preview extra polling 5
+[   52.514861] preview extra polling 5
+[   52.515199] preview extra polling 5
+[   52.515538] preview extra polling 5
+[   52.515891] preview extra polling 5
+[   52.516233] preview extra polling 5
+[   52.516576] preview extra polling 5
+[   52.516914] preview extra polling 5
+[   52.517254] preview extra polling 5
+[   52.517596] preview extra polling 5
+[   52.518009] preview extra polling 5
+[   52.518353] preview extra polling 5
+[   52.518693] preview extra polling 5
+[   52.519027] preview extra polling 5
+[   52.519367] preview extra polling 5
+[   52.519711] preview extra polling 5
+[   52.520049] preview extra polling 5
+[   52.520384] preview extra polling 5
+[   52.520726] preview extra polling 5
+[   52.521066] preview extra polling 5
+[   52.521401] preview extra polling 5
+[   52.521739] preview extra polling 5
+[   52.522077] preview extra polling 5
+[   52.522419] preview extra polling 5
+[   52.522759] preview extra polling 5
+[   52.523096] preview extra polling 5
+[   52.523437] preview extra polling 5
+[   52.523776] preview extra polling 5
+[   52.524116] preview extra polling 5
+[   52.524452] preview extra polling 5
+[   52.524794] preview extra polling 5
+[   52.525134] preview extra polling 5
+[   52.525472] preview extra polling 5
+[   52.525826] preview extra polling 5
+[   52.526181] preview extra polling 5
+[   52.526534] preview extra polling 5
+[   52.526896] preview extra polling 5
+[   52.527241] preview extra polling 5
+[   52.527597] preview extra polling 5
+[   52.527982] preview extra polling 5
+[   52.528349] preview extra polling 5
+[   52.528706] preview extra polling 0
+[   52.528766] msm_enqueue: queue control new max is 1
+[   52.533586] Config sensor info type 16
+[   52.533722] Config sensor info type 1
+[   52.533736] Config Effect
+[   52.533747] Effect Off
+[   52.648586] Config sensor info type 12
+[   52.648722] Config sensor info type 12
+[   52.648737] Config Brightness
+[   52.649294] Config sensor info type 201
+[   52.649311] Config ISO
+[   52.649322] ISO AUTO
+[   52.720370] Config sensor info type 1
+[   52.720394] Config Effect
+[   52.720405] Effect Off
+[   52.808621] Config sensor info type 12
+[   52.808646] Config Brightness
+[   52.809150] Config sensor info type 201
+[   52.809165] Config ISO
+[   52.809177] ISO AUTO
+[   52.834837] Config sensor info type 1
+[   52.834860] Config Effect
+[   52.834872] Effect Off
+[   52.968601] Config sensor info type 12
+[   52.968624] Config Brightness
+[   52.969161] Config sensor info type 201
+[   52.969176] Config ISO
+[   52.969188] ISO AUTO
+[   52.976376] Config sensor info type 1
+[   52.976398] Config Effect
+[   52.976409] Effect Off
+[   53.128502] Config sensor info type 12
+[   53.128526] Config Brightness
+[   53.129037] Config sensor info type 201
+[   53.129054] Config ISO
+[   53.129064] ISO AUTO
+[   53.131699] msm_pmem_table_add: type 15, paddr 0x48ee000, vaddr 0x40d0c000
+[   53.131735] msm_pmem_table_add: type 15, paddr 0x490b000, vaddr 0x40d29000
+[   53.131762] msm_pmem_table_add: type 15, paddr 0x4928000, vaddr 0x40d46000
+[   53.131789] msm_pmem_table_add: type 15, paddr 0x4945000, vaddr 0x40d63000
+[   53.132087] msm_pp_release: pp not in progress for
+[   53.132120] [adsp.c:msm_adsp_enable] enable 'QCAMTASK'state[0] id[17227151]
+[   53.137850] [adsp.c:handle_adsp_rtos_mtoa_app] module QCAMTASK: READY
+[   53.138072] msm_enable_vfe: rc 0
+[   53.143109] [adsp.c:msm_adsp_enable] enable 'VFETASK'state[0] id[17227140]
+[   53.144399] [adsp.c:handle_adsp_rtos_mtoa_app] module VFETASK: READY
+[   53.144470] msm_enable_vfe: rc 0
+[   53.148109] msm_open_frame: draining queue frame
+[   53.344177] msm_get_stats(1115): copy to user
+[   53.401608] msm_enqueue: queue frame new max is 1
+[   54.209911] save exit: isCheckpointed 1
+[   57.343298] Config sensor info type 1
+[   57.343320] Config Effect
+[   57.343331] Effect Off
+[   57.408307] Config sensor info type 12
+[   57.408331] Config Brightness
+[   57.408871] Config sensor info type 201
+[   57.408887] Config ISO
+[   57.408899] ISO AUTO
+[   58.278945] select 1789 (ogenmod.cmparts), adj 11, size 3699, to kill
+[   58.278980] select 1801 (d.process.acore), adj 12, size 8141, to kill
+[   58.279001] select 1849 (anogenmod.stats), adj 13, size 3363, to kill
+[   58.279033] send sigkill to 1849 (anogenmod.stats), adj 13, size 3363
+[   59.478153] select 1789 (ogenmod.cmparts), adj 11, size 3699, to kill
+[   59.478175] select 1801 (d.process.acore), adj 12, size 7874, to kill
+[   59.478195] select 1931 (oid.voicedialer), adj 13, size 3301, to kill
+[   59.478233] send sigkill to 1931 (oid.voicedialer), adj 13, size 3301
+[   60.151728] select 1789 (ogenmod.cmparts), adj 11, size 3699, to kill
+[   60.151760] select 1801 (d.process.acore), adj 12, size 7866, to kill
+[   60.151796] send sigkill to 1801 (d.process.acore), adj 12, size 7866
+[   60.207369] save exit: isCheckpointed 1
+[   64.151540] msm_release_frame: frame0
+[   64.151568] __msm_release, open count =2
+[   64.151583] msm_release_frame: draining queue frame
+[   64.151595] msm_release_frame, completed
+[   64.151663] __msm_pmem_table_del: type 15, vaddr  0x40d0c000
+[   64.151685] __msm_pmem_table_del: type 15, vaddr  0x40d29000
+[   64.151703] __msm_pmem_table_del: type 15, vaddr  0x40d46000
+[   64.151720] __msm_pmem_table_del: type 15, vaddr  0x40d63000
+[   64.182699] msm_enqueue: queue event new max is 2
+[   64.182873] msm_release_config: config0
+[   64.182889] __msm_release, open count =1
+[   64.182903] msm_release_config: draining queue event
+[   64.182916] msm_release_config,q->len = 0
+[   64.182928] msm_release_config, completed
+[   64.183138] msm_release_control: control0
+[   64.183153] __msm_release, open count =0
+[   64.183164] __msm_release, vfe_release
+[   64.183179] [adsp.c:msm_adsp_disable] disable 'QCAMTASK'
+[   64.184838] [adsp.c:msm_adsp_disable] disable 'VFETASK'
+[   64.186348] [adsp.c:msm_adsp_put] closing module QCAMTASK
+[   64.186378] [adsp.c:msm_adsp_put] closing module VFETASK
+[   64.186539] __msm_release, s_release
+[   64.212329] __msm_release, msm_camio_sensor_clk_off
+[   64.212780] __msm_release, free frame pmem region
+[   64.212797] __msm_release, free stats pmem region
+[   64.212810] __msm_release: draining queue pict
+[   64.212824] __msm_release: draining queue event
+[   64.212840] __msm_release: completed
+[   64.212852] msm_release_control: draining queue control
+[   64.212865] msm_release_control, completed
+[   64.769280] [dual] 0x3B80 = 9
+[   64.769300] pll
+[   64.770800] pll delay 10
+[   64.782340] pll polling 0x4028
+[   64.782538] pll polling 0x4028
+[   64.782725] pll polling 0x4028
+[   64.783068] pll polling 0x4028
+[   64.783265] pll polling 0x4028
+[   64.783456] pll polling 0x4028
+[   64.783645] pll polling 0x4028
+[   64.783835] pll polling 0x4028
+[   64.784023] pll polling 0x4028
+[   64.784213] pll polling 0x4028
+[   64.784401] pll polling 0x4028
+[   64.784588] pll polling 0x4028
+[   64.784775] pll polling 0x4028
+[   64.784958] pll polling 0x4028
+[   64.785143] pll polling 0x4028
+[   64.785333] pll polling 0x4028
+[   64.785525] pll polling 0x4028
+[   64.785715] pll polling 0x4028
+[   64.785901] pll polling 0x4028
+[   64.786086] pll polling 0x4028
+[   64.786273] pll polling 0x4028
+[   64.786458] pll polling 0x4028
+[   64.786646] pll polling 0x4028
+[   64.786836] pll polling 0x4028
+[   64.787025] pll polling 0x4028
+[   64.787211] pll polling 0x4028
+[   64.787395] pll polling 0x4028
+[   64.787580] pll polling 0x4028
+[   64.787765] pll polling 0x4028
+[   64.787983] pll polling 0x4028
+[   64.788173] pll polling 0x4028
+[   64.788361] pll polling 0x4028
+[   64.788548] pll polling 0x4028
+[   64.788730] pll polling 0x4028
+[   64.788918] pll polling 0x4028
+[   64.789110] pll polling 0x4028
+[   64.789300] pll polling 0x4028
+[   64.789488] pll polling 0x4028
+[   64.789671] pll polling 0x4028
+[   64.789855] pll polling 0x4028
+[   64.790040] pll polling 0x4028
+[   64.790228] pll polling 0x4028
+[   64.790416] pll polling 0x4028
+[   64.790608] pll polling 0x4028
+[   64.790808] pll polling 0x4028
+[   64.790998] pll polling 0x4028
+[   64.791443] pll polling 0x4028
+[   64.791635] pll polling 0x4028
+[   64.791821] pll polling 0x4028
+[   64.792006] pll polling 0x4028
+[   64.792196] pll polling 0x4028
+[   64.792385] pll polling 0x4028
+[   64.792576] pll polling 0x4028
+[   64.792765] pll polling 0x4028
+[   64.792951] pll polling 0x4028
+[   64.793138] pll polling 0x4028
+[   64.793328] pll polling 0x4028
+[   64.793828] pll polling 0x4028
+[   64.794021] pll polling 0x28
+[   64.794033] Aptina init_code
+[   65.097861] [adsp.c:msm_adsp_get] opening module QCAMTASK
+[   65.098673] [adsp.c:msm_adsp_get] opening module VFETASK
+[   65.115654] msm_enqueue: queue control new max is 1
+[   65.116091] Config sensor info type 16
+[   65.116201] Config sensor info type 1
+[   65.116214] Config Effect
+[   65.116224] Effect Off
+[   65.141199] Config sensor info type 12
+[   65.141311] Config sensor info type 12
+[   65.141324] Config Brightness
+[   65.143317] Config sensor info type 201
+[   65.143332] Config ISO
+[   65.143342] ISO AUTO
+[   65.216919] Config sensor info type 1
+[   65.216940] Config Effect
+[   65.216950] Effect Off
+[   65.265017] Config sensor info type 12
+[   65.265038] Config Brightness
+[   65.265510] Config sensor info type 201
+[   65.265523] Config ISO
+[   65.265533] ISO AUTO
+[   65.285697] Config sensor info type 1
+[   65.285717] Config Effect
+[   65.285727] Effect Off
+[   65.387429] Config sensor info type 12
+[   65.387451] Config Brightness
+[   65.387953] Config sensor info type 201
+[   65.387966] Config ISO
+[   65.387976] ISO AUTO
+[   65.398061] Config sensor info type 1
+[   65.398081] Config Effect
+[   65.398091] Effect Off
+[   65.528677] Config sensor info type 12
+[   65.528698] Config Brightness
+[   65.529158] Config sensor info type 201
+[   65.529172] Config ISO
+[   65.529182] ISO AUTO
+[   65.531642] msm_pmem_table_add: type 15, paddr 0x48ee000, vaddr 0x40d0c000
+[   65.531673] msm_pmem_table_add: type 15, paddr 0x490b000, vaddr 0x40d29000
+[   65.531695] msm_pmem_table_add: type 15, paddr 0x4928000, vaddr 0x40d46000
+[   65.531717] msm_pmem_table_add: type 15, paddr 0x4945000, vaddr 0x40d63000
+[   65.531815] Config sensor info type 0
+[   65.531827] Config Sensor Mode
+[   65.531837] preview mode
+[   65.633956] preview extra polling 5
+[   65.634294] preview extra polling 5
+[   65.634629] preview extra polling 5
+[   65.636719] preview extra polling 5
+[   65.637069] preview extra polling 5
+[   65.637404] preview extra polling 5
+[   65.637737] preview extra polling 5
+[   65.638116] preview extra polling 5
+[   65.638457] preview extra polling 5
+[   65.638792] preview extra polling 5
+[   65.639141] preview extra polling 5
+[   65.639475] preview extra polling 5
+[   65.639819] preview extra polling 5
+[   65.641770] preview extra polling 5
+[   65.642115] preview extra polling 5
+[   65.643989] preview extra polling 5
+[   65.644320] preview extra polling 5
+[   65.644654] preview extra polling 5
+[   65.644992] preview extra polling 5
+[   65.645374] preview extra polling 5
+[   65.645762] preview extra polling 5
+[   65.646102] preview extra polling 5
+[   65.646429] preview extra polling 5
+[   65.646772] preview extra polling 5
+[   65.647122] preview extra polling 5
+[   65.648989] preview extra polling 5
+[   65.649344] preview extra polling 5
+[   65.651314] preview extra polling 5
+[   65.651645] preview extra polling 5
+[   65.651975] preview extra polling 5
+[   65.652315] preview extra polling 5
+[   65.652665] preview extra polling 5
+[   65.653010] preview extra polling 5
+[   65.653365] preview extra polling 5
+[   65.653715] preview extra polling 5
+[   65.654045] preview extra polling 5
+[   65.654374] preview extra polling 5
+[   65.654714] preview extra polling 5
+[   65.656760] preview extra polling 5
+[   65.659112] preview extra polling 5
+[   65.659479] preview extra polling 5
+[   65.660127] preview extra polling 5
+[   65.660462] preview extra polling 5
+[   65.660794] preview extra polling 5
+[   65.661139] preview extra polling 5
+[   65.663764] preview extra polling 5
+[   65.664120] preview extra polling 5
+[   65.664690] preview extra polling 5
+[   65.665020] preview extra polling 5
+[   65.665350] preview extra polling 5
+[   65.665692] preview extra polling 5
+[   65.666034] preview extra polling 5
+[   65.666370] preview extra polling 5
+[   65.666710] preview extra polling 5
+[   65.667057] preview extra polling 5
+[   65.667398] preview extra polling 5
+[   65.667735] preview extra polling 5
+[   65.668120] preview extra polling 5
+[   65.668470] preview extra polling 5
+[   65.668808] preview extra polling 5
+[   65.669143] preview extra polling 5
+[   65.669478] preview extra polling 5
+[   65.669822] preview extra polling 5
+[   65.670173] preview extra polling 5
+[   65.670532] preview extra polling 5
+[   65.670873] preview extra polling 5
+[   65.671210] preview extra polling 5
+[   65.671552] preview extra polling 5
+[   65.671892] preview extra polling 5
+[   65.672245] preview extra polling 5
+[   65.672582] preview extra polling 5
+[   65.672932] preview extra polling 5
+[   65.673283] preview extra polling 5
+[   65.675473] preview extra polling 5
+[   65.675825] preview extra polling 5
+[   65.677733] preview extra polling 5
+[   65.678120] preview extra polling 5
+[   65.680075] preview extra polling 5
+[   65.681940] preview extra polling 5
+[   65.682292] preview extra polling 5
+[   65.684117] preview extra polling 5
+[   65.686008] preview extra polling 5
+[   65.687838] preview extra polling 5
+[   65.688183] preview extra polling 5
+[   65.688530] preview extra polling 5
+[   65.690363] preview extra polling 5
+[   65.690708] preview extra polling 5
+[   65.692907] preview extra polling 5
+[   65.693295] preview extra polling 5
+[   65.697892] preview extra polling 5
+[   65.698868] preview extra polling 5
+[   65.699232] preview extra polling 5
+[   65.700105] preview extra polling 5
+[   65.700696] preview extra polling 5
+[   65.701050] preview extra polling 5
+[   65.705726] preview extra polling 5
+[   65.710613] preview extra polling 5
+[   65.712008] preview extra polling 5
+[   65.712503] preview extra polling 5
+[   65.712845] preview extra polling 5
+[   65.713190] preview extra polling 5
+[   65.713930] preview extra polling 5
+[   65.714273] preview extra polling 5
+[   65.714635] preview extra polling 5
+[   65.715150] preview extra polling 5
+[   65.716305] preview extra polling 5
+[   65.720341] preview extra polling 5
+[   65.720693] preview extra polling 5
+[   65.722560] preview extra polling 5
+[   65.724498] preview extra polling 5
+[   65.724846] preview extra polling 5
+[   65.725176] preview extra polling 5
+[   65.725505] preview extra polling 5
+[   65.727480] preview extra polling 5
+[   65.727838] preview extra polling 5
+[   65.728181] preview extra polling 5
+[   65.728510] preview extra polling 5
+[   65.730448] preview extra polling 5
+[   65.730796] preview extra polling 5
+[   65.731140] preview extra polling 5
+[   65.731470] preview extra polling 5
+[   65.731801] preview extra polling 5
+[   65.732136] preview extra polling 5
+[   65.732478] preview extra polling 5
+[   65.732825] preview extra polling 5
+[   65.733165] preview extra polling 5
+[   65.733496] preview extra polling 5
+[   65.735516] preview extra polling 5
+[   65.735873] preview extra polling 5
+[   65.737631] preview extra polling 5
+[   65.739589] preview extra polling 5
+[   65.739936] preview extra polling 5
+[   65.740268] preview extra polling 5
+[   65.740609] preview extra polling 5
+[   65.740966] preview extra polling 5
+[   65.741311] preview extra polling 5
+[   65.741646] preview extra polling 5
+[   65.741989] preview extra polling 5
+[   65.742329] preview extra polling 5
+[   65.742656] preview extra polling 5
+[   65.742991] preview extra polling 5
+[   65.743334] preview extra polling 5
+[   65.745484] preview extra polling 5
+[   65.745878] preview extra polling 5
+[   65.746206] preview extra polling 5
+[   65.746543] preview extra polling 5
+[   65.746883] preview extra polling 5
+[   65.748131] preview extra polling 5
+[   65.748478] preview extra polling 5
+[   65.748818] preview extra polling 5
+[   65.749168] preview extra polling 5
+[   65.749508] preview extra polling 5
+[   65.750909] preview extra polling 5
+[   65.751244] preview extra polling 5
+[   65.751574] preview extra polling 5
+[   65.751924] preview extra polling 5
+[   65.753939] preview extra polling 5
+[   65.754288] preview extra polling 5
+[   65.755004] preview extra polling 5
+[   65.755363] preview extra polling 5
+[   65.755706] preview extra polling 5
+[   65.758271] preview extra polling 5
+[   65.758603] preview extra polling 5
+[   65.758931] preview extra polling 5
+[   65.759274] preview extra polling 5
+[   65.761364] preview extra polling 5
+[   65.761713] preview extra polling 0
+[   65.761976] msm_pp_release: pp not in progress for
+[   65.762003] [adsp.c:msm_adsp_enable] enable 'QCAMTASK'state[0] id[17227151]
+[   65.767649] [adsp.c:handle_adsp_rtos_mtoa_app] module QCAMTASK: READY
+[   65.767758] msm_enable_vfe: rc 0
+[   65.768824] [adsp.c:msm_adsp_enable] enable 'VFETASK'state[0] id[17227140]
+[   65.769977] [adsp.c:handle_adsp_rtos_mtoa_app] module VFETASK: READY
+[   65.770034] msm_enable_vfe: rc 0
+[   65.808041] msm_open_frame: draining queue frame
+[   66.149113] msm_get_stats(1115): copy to user
+[   66.258094] save exit: isCheckpointed 1
+[   68.168595] select 1789 (ogenmod.cmparts), adj 8, size 3826, to kill
+[   68.168623] select 1940 (droid.deskclock), adj 10, size 3676, to kill
+[   68.168640] select 1970 (viders.calendar), adj 14, size 3694, to kill
+[   68.168668] send sigkill to 1970 (viders.calendar), adj 14, size 3694
+[   71.915846] select 1789 (ogenmod.cmparts), adj 8, size 3826, to kill
+[   71.915874] select 1940 (droid.deskclock), adj 10, size 3675, to kill
+[   71.915892] select 1983 (m.android.email), adj 13, size 3978, to kill
+[   71.915911] select 2007 (com.android.mms), adj 13, size 4112, to kill
+[   71.915939] send sigkill to 2007 (com.android.mms), adj 13, size 4112
+[   72.242786] save exit: isCheckpointed 1
+[   72.630635] select 1789 (ogenmod.cmparts), adj 9, size 3823, to kill
+[   72.630665] select 1940 (droid.deskclock), adj 11, size 3666, to kill
+[   72.630683] select 1983 (m.android.email), adj 14, size 3974, to kill
+[   72.630711] send sigkill to 1983 (m.android.email), adj 14, size 3974
+[   73.919654] select 1789 (ogenmod.cmparts), adj 9, size 3819, to kill
+[   73.919689] select 1940 (droid.deskclock), adj 11, size 3662, to kill
+[   73.919711] select 2024 (ogle.android.gm), adj 11, size 3823, to kill
+[   73.919736] select 2104 (ufou.android.su), adj 12, size 3750, to kill
+[   73.919758] select 2124 (ter.main:remote), adj 13, size 3357, to kill
+[   73.919786] send sigkill to 2124 (ter.main:remote), adj 13, size 3357
+[   74.089967] select 1789 (ogenmod.cmparts), adj 9, size 3817, to kill
+[   74.090001] select 1940 (droid.deskclock), adj 11, size 3660, to kill
+[   74.090021] select 2024 (ogle.android.gm), adj 11, size 3821, to kill
+[   74.090044] select 2104 (ufou.android.su), adj 12, size 3748, to kill
+[   74.090067] select 2194 (anogenmod.stats), adj 12, size 3786, to kill
+[   74.090092] send sigkill to 2194 (anogenmod.stats), adj 12, size 3786
+[   74.277340] select 1789 (ogenmod.cmparts), adj 9, size 3817, to kill
+[   74.277372] select 1940 (droid.deskclock), adj 11, size 3660, to kill
+[   74.277392] select 2024 (ogle.android.gm), adj 11, size 3821, to kill
+[   74.277417] select 2104 (ufou.android.su), adj 12, size 3748, to kill
+[   74.277447] send sigkill to 2104 (ufou.android.su), adj 12, size 3748
+[   74.748450] select 1789 (ogenmod.cmparts), adj 9, size 3816, to kill
+[   74.748483] select 1940 (droid.deskclock), adj 11, size 3655, to kill
+[   74.748505] select 2024 (ogle.android.gm), adj 11, size 3817, to kill
+[   74.748537] send sigkill to 2024 (ogle.android.gm), adj 11, size 3817
+[   75.045163] select 1789 (ogenmod.cmparts), adj 11, size 3816, to kill
+[   75.045193] select 1940 (droid.deskclock), adj 15, size 3655, to kill
+[   75.045231] send sigkill to 1940 (droid.deskclock), adj 15, size 3655
+[   75.270518] select 1789 (ogenmod.cmparts), adj 11, size 3816, to kill
+[   75.270562] select 2182 (d.apps.uploader), adj 12, size 3511, to kill
+[   75.270580] select 2207 (ndroid.settings), adj 13, size 4541, to kill
+[   75.270600] select 2223 (m.android.music), adj 14, size 3549, to kill
+[   75.270623] send sigkill to 2223 (m.android.music), adj 14, size 3549
+[   75.688409] select 1789 (ogenmod.cmparts), adj 11, size 3816, to kill
+[   75.688450] select 2182 (d.apps.uploader), adj 12, size 3511, to kill
+[   75.688469] select 2207 (ndroid.settings), adj 13, size 4541, to kill
+[   75.688494] send sigkill to 2207 (ndroid.settings), adj 13, size 4541
+[   78.229411] save exit: isCheckpointed 1
+[   81.758690] select 1789 (ogenmod.cmparts), adj 13, size 3513, to kill
+[   81.758725] select 2182 (d.apps.uploader), adj 14, size 3219, to kill
+[   81.758745] send sigkill to 2182 (d.apps.uploader), adj 14, size 3219
+[   84.254850] save exit: isCheckpointed 1
+[   95.619468] select 1789 (ogenmod.cmparts), adj 13, size 3495, to kill
+[   95.619518] send sigkill to 1789 (ogenmod.cmparts), adj 13, size 3495
+[   96.202077] save exit: isCheckpointed 1
+[  102.216670] save exit: isCheckpointed 1
+[  116.334247] aat28xx_power_internal: on = 1, refcnt = 1
+[  116.335168] pecan_vibrator_power_set: vibrator volage 3300
+[  116.346122] aat28xx_power_internal: on = 0, refcnt = 2
+[  116.365902] aat28xx_power_internal: on = 1, refcnt = 1
+[  116.366807] pecan_vibrator_power_set: vibrator volage 3300
+[  116.397752] aat28xx_power_internal: on = 0, refcnt = 2
+[  116.615886] msm_release_frame: frame0
+[  116.615920] __msm_release, open count =2
+[  116.615936] msm_release_frame: draining queue frame
+[  116.615951] msm_release_frame, completed
+[  116.616031] __msm_pmem_table_del: type 15, vaddr  0x40d0c000
+[  116.616056] __msm_pmem_table_del: type 15, vaddr  0x40d29000
+[  116.616078] __msm_pmem_table_del: type 15, vaddr  0x40d46000
+[  116.616100] __msm_pmem_table_del: type 15, vaddr  0x40d63000
+[  116.628826] msm_release_config: config0
+[  116.628856] __msm_release, open count =1
+[  116.628871] msm_release_config: draining queue event
+[  116.628888] msm_release_config,q->len = 0
+[  116.628903] msm_release_config, completed
+[  116.629073] msm_release_control: control0
+[  116.629091] __msm_release, open count =0
+[  116.629105] __msm_release, vfe_release
+[  116.629123] [adsp.c:msm_adsp_disable] disable 'QCAMTASK'
+[  116.630295] [adsp.c:msm_adsp_disable] disable 'VFETASK'
+[  116.631843] [adsp.c:msm_adsp_put] closing module QCAMTASK
+[  116.631875] [adsp.c:msm_adsp_put] closing module VFETASK
+[  116.632035] __msm_release, s_release
+[  116.638863] __msm_release, msm_camio_sensor_clk_off
+[  116.639348] __msm_release, free frame pmem region
+[  116.639368] __msm_release, free stats pmem region
+[  116.639383] __msm_release: draining queue pict
+[  116.639398] __msm_release: draining queue event
+[  116.639415] __msm_release: completed
+[  116.639430] msm_release_control: draining queue control
+[  116.639445] msm_release_control, completed
+[  118.787557] request_suspend_state: sleep (0->3) at 118789880123 (2013-02-10 23:04:00.756415133 UTC)
+[  118.787805] early_suspend: smartass_early_suspend+0x0/0x2c
+[  118.787893] early_suspend: ami304_early_suspend+0x0/0x14
+[  118.787958] early_suspend: msm_batt_early_suspend+0x0/0x4
+[  118.788020] early_suspend: aat28xx_early_suspend+0x0/0x50
+[  118.788063] aat28xx_sleep: cur state=1 to sleep state(2)
+[  118.788540] aat28xx_power_internal: on = 0, refcnt = 1
+[  118.882773] early_suspend: mcs7000_early_suspend+0x0/0x48
+[  118.882806] [Touch] ts_set_vreg() onoff:0
+[  118.882901] early_suspend: gpio_event_suspend+0x0/0x28
+[  118.883074] early_suspend: dhd_early_suspend+0x0/0xc [wireless]
+[  118.897003] early_suspend: stop_drawing_early_suspend+0x0/0x11c
+[  118.898066] early_suspend: kgsl_early_suspend_driver+0x0/0x2c
+[  118.898101] early_suspend: msmfb_early_suspend_early+0x0/0x4
+[  118.898123] early_suspend: msmfb_early_suspend+0x0/0x8
+[  118.927650] ilitek_qvga_disp_off: display off...
+[  119.261443] ebi2_tovis_power_save: on=0
+[  119.261668] early_suspend: mdp_early_suspend+0x0/0x68
+[  119.261696] early_suspend: msmsdcc_early_suspend+0x0/0x80
+[  119.261718] early_suspend: msmsdcc_early_suspend+0x0/0x80
+[  119.383424] save exit: isCheckpointed 1
+[  120.239776] save exit: isCheckpointed 1
+[  126.233977] save exit: isCheckpointed 1
+[  159.308910] request_suspend_state: wakeup (3->0) at 159311248554 (2013-02-10 23:04:41.277785231 UTC)
+[  159.313165] late_resume: msmsdcc_late_resume+0x0/0x8c
+[  159.313232] late_resume: msmsdcc_late_resume+0x0/0x8c
+[  159.313277] late_resume: 0x0
+[  159.313334] late_resume: msmfb_early_resume+0x0/0x88
+[  159.338180] ilitek_qvga_disp_on: display on...
+[  159.338215] ebi2_tovis_power_save: on=1
+[  159.699190] late_resume: msmfb_late_resume_late+0x0/0x34
+[  159.703648] late_resume: kgsl_late_resume_driver+0x0/0x2c
+[  159.703673] late_resume: start_drawing_late_resume+0x0/0x6c
+[  159.705043] late_resume: dhd_late_resume+0x0/0xc [wireless]
+[  159.710793] late_resume: gpio_event_resume+0x0/0x28
+[  159.710881] late_resume: mcs7000_late_resume+0x0/0x6c
+[  159.710896] [Touch] ts_set_vreg() onoff:1
+[  159.727638] late_resume: aat28xx_late_resume+0x0/0x1b0
+[  159.727658] aat28xx_power_internal: on = 1, refcnt = 0
+[  159.749589] aat28xx_wakeup: cur state=2 to wakeup state(1)
+[  159.750404] late_resume: msm_batt_late_resume+0x0/0x34
+[  159.750418] msm_batt_late_resume: enter
+[  159.751096] msm_batt_late_resume: exit
+[  159.751129] late_resume: ami304_late_resume+0x0/0x14
+[  159.751153] late_resume: smartass_late_resume+0x0/0x24
+[  160.399517] aat28xx_power_internal: on = 1, refcnt = 1
+[  160.400107] pecan_vibrator_power_set: vibrator volage 3300
+[  160.410731] aat28xx_power_internal: on = 0, refcnt = 2
+[  160.430942] aat28xx_power_internal: on = 1, refcnt = 1
+[  160.431531] pecan_vibrator_power_set: vibrator volage 3300
+[  160.462137] aat28xx_power_internal: on = 0, refcnt = 2
+[  160.476547] aat28xx_power_internal: on = 1, refcnt = 1
+[  160.477111] pecan_vibrator_power_set: vibrator volage 3300
+[  160.487702] aat28xx_power_internal: on = 0, refcnt = 2
+[  160.521435] aat28xx_power_internal: on = 1, refcnt = 1
+[  160.521995] pecan_vibrator_power_set: vibrator volage 3300
+[  160.552595] aat28xx_power_internal: on = 0, refcnt = 2
+[  160.811568] select 2054 (.android.camera), adj 15, size 4755, to kill
+[  160.811605] send sigkill to 2054 (.android.camera), adj 15, size 4755
+[  162.288488] select 1839 (d.process.media), adj 15, size 4021, to kill
+[  162.288528] send sigkill to 1839 (d.process.media), adj 15, size 4021
+[  162.690547] aat28xx_power_internal: on = 1, refcnt = 1
+[  162.691138] pecan_vibrator_power_set: vibrator volage 3300
+[  162.701768] aat28xx_power_internal: on = 0, refcnt = 2
+[  162.721962] aat28xx_power_internal: on = 1, refcnt = 1
+[  162.722555] pecan_vibrator_power_set: vibrator volage 3300
+[  162.753154] aat28xx_power_internal: on = 0, refcnt = 2
+[  163.376774] aat28xx_power_internal: on = 1, refcnt = 1
+[  163.377707] pecan_vibrator_power_set: vibrator volage 3300
+[  163.388342] aat28xx_power_internal: on = 0, refcnt = 2
+[  163.408612] aat28xx_power_internal: on = 1, refcnt = 1
+[  163.409199] pecan_vibrator_power_set: vibrator volage 3300
+[  163.439779] aat28xx_power_internal: on = 0, refcnt = 2
+[  163.785063] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[  163.785088] Modules linked in: wireless
+[  163.785176] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[  163.785221] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[  163.785261] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[  163.785310] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[  163.785358] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4)
+[  163.785398] [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4) from [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190)
+[  163.785435] [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190) from [<c032950c>] (sdio_memcpy_toio+0x1c/0x20)
+[  163.785720] [<c032950c>] (sdio_memcpy_toio+0x1c/0x20) from [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless])
+[  163.786016] [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless]) from [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless])
+[  163.786305] [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless]) from [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless])
+[  163.786585] [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless]) from [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless])
+[  163.786846] [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[  163.787106] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[  163.787330] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[  163.787510] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless])
+[  163.787676] [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[  163.787795] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[  163.787813] Modules linked in: wireless
+[  163.787861] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[  163.787901] [<c048c810>] (schedule+0x70/0x308) from [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8)
+[  163.788026] [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8) from [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless])
+[  163.788258] [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless]) from [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless])
+[  163.788525] [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless]) from [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless])
+[  163.788783] [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[  163.789008] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[  163.789185] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless])
+[  163.789296] [<bf001bf0>] (_dhd_sysioc_thread+0x330/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[  163.791903] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[  163.791928] Modules linked in: wireless
+[  163.791995] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[  163.792066] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[  163.792108] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[  163.792155] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[  163.792200] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4)
+[  163.792240] [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4) from [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190)
+[  163.792276] [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190) from [<c032950c>] (sdio_memcpy_toio+0x1c/0x20)
+[  163.792531] [<c032950c>] (sdio_memcpy_toio+0x1c/0x20) from [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless])
+[  163.792826] [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless]) from [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless])
+[  163.793116] [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless]) from [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless])
+[  163.793395] [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless]) from [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless])
+[  163.793656] [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[  163.793915] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[  163.794140] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[  163.794318] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless])
+[  163.794438] [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[  163.794526] NOHZ: local_softirq_pending 40
+[  163.794875] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[  163.794895] Modules linked in: wireless
+[  163.794945] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[  163.794986] [<c048c810>] (schedule+0x70/0x308) from [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8)
+[  163.795126] [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8) from [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless])
+[  163.795358] [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless]) from [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless])
+[  163.795625] [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless]) from [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless])
+[  163.795883] [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[  163.796106] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[  163.796285] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless])
+[  163.796396] [<bf001ca8>] (_dhd_sysioc_thread+0x3e8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[  163.796726] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[  163.796768] Modules linked in: wireless
+[  163.796823] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[  163.796863] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[  163.796903] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048cf80>] (wait_for_common+0x100/0x1c0)
+[  163.796955] [<c048cf80>] (wait_for_common+0x100/0x1c0) from [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8)
+[  163.796996] [<c0322524>] (mmc_wait_for_req+0x29c/0x2f8) from [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4)
+[  163.797036] [<c0328510>] (mmc_io_rw_extended+0x194/0x1f4) from [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190)
+[  163.797073] [<c0329480>] (sdio_io_rw_ext_helper+0x158/0x190) from [<c032950c>] (sdio_memcpy_toio+0x1c/0x20)
+[  163.797256] [<c032950c>] (sdio_memcpy_toio+0x1c/0x20) from [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless])
+[  163.797545] [<bf017490>] (sdioh_request_packet.isra.0+0x7c/0xe4 [wireless]) from [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless])
+[  163.797881] [<bf017ddc>] (sdioh_request_buffer+0xbc/0x1e0 [wireless]) from [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless])
+[  163.798163] [<bf018b18>] (bcmsdh_send_buf+0xa4/0xb4 [wireless]) from [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless])
+[  163.798425] [<bf013b28>] (dhd_bus_txctl+0x1dc/0x2fc [wireless]) from [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless])
+[  163.798681] [<bf010e54>] (dhdcdc_set_ioctl+0x98/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[  163.798906] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[  163.799085] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless])
+[  163.799196] [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[  163.799648] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[  163.799665] Modules linked in: wireless
+[  163.799706] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[  163.799741] [<c048c810>] (schedule+0x70/0x308) from [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8)
+[  163.799875] [<c048d2c4>] (schedule_timeout+0x1a4/0x1d8) from [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless])
+[  163.800078] [<bf0020f4>] (dhd_os_ioctl_resp_wait+0x88/0x104 [wireless]) from [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless])
+[  163.800308] [<bf013c78>] (dhd_bus_rxctl+0x30/0xc0 [wireless]) from [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless])
+[  163.800530] [<bf010e6c>] (dhdcdc_set_ioctl+0xb0/0xe4 [wireless]) from [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless])
+[  163.800721] [<bf011288>] (dhd_prot_ioctl+0x6c/0x2ac [wireless]) from [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless])
+[  163.800875] [<bf0052c8>] (dhd_wl_ioctl+0x90/0xa8 [wireless]) from [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless])
+[  163.800971] [<bf001d08>] (_dhd_sysioc_thread+0x448/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[  163.801281] BUG: scheduling while atomic: dhd_sysioc/1669/0x00000203
+[  163.801298] Modules linked in: wireless
+[  163.801336] [<c0034a84>] (unwind_backtrace+0x0/0x164) from [<c048c810>] (schedule+0x70/0x308)
+[  163.801371] [<c048c810>] (schedule+0x70/0x308) from [<c048d138>] (schedule_timeout+0x18/0x1d8)
+[  163.801406] [<c048d138>] (schedule_timeout+0x18/0x1d8) from [<c048dfd8>] (__down_interruptible+0x88/0xec)
+[  163.801451] [<c048dfd8>] (__down_interruptible+0x88/0xec) from [<c00ba148>] (down_interruptible+0x40/0x78)
+[  163.801575] [<c00ba148>] (down_interruptible+0x40/0x78) from [<bf001db8>] (_dhd_sysioc_thread+0x4f8/0x548 [wireless])
+[  163.801675] [<bf001db8>] (_dhd_sysioc_thread+0x4f8/0x548 [wireless]) from [<c002fdbc>] (kernel_thread_exit+0x0/0x8)
+[  163.848038] init: untracked pid 2381 exited
+[  164.388440] select 2265 (id.partnersetup), adj 15, size 3504, to kill
+[  164.388475] send sigkill to 2265 (id.partnersetup), adj 15, size 3504
+[  164.589083] select 1993 (ndroid.fotakill), adj 15, size 3024, to kill
+[  164.589128] select 2244 (.cooliris.media), adj 15, size 4091, to kill
+[  164.589153] send sigkill to 2244 (.cooliris.media), adj 15, size 4091
+[  164.846642] unregister_mmc_card_pm: [WIFI] Unregistering suspend/resume callbacks.  
+[  164.850405] Kernel panic - not syncing: Aiee, killing interrupt handler!
+[  164.850440] Rebooting in 1 seconds..
+[  165.831297] Restarting Linux version 2.6.35.10-PecanCM-Ics (anthony@anthony-PecanCM) (gcc version 4.6.x-google 20120106 (prerelease) (GCC) ) #1 PREEMPT Sun Feb 10 23:00:01 GMT 2013
+[  165.831320] 
