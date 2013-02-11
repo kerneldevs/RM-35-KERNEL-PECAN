@@ -68,11 +68,10 @@ EXTRA_CFLAGS = \
 	-DANDROID_SPECIFIC \
 	-DDONGLEOVERLAYS \
 	-DMMC_SDIO_ABORT \
+	-DEMBEDDED_PLATFORM -DARP_OFFLOAD_SUPPORT -DPKT_FILTER_SUPPORT \
+	-DGET_CUSTOM_MAC_ENABLE -DSET_RANDOM_MAC_SOFTAP -DCSCAN  \
 	-Wno-error=unused-but-set-variable \
-	-Wno-error=array-bounds
-#-DAP -DAPSTA_PINGTEST \
-
-#	\
+	-Wno-error=array-bounds \
 	-fshort-wchar \
 	-D__KERNEL__ \
 	-Iinclude \

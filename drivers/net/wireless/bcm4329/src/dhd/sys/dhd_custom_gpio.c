@@ -193,9 +193,38 @@ dhd_customer_gpio_wlan_ctrl(int onoff)
 				__FUNCTION__));
 #ifdef CUSTOMER_HW
 			bcm_wlan_power_on(1);
-#endif /* CUSTOMER_HW */
+
 			/* Lets customer power to get stable */
-			OSL_DELAY(500);
+			OSL_DELAY(50);
+#endif /* CUSTOMER_HW */
 		break;
 	}
 }
+
+ifdef GET_CUSTOM_MAC_ENABLE
+/* Function to get custom MAC address */
+int
+dhd_custom_get_mac_address(unsigned char *buf)
+{
+	int ret = 0;
+
+	WL_TRACE(("%s Enter\n", __FUNCTION__));
+	if (!buf)
+		return -EINVAL;
+
+	/* Customer access to MAC address stored outside of DHD driver */
+#ifdef CUSTOMER_HW2
+	ret = wifi_get_mac_addr(buf);
+#endif
+
+#ifdef EXAMPLE_GET_MAC
+	/* EXAMPLE code */
+	{
+		struct ether_addr ea_example = {{0x00, 0x11, 0x22, 0x33, 0x44, 0xFF}};
+		bcopy((char *)&ea_example, buf, sizeof(struct ether_addr));
+	}
+#endif /* EXAMPLE_GET_MAC */
+
+	return ret;
+}
+#endif /* GET_CUSTOM_MAC_ENABLE */

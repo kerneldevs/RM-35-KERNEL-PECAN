@@ -60,6 +60,11 @@ extern int dhd_bus_rxctl(struct dhd_bus *bus, uchar *msg, uint msglen);
 /* Watchdog timer function */
 extern bool dhd_bus_watchdog(dhd_pub_t *dhd);
 
+#ifdef DHD_DEBUG
+/* Device console input function */
+extern int dhd_bus_console_in(dhd_pub_t *dhd, uchar *msg, uint msglen);
+#endif
+
 
 /* Deferred processing for the bus, return TRUE requests reschedule */
 extern bool dhd_bus_dpc(struct dhd_bus *bus);

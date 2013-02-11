@@ -42,6 +42,7 @@
 #include <dhd_bus.h>
 #include <dhd_dbg.h>
 
+extern int dhd_preinit_ioctls(dhd_pub_t *dhd);
 
 #ifdef PROP_TXSTATUS
 #include <wlfc_proto.h>
@@ -199,7 +200,7 @@ done:
 	return ret;
 }
 
-static int
+int
 dhdcdc_set_ioctl(dhd_pub_t *dhd, int ifidx, uint cmd, void *buf, uint len, uint8 action)
 {
 	dhd_prot_t *prot = dhd->prot;
@@ -2297,107 +2298,6 @@ dhd_prot_dstats(dhd_pub_t *dhd)
 	return;
 }
 
-int dhd_set_suspend(int value, dhd_pub_t *dhd)
-{
-#if defined(CONFIG_LGE_BCM432X_PATCH_PMCTL)
-	int power_mode = PM_MAX;
-#endif /* CONFIG_LGE_BCM432X_PATCH_PMCTL */
-	wl_pkt_filter_enable_t	enable_parm;
-	char iovbuf[32];
-#if defined(CONFIG_LGE_BCM432X_PATCH_DTIMCTL)
-	int bcn_li_dtim = 3;
-#endif /* CONFIG_LGE_BCM432X_PATCH_DTIMCTL */
-#ifdef CUSTOMER_HW2
-	uint roamvar = 1;
-#endif /* CUSTOMER_HW2 */
-
-#define htod32(i) i
-
-	if (dhd && dhd->up) {
-#if !defined(DONGLEOVERLAYS) && !defined(CONFIG_LGE_BCM432X_PATCH)
-		dhd_os_proto_block(dhd);
-#endif
-		if (value) {
-#if defined(CONFIG_LGE_BCM432X_PATCH_PMCTL)
-			dhd_wl_ioctl_cmd(dhd, WLC_SET_PM,
-				(char *)&power_mode, sizeof(power_mode), TRUE, 0);
-#endif /* CONFIG_LGE_BCM432X_PATCH_PMCTL */
-			/* Enable packet filter, only allow unicast packet to send up */
-			enable_parm.id = htod32(100);
-			enable_parm.enable = htod32(1);
-			bcm_mkiovar("pkt_filter_enable", (char *)&enable_parm,
-				sizeof(wl_pkt_filter_enable_t), iovbuf, sizeof(iovbuf));
-			dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
-#if defined(CONFIG_LGE_BCM432X_PATCH_DTIMCTL)
-			/* set bcn_li_dtim */
-			bcm_mkiovar("bcn_li_dtim", (char *)&bcn_li_dtim,
-				4, iovbuf, sizeof(iovbuf));
-			dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
-#endif /* CONFIG_LGE_BCM432X_PATCH_DTIMCTL */
-#ifdef CUSTOMER_HW2
-			/* Disable build-in roaming to allowed ext supplicant to take of romaing */
-			bcm_mkiovar("roam_off", (char *)&roamvar, 4, iovbuf, sizeof(iovbuf));
-			dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
-#endif /* CUSTOMER_HW2 */
-		} else {
-#if defined(CONFIG_LGE_BCM432X_PATCH_PMCTL)
-			power_mode = PM_FAST;
-			dhd_wl_ioctl_cmd(dhd, WLC_SET_PM, (char *)&power_mode,
-				sizeof(power_mode), TRUE, 0);
-#endif /* CONFIG_LGE_BCM432X_PATCH_PMCTL */
-			/* disable pkt filter */
-			enable_parm.id = htod32(100);
-			enable_parm.enable = htod32(0);
-			bcm_mkiovar("pkt_filter_enable", (char *)&enable_parm,
-				sizeof(wl_pkt_filter_enable_t), iovbuf, sizeof(iovbuf));
-			dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
-#if defined(CONFIG_LGE_BCM432X_PATCH_DTIMCTL)
-			/* set bcn_li_dtim */
-			bcn_li_dtim = 0;
-			bcm_mkiovar("bcn_li_dtim", (char *)&bcn_li_dtim,
-				4, iovbuf, sizeof(iovbuf));
-			dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
-#endif /* CONFIG_LGE_BCM432X_PATCH_DTIMCTL */
-#ifdef CUSTOMER_HW2
-			roamvar = 0;
-			bcm_mkiovar("roam_off", (char *)&roamvar, 4, iovbuf, sizeof(iovbuf));
-			dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
-#endif /* CUSTOMER_HW2 */
-		}
-#if !defined(DONGLEOVERLAYS) && !defined(CONFIG_LGE_BCM432X_PATCH)
-		dhd_os_proto_unblock(dhd);
-#endif
-	}
-
-	return 0;
-}
-
-#define strtoul(nptr, endptr, base) bcm_strtoul((nptr), (endptr), (base))
-
-/* Convert user's input in hex pattern to byte-size mask */
-static int
-wl_pattern_atoh(char *src, char *dst)
-{
-	int i;
-	if (strncmp(src, "0x", 2) != 0 &&
-	    strncmp(src, "0X", 2) != 0) {
-		printf("Mask invalid format. Needs to start with 0x\n");
-		return -1;
-	}
-	src = src + 2; /* Skip past 0x */
-	if (strlen(src) % 2 != 0) {
-		printf("Mask invalid format. Needs to be of even length\n");
-		return -1;
-	}
-	for (i = 0; *src != '\0'; i++) {
-		char num[3];
-		strncpy(num, src, 2);
-		num[2] = '\0';
-		dst[i] = (uint8)strtoul(num, NULL, 16);
-		src += 2;
-	}
-	return i;
-}
 
 /* LGE_CHANGE_S [yoohoo@lge.com] 2009-04-03, configs */
 #if defined(CONFIG_LGE_BCM432X_PATCH)
@@ -2642,230 +2542,35 @@ err:
 /* LGE_CHANGE_E [yoohoo@lge.com] 2009-04-03, configs */
 
 int
-dhd_preinit_ioctls(dhd_pub_t *dhd)
+dhd_prot_init(dhd_pub_t *dhd)
 {
-	char eventmask[WL_EVENTING_MASK_LEN];
-	char iovbuf[WL_EVENTING_MASK_LEN + 12];	/*  Room for "event_msgs" + '\0' + bitvec  */
-	int ret;
-	uint up = 0;
-	
-/* LGE_CHANGE_S [yoohoo@lge.com] 2009-08-27, roam_off, PM */
-#if !defined(CONFIG_LGE_BCM432X_PATCH)
-#ifdef CUSTOMER_HW2
-	uint roamvar = 0;
-#else
-	uint roamvar = 1;
-#endif
-	uint power_mode = PM_FAST;
-#endif /* CONFIG_LGE_BCM432X_PATCH */
-/* LGE_CHANGE_E [yoohoo@lge.com] 2009-08-27, roam_off, PM */
-	uint32 dongle_align = DHD_SDALIGN;
-	uint32 glom = 0;
-/* LGE_CHANGE_S [yoohoo@lge.com] 2009-10-29, process in dhd_preinit_config() */
-#if !defined(CONFIG_LGE_BCM432X_PATCH)
-	uint bcn_timeout = 3;
-#endif /* CONFIG_LGE_BCM432X_PATCH */
-/* LGE_CHANGE_E [yoohoo@lge.com] 2009-10-29, process in dhd_preinit_config() */
-	int arpoe = 1;
-	int arp_ol = 0xf;
-	int scan_assoc_time = 40;
-	int scan_unassoc_time = 80;
-	const char 				*str;
-	wl_pkt_filter_t		pkt_filter;
-	wl_pkt_filter_t		*pkt_filterp;
-	int						buf_len;
-	int						str_len;
-	uint32					mask_size;
-	uint32					pattern_size;
-	char buf[256];
-#if defined(CONFIG_LGE_BCM432X_PATCH)
-	uint filter_mode = 0;
-#else
-	uint filter_mode = 1;
-#endif /* CONFIG_LGE_BCM432X_PATCH */
+	int ret = 0;
+	char buf[128];
+
+	DHD_TRACE(("%s: Enter\n", __FUNCTION__));
+
 #ifdef AP
 	uint32 mpc = 0; /* Turn MPC off for AP/APSTA mode */
 	uint32 apsta = 1; /* Enable APSTA mode */
 #endif
 
+	dhd_os_proto_block(dhd);
+
 	/* Get the device MAC address */
-	strcpy(iovbuf, "cur_etheraddr");
-	if ((ret = dhd_wl_ioctl_cmd(dhd, WLC_GET_VAR, iovbuf, sizeof(iovbuf), FALSE, 0)) < 0) {
-		DHD_ERROR(("%s: can't get MAC address , error=%d\n", __FUNCTION__, ret));
-		return BCME_NOTUP;
+	strcpy(buf, "cur_etheraddr");
+	ret = dhdcdc_query_ioctl(dhd, 0, WLC_GET_VAR, buf, sizeof(buf));
+	if (ret < 0) {
+	  dhd_os_proto_unblock(dhd);
+	  return ret;
 	}
-	memcpy(dhd->mac.octet, iovbuf, ETHER_ADDR_LEN);
-/* LGE_CHANGE_S [yoohoo@lge.com] 2009-04-03, configs */
-#if defined(CONFIG_LGE_BCM432X_PATCH)
-	dhd_preinit_config(dhd, 0);
-#endif /* CONFIG_LGE_BCM432X_PATCH */
-/* LGE_CHANGE_E [yoohoo@lge.com] 2009-04-03, configs */
+	memcpy(dhd->mac.octet, buf, ETHER_ADDR_LEN);
 
-	/* Set Country code */
-	if (dhd->country_code[0] != 0) {
-		if (dhd_wl_ioctl_cmd(dhd, WLC_SET_COUNTRY,
-			dhd->country_code, sizeof(dhd->country_code), TRUE, 0) < 0) {
-			DHD_ERROR(("%s: country code setting failed\n", __FUNCTION__));
-		}
-	}
-
-/* LGE_CHANGE_S [yoohoo@lge.com] 2009-08-27, already PM setup is configured */
-#if !defined(CONFIG_LGE_BCM432X_PATCH)
-	/* Set PowerSave mode */
-	dhd_wl_ioctl_cmd(dhd, WLC_SET_PM, (char *)&power_mode, sizeof(power_mode), TRUE, 0);
-#endif /* CONFIG_LGE_BCM432X_PATCH */
-/* LGE_CHANGE_E [yoohoo@lge.com] 2009-08-27, already PM setup is configured */
-
-	/* Match Host and Dongle rx alignment */
-	bcm_mkiovar("bus:txglomalign", (char *)&dongle_align, 4, iovbuf, sizeof(iovbuf));
-	dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
-
-	/* disable glom option per default */
-	bcm_mkiovar("bus:txglom", (char *)&glom, 4, iovbuf, sizeof(iovbuf));
-	dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
-/* LGE_CHANGE_S [yoohoo@lge.com] 2009-04-08, roam_off */
-#if !defined(CONFIG_LGE_BCM432X_PATCH)
-	/* Setup timeout if Beacons are lost to report link down */
-	if (roamvar) {
-		bcm_mkiovar("bcn_timeout", (char *)&bcn_timeout, 4, iovbuf, sizeof(iovbuf));
-		dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
-	}
-
-	/* Disable build-in roaming to allowed ext supplicant to take of romaing */
-	bcm_mkiovar("roam_off", (char *)&roamvar, 4, iovbuf, sizeof(iovbuf));
-	dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
-#endif /* CONFIG_LGE_BCM432X_PATCH */
-/* LGE_CHANGE_E [yoohoo@lge.com] 2009-04-08, roam_off */
-
-#ifdef AP
-	/* Disable build-in roaming to allowed ext supplicant to take of romaing */
-	bcm_mkiovar("mpc", (char *)&mpc, 4, iovbuf, sizeof(iovbuf));
-	dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
-
-	/* Disable build-in roaming to allowed ext supplicant to take of romaing */
-	bcm_mkiovar("apsta", (char *)&apsta, 4, iovbuf, sizeof(iovbuf));
-	dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
-#endif
-
-	/* Force STA UP */
-	dhd_wl_ioctl_cmd(dhd, WLC_UP, (char *)&up, sizeof(up), TRUE, 0);
-
-	/* Setup event_msgs */
-	bcm_mkiovar("event_msgs", eventmask, WL_EVENTING_MASK_LEN, iovbuf, sizeof(iovbuf));
-	dhd_wl_ioctl_cmd(dhd, WLC_GET_VAR, iovbuf, sizeof(iovbuf), FALSE, 0);
-	bcopy(iovbuf, eventmask, WL_EVENTING_MASK_LEN);
-
-	/* Setup event_msgs */
-	setbit(eventmask, WLC_E_SET_SSID);
-	setbit(eventmask, WLC_E_PRUNE);
-	setbit(eventmask, WLC_E_AUTH);
-	setbit(eventmask, WLC_E_REASSOC);
-	setbit(eventmask, WLC_E_REASSOC_IND);
-	setbit(eventmask, WLC_E_DEAUTH_IND);
-	setbit(eventmask, WLC_E_DISASSOC_IND);
-	setbit(eventmask, WLC_E_DISASSOC);
-	setbit(eventmask, WLC_E_JOIN);
-	setbit(eventmask, WLC_E_ASSOC_IND);
-	setbit(eventmask, WLC_E_PSK_SUP);
-	setbit(eventmask, WLC_E_LINK);
-	setbit(eventmask, WLC_E_NDIS_LINK);
-	setbit(eventmask, WLC_E_MIC_ERROR);
-	setbit(eventmask, WLC_E_PMKID_CACHE);
-	setbit(eventmask, WLC_E_TXFAIL);
-	setbit(eventmask, WLC_E_JOIN_START);
-	setbit(eventmask, WLC_E_SCAN_COMPLETE);
-#if defined(DONGLEOVERLAYS)
-	setbit(eventmask, WLC_E_OVERLAY_REQ);
-#endif
-	bcm_mkiovar("event_msgs", eventmask, WL_EVENTING_MASK_LEN, iovbuf, sizeof(iovbuf));
-	dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
-
-	dhd_wl_ioctl_cmd(dhd, WLC_SET_SCAN_CHANNEL_TIME, (char *)&scan_assoc_time,
-		sizeof(scan_assoc_time), TRUE, 0);
-	dhd_wl_ioctl_cmd(dhd, WLC_SET_SCAN_UNASSOC_TIME, (char *)&scan_unassoc_time,
-		sizeof(scan_unassoc_time), TRUE, 0);
-
-	/* Set ARP offload */
-	bcm_mkiovar("arpoe", (char *)&arpoe, 4, iovbuf, sizeof(iovbuf));
-	dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
-	bcm_mkiovar("arp_ol", (char *)&arp_ol, 4, iovbuf, sizeof(iovbuf));
-	dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
-
-	/* add a default packet filter pattern */
-	str = "pkt_filter_add";
-	str_len = strlen(str);
-	strncpy(buf, str, str_len);
-	buf[ str_len ] = '\0';
-	buf_len = str_len + 1;
-
-	pkt_filterp = (wl_pkt_filter_t *) (buf + str_len + 1);
-
-	/* Parse packet filter id. */
-	pkt_filter.id = htod32(100);
-
-	/* Parse filter polarity. */
-	pkt_filter.negate_match = htod32(0);
-
-	/* Parse filter type. */
-	pkt_filter.type = htod32(0);
-
-	/* Parse pattern filter offset. */
-	pkt_filter.u.pattern.offset = htod32(0);
-
-#if defined(CONFIG_LGE_BCM432X_PATCH)
-	/* Parse pattern filter mask. */
-	mask_size =	htod32(wl_pattern_atoh("0xff",
-		(char *) pkt_filterp->u.pattern.mask_and_pattern));
-
-	/* Parse pattern filter pattern. */
-	pattern_size = htod32(wl_pattern_atoh("0xff",
-		(char *) &pkt_filterp->u.pattern.mask_and_pattern[mask_size]));
-#else
-	/* Parse pattern filter mask. */
-	mask_size =	htod32(wl_pattern_atoh("0x01",
-		(char *) pkt_filterp->u.pattern.mask_and_pattern));
-
-	/* Parse pattern filter pattern. */
-	pattern_size = htod32(wl_pattern_atoh("0x00",
-		(char *) &pkt_filterp->u.pattern.mask_and_pattern[mask_size]));
-#endif /* CONFIG_LGE_BCM432X_PATCH */
-
-	if (mask_size != pattern_size) {
-		DHD_ERROR(("Mask and pattern not the same size\n"));
-		return -EINVAL;
-	}
-
-	pkt_filter.u.pattern.size_bytes = mask_size;
-	buf_len += WL_PKT_FILTER_FIXED_LEN;
-	buf_len += (WL_PKT_FILTER_PATTERN_FIXED_LEN + 2 * mask_size);
-
-	/* Keep-alive attributes are set in local	variable (keep_alive_pkt), and
-	** then memcpy'ed into buffer (keep_alive_pktp) since there is no
-	** guarantee that the buffer is properly aligned.
-	*/
-	memcpy((char *)pkt_filterp, &pkt_filter,
-		WL_PKT_FILTER_FIXED_LEN + WL_PKT_FILTER_PATTERN_FIXED_LEN);
-
-	dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, buf, buf_len, TRUE, 0);
-
-	/* set mode to allow pattern */
-	bcm_mkiovar("pkt_filter_mode", (char *)&filter_mode, 4, iovbuf, sizeof(iovbuf));
-	dhd_wl_ioctl_cmd(dhd, WLC_SET_VAR, iovbuf, sizeof(iovbuf), TRUE, 0);
+	dhd_os_proto_unblock(dhd);
 
 
-	return 0;
-}
-
-int
-dhd_prot_init(dhd_pub_t *dhd)
-{
-	int ret = 0;
-	DHD_TRACE(("%s: Enter\n", __FUNCTION__));
-
-
-#ifdef BCMDONGLEHOST
+#ifdef EMBEDDED_PLATFORM
 	ret = dhd_preinit_ioctls(dhd);
-#endif /* BCMDONGLEHOST */
+#endif /* EMBEDDED_PLATFORM */
 
 	/* Always assumes wl for now */
 	dhd->iswl = TRUE;

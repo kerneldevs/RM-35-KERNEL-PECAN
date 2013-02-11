@@ -52,6 +52,12 @@
 
 #include <wlioctl.h>
 
+#ifdef DHD_DEBUG
+#ifndef DHD_DEBUG_TRAP
+#define DHD_DEBUG_TRAP
+#endif
+#endif
+
 #if defined(NDIS60)
 #include <wdf.h>
 #include <WdfMiniport.h>
@@ -146,6 +152,10 @@ typedef struct dhd_pub {
 	/* Last error from dongle */
 	int dongle_error;
 
+	/* Suspend disable flag and "in suspend" flag */
+	int suspend_disable_flag;
+	int in_suspend;
+
 	/* Pkt filter defination */
 	char * pktfilter[100];
 	int pktfilter_count;
@@ -218,10 +228,10 @@ WDF_DECLARE_CONTEXT_TYPE_WITH_NAME(wdf_device_info_t, dhd_get_wdf_device_info)
 
 	#define DHD_SPINWAIT_SLEEP_INIT(a) DECLARE_WAIT_QUEUE_HEAD(a);
 	#define SPINWAIT_SLEEP(a, exp, us) do { \
-		uint countdown = (us) + 9; \
-		while ((exp) && (countdown >= 10)) { \
+		uint countdown = (us) + 9999; \
+		while ((exp) && (countdown >= 10000)) { \
 			wait_event_timeout(a, FALSE, HZ/100); \
-			countdown -= 10; \
+			countdown -= 10000; \
 		} \
 	} while (0)
 
@@ -368,6 +378,7 @@ extern void dhd_os_sdlock_rxq(dhd_pub_t * pub);
 extern void dhd_os_sdunlock_rxq(dhd_pub_t * pub);
 extern void dhd_os_sdlock_sndup_rxq(dhd_pub_t * pub);
 extern void dhd_customer_gpio_wlan_ctrl(int onoff);
+extern int dhd_custom_get_mac_address(unsigned char *buf);
 extern void dhd_os_sdunlock_sndup_rxq(dhd_pub_t * pub);
 extern void dhd_os_sdlock_eventq(dhd_pub_t * pub);
 extern void dhd_os_sdunlock_eventq(dhd_pub_t * pub);
@@ -444,12 +455,19 @@ typedef enum cust_gpio_modes {
 	WLAN_POWER_OFF
 } cust_gpio_modes_t;
 extern int wl_iw_iscan_set_scan_broadcast_prep(struct net_device *dev, uint flag);
+extern int wl_iw_send_priv_event(struct net_device *dev, char *flag);
+
 /*
  * Insmod parameters for debug/test
  */
 
 /* Watchdog timer interval */
 extern uint dhd_watchdog_ms;
+
+#if defined(DHD_DEBUG)
+/* Console output poll interval */
+extern uint dhd_console_ms;
+#endif
 
 
 #if defined(DHD_DEBUG)

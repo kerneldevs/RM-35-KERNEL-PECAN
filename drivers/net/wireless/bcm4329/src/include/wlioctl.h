@@ -371,6 +371,7 @@ typedef enum sup_auth_status {
 #define CRYPTO_ALGO_AES_OCB_MSDU	5
 #define CRYPTO_ALGO_AES_OCB_MPDU	6
 #define CRYPTO_ALGO_NALG		7
+#define CRYPTO_ALGO_SMS4    11
 
 #define WSEC_GEN_MIC_ERROR	0x0001
 #define WSEC_GEN_REPLAY		0x0002
@@ -420,7 +421,8 @@ typedef struct {
 #define TKIP_ENABLED		0x0002
 #define AES_ENABLED		0x0004
 #define WSEC_SWFLAG		0x0008
-#define SES_OW_ENABLED		0x0040	
+#define SES_OW_ENABLED		0x0040
+#define SMS4_ENABLED    	0x0100
 
 
 #define WPA_AUTH_DISABLED	0x0000	
@@ -431,7 +433,8 @@ typedef struct {
 #define WPA2_AUTH_UNSPECIFIED	0x0040	
 #define WPA2_AUTH_PSK		0x0080	
 #define BRCM_AUTH_PSK           0x0100  
-#define BRCM_AUTH_DPT		0x0200	
+#define BRCM_AUTH_DPT		0x0200
+#define WPA_AUTH_WAPI    	0x0400
 
 #define WPA_AUTH_PFN_ANY	0xffffffff	
 
