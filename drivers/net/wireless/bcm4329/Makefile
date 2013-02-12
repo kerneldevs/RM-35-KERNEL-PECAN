@@ -68,7 +68,6 @@ EXTRA_CFLAGS = \
 	-DANDROID_SPECIFIC \
 	-DDONGLEOVERLAYS \
 	-DMMC_SDIO_ABORT \
-	-Wno-error=unused-but-set-variable \
 	-Wno-error=array-bounds
 #-DAP -DAPSTA_PINGTEST \
 
