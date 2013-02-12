@@ -37,10 +37,6 @@
 #define IOCTL_RESP_TIMEOUT  2000 /* In milli second */
 #endif
 
-#ifndef IOCTL_CHIP_ACTIVE_TIMEOUT
-#define IOCTL_CHIP_ACTIVE_TIMEOUT  10 /* In milli second */
-#endif
-
 /*
  * Exported from the dhd protocol module (dhd_cdc, dhd_rndis)
  */

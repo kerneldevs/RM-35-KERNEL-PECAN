@@ -34,21 +34,9 @@
 #include <proto/ethernet.h>
 #include <wlioctl.h>
 
-#define WL_SCAN_PARAMS_SSID_MAX 	10
-#define GET_SSID			"SSID="
-#define GET_CHANNEL			"CH="
-#define GET_NPROBE 			"NPROBE="
-#define GET_ACTIVE_ASSOC_DWELL  	"ACTIVE="
-#define GET_PASSIVE_ASSOC_DWELL  	"PASSIVE="
-#define GET_HOME_DWELL  		"HOME="
-#define GET_SCAN_TYPE      		"TYPE="
-
-#define BAND_GET_CMD        		"GETBAND"
-#define BAND_SET_CMD       		"SETBAND"
-
 #define SOFTAP 1 // LGE
 
-#define	WL_IW_RSSI_MINVAL	-200	
+#define	WL_IW_RSSI_MINVAL		-200	
 #define	WL_IW_RSSI_NO_SIGNAL	-91	
 #define	WL_IW_RSSI_VERY_LOW	-80	
 #define	WL_IW_RSSI_LOW		-70	
@@ -73,18 +61,17 @@
 #define WL_AP_BSS_START         (SIOCIWFIRSTPRIV+21)
 #define AP_LPB_CMD              (SIOCIWFIRSTPRIV+23)
 #define WL_AP_STOP              (SIOCIWFIRSTPRIV+25)
-#define WL_FW_RELOAD            (SIOCIWFIRSTPRIV+27)
 #if defined(CONFIG_LGE_BCM432X_PATCH)
+#define WL_FW_RELOAD            (SIOCIWFIRSTPRIV+27)
 #define WL_IW_SET_STOP_SOFTAP	(SIOCIWFIRSTPRIV+29)
 #define WL_IW_SET_START_SOFTAP	(SIOCIWFIRSTPRIV+31)
-#define WL_COMBO_SCAN           (SIOCIWFIRSTPRIV+33)
+#define WL_AP_SPARE1            (SIOCIWFIRSTPRIV+33)
 #define WL_AP_SPARE2            (SIOCIWFIRSTPRIV+35)
 #define WL_AP_SPARE3            (SIOCIWFIRSTPRIV+37)
 #else
-#define WL_AP_SPARE1		(SIOCIWFIRSTPRIV+29)
-#define WL_AP_SPARE2            (SIOCIWFIRSTPRIV+31)
-#define WL_AP_SPARE3            (SIOCIWFIRSTPRIV+33)
-
+#define WL_AP_SPARE1            (SIOCIWFIRSTPRIV+27)
+#define WL_AP_SPARE2            (SIOCIWFIRSTPRIV+29)
+#define WL_AP_SPARE3            (SIOCIWFIRSTPRIV+31)
 #endif /* CONFIG_LGE_BCM432X_PATCH */
 #define 		G_SCAN_RESULTS 8*1024
 #define 		WE_ADD_EVENT_FIX	0x80
@@ -192,14 +179,6 @@ extern void wl_iw_event(struct net_device *dev, wl_event_msg_t *e, void* data);
 extern int wl_iw_get_wireless_stats(struct net_device *dev, struct iw_statistics *wstats);
 int wl_iw_attach(struct net_device *dev, void * dhdp);
 void wl_iw_detach(void);
-int wl_control_wl_start(struct net_device *dev);
-
-extern int net_os_wake_lock(struct net_device *dev);
-extern int net_os_wake_unlock(struct net_device *dev);
-extern int net_os_wake_lock_timeout(struct net_device *dev);
-extern int net_os_wake_lock_timeout_enable(struct net_device *dev);
-extern int net_os_set_suspend_disable(struct net_device *dev, int val);
-extern int net_os_set_suspend(struct net_device *dev, int val);
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 27)
 #define IWE_STREAM_ADD_EVENT(info, stream, ends, iwe, extra) \
@@ -216,41 +195,5 @@ extern int net_os_set_suspend(struct net_device *dev, int val);
 #define IWE_STREAM_ADD_POINT(info, stream, ends, iwe, extra) \
 	iwe_stream_add_point(stream, ends, iwe, extra)
 #endif
-
-#if defined(CSCAN)
-
-typedef struct cscan_tlv {
-	char prefix;
-	char version;
-	char subver;
-	char reserved;
-} cscan_tlv_t;
-
-#define CSCAN_COMMAND				"CSCAN "
-#define CSCAN_TLV_PREFIX 			'S'
-#define CSCAN_TLV_VERSION			1
-#define CSCAN_TLV_SUBVERSION			0
-#define CSCAN_TLV_TYPE_SSID_IE			'S'
-#define CSCAN_TLV_TYPE_CHANNEL_IE		'C'
-#define CSCAN_TLV_TYPE_NPROBE_IE		'N'
-#define CSCAN_TLV_TYPE_ACTIVE_IE		'A'
-#define CSCAN_TLV_TYPE_PASSIVE_IE		'P'
-#define CSCAN_TLV_TYPE_HOME_IE			'H'
-#define CSCAN_TLV_TYPE_STYPE_IE			'T'
-
-extern int wl_iw_parse_channel_list_tlv(char** list_str, uint16* channel_list, \
-					int channel_num, int *bytes_left);
-
-extern int wl_iw_parse_data_tlv(char** list_str, void  *dst, int dst_size, \
-					const char token, int input_size, int *bytes_left);
-
-extern int wl_iw_parse_ssid_list_tlv(char** list_str, wlc_ssid_t* ssid, \
-					int max, int *bytes_left);
-
-extern int wl_iw_parse_ssid_list(char** list_str, wlc_ssid_t* ssid, int idx, int max);
-
-extern int wl_iw_parse_channel_list(char** list_str, uint16* channel_list, int channel_num);
-
-#endif 
 
 #endif 

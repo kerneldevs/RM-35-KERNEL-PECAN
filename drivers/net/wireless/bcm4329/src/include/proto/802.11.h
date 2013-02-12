@@ -985,8 +985,7 @@ BWL_PRE_PACKED_STRUCT struct dot11_management_notification {
 #define	DOT11_MNG_REGCLASS_ID			59	
 #define DOT11_MNG_EXT_CSA_ID			60	
 #define	DOT11_MNG_HT_ADD			61	
-#define	DOT11_MNG_EXT_CHANNEL_OFFSET		62
-#define DOT11_MNG_WAPI_ID        68
+#define	DOT11_MNG_EXT_CHANNEL_OFFSET		62	
 
 #define DOT11_MNG_RRM_CAP_ID		70	
 #define	DOT11_MNG_HT_BSS_COEXINFO_ID		72	
@@ -1614,10 +1613,7 @@ typedef struct dot11_obss_ie dot11_obss_ie_t;
 #define TKIP_MIC_SUP_RX		TKIP_MIC_AUTH_TX	
 #define TKIP_MIC_SUP_TX		TKIP_MIC_AUTH_RX	
 #define AES_KEY_SIZE		16	
-#define AES_MIC_SIZE		8
-
-#define SMS4_KEY_LEN    16
-#define SMS4_WPI_CBC_MAC_LEN  16
+#define AES_MIC_SIZE		8	
 
 
 
